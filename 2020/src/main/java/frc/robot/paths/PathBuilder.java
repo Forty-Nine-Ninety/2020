@@ -22,6 +22,10 @@ public class PathBuilder {
         return null;
     }
 
+    private static void generatePaths() {
+        
+    }
+
     public static boolean loadFieldFromFile(String fileName) {
         System.out.println("Loading field from " + Filesystem.getDeployDirectory().toString() + fileName);
         try {

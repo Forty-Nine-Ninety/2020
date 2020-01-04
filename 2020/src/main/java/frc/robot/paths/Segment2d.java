@@ -46,6 +46,11 @@ public class Segment2d {
     }
 
     public boolean intersects(Segment2d l) {
+        return ((ccw(m_start, m_end, l.m_start) * ccw(m_start, m_end, l.m_end)) < 0) && ((ccw(l.m_start, l.m_end, m_start) * ccw(l.m_start, l.m_end, m_end)) < 0);
+    }
+
+    public boolean touches(Segment2d l) {
+        // <= checks for touches as well, while < only checks for intersections
         return ((ccw(m_start, m_end, l.m_start) * ccw(m_start, m_end, l.m_end)) <= 0) && ((ccw(l.m_start, l.m_end, m_start) * ccw(l.m_start, l.m_end, m_end)) <= 0);
     }
     
