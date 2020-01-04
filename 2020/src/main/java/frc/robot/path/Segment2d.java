@@ -1,4 +1,4 @@
-package frc.robot.paths;
+package frc.robot.path;
 
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 
