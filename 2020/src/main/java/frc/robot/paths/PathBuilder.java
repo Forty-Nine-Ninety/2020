@@ -23,6 +23,7 @@ public class PathBuilder {
     }
 
     public static boolean loadFieldFromFile(String fileName) {
+        System.out.println("Loading field from " + Filesystem.getDeployDirectory().toString() + fileName);
         try {
             Scanner s = new Scanner(new File(Filesystem.getDeployDirectory().toString() + fileName));
             s.close();
