@@ -1,6 +1,6 @@
 package frc.robot.commands;
 
-import frc.robot.Constants;
+import static frc.robot.Constants.*;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem.DriveMode;
 import java.util.function.DoubleSupplier;
@@ -18,7 +18,7 @@ public class TeleopArcadeDriveCommand extends CommandBase {
         addRequirements(drive);
         m_drive = drive;
         m_drive.setDriveMode(DriveMode.Arcade);
-        m_pid = new PIDController(Constants.DRIVETRAIN_ARCADE_KP, Constants.DRIVETRAIN_ARCADE_KI, Constants.DRIVETRAIN_ARCADE_KD);
+        m_pid = new PIDController(DRIVETRAIN_ARCADE_KP, DRIVETRAIN_ARCADE_KI, DRIVETRAIN_ARCADE_KD);
     }
 
     public void setSuppliers(DoubleSupplier left, DoubleSupplier right) {

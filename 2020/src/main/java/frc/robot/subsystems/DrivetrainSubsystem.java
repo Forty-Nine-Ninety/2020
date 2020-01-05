@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import static frc.robot.Constants.*;
 
 //See https://docs.wpilib.org/en/latest/docs/software/commandbased/pid-subsystems-commands.html
 //And perhaps https://github.com/wpilibsuite/allwpilib/blob/master/wpilibjExamples/src/main/java/edu/wpi/first/wpilibj/examples/gyrodrivecommands/commands/TurnToAngle.java
@@ -38,13 +38,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private final DifferentialDriveKinematics m_kinematics;
     private final DifferentialDriveOdometry m_odometry;
 
-    private DriveMode driveMode = Constants.DEFAULT_DRIVE_MODE;
+    private DriveMode driveMode = DEFAULT_DRIVE_MODE;
 
     public DrivetrainSubsystem() {
-        m_leftFront = new WPI_TalonSRX(Constants.CAN_DRIVETRAIN_LEFT_FRONT_TALONSRX);
-        m_leftRear = new WPI_TalonSRX(Constants.CAN_DRIVETRAIN_LEFT_REAR_TALONSRX);
-        m_rightFront = new WPI_TalonSRX(Constants.CAN_DRIVETRAIN_RIGHT_FRONT_TALONSRX);
-        m_rightRear = new WPI_TalonSRX(Constants.CAN_DRIVETRAIN_RIGHT_REAR_TALONSRX);
+        m_leftFront = new WPI_TalonSRX(CAN_DRIVETRAIN_LEFT_FRONT_TALONSRX);
+        m_leftRear = new WPI_TalonSRX(CAN_DRIVETRAIN_LEFT_REAR_TALONSRX);
+        m_rightFront = new WPI_TalonSRX(CAN_DRIVETRAIN_RIGHT_FRONT_TALONSRX);
+        m_rightRear = new WPI_TalonSRX(CAN_DRIVETRAIN_RIGHT_REAR_TALONSRX);
 
         m_gyro = new AHRS(SPI.Port.kMXP);
 
@@ -55,7 +55,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         //TODO Reset gyro
 
-        m_kinematics = new DifferentialDriveKinematics(Constants.DRIVETRAIN_TRACKWIDTH_METERS);
+        m_kinematics = new DifferentialDriveKinematics(DRIVETRAIN_TRACKWIDTH_METERS);
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(m_gyro.getAngle()));
     }
 
@@ -75,20 +75,20 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     private double getDistanceLeft() {
-        return m_leftFront.getSelectedSensorPosition() * Constants.DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
+        return m_leftFront.getSelectedSensorPosition() * DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
     }
 
     private double getDistanceRight() {
-        return m_leftFront.getSelectedSensorPosition() * Constants.DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
+        return m_leftFront.getSelectedSensorPosition() * DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
     }
 
     //TODO get actual rates
     private double getRateLeft() {
-        return m_leftFront.getSelectedSensorVelocity() * Constants.DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
+        return m_leftFront.getSelectedSensorVelocity() * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     }
 
     private double getRateRight() {
-        return m_rightFront.getSelectedSensorVelocity() * Constants.DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
+        return m_rightFront.getSelectedSensorVelocity() * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     }
 
 
