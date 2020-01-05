@@ -1,5 +1,7 @@
 package frc.robot;
 
+import frc.robot.subsystems.DrivetrainSubsystem.DriveMode;
+
 public final class Constants {
     public static int PORT_JOYSTICK_DRIVE = 0;
     public static int PORT_JOYSTICK_OPERATOR = 1;
@@ -23,6 +25,17 @@ public final class Constants {
     
 
     public static double DRIVETRAIN_TRACKWIDTH_METERS = 0.606425;
+
+    public static double DRIVETRAIN_MINIMUM_SPEED_METERS_PER_SECOND = 0.1;
+    public static double DRIVETRAIN_ENCODER_DISTANCE_TO_METERS = 0.10914037;//1 rotation is 4096 encoder units, 10.71:1 gear ratio, 6 inch wheels
+    public static double DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND = DRIVETRAIN_ENCODER_DISTANCE_TO_METERS / 10;
+    public static double DRIVETRAIN_MAXIMUM_SPEED_METERS_PER_SECOND = 8;
+
+    public static DriveMode DEFAULT_DRIVE_MODE = DriveMode.Arcade;
+
+    public static double DRIVETRAIN_ARCADE_KP = 0.1;
+    public static double DRIVETRAIN_ARCADE_KI = 0.1;
+    public static double DRIVETRAIN_ARCADE_KD = 0.1;
 
     public static double TURRET_KP = 0.1;
     public static double TURRET_KI = 0;

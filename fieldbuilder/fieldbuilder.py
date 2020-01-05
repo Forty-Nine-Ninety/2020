@@ -20,6 +20,8 @@ def main():
             pass
         elif command[0] == "save":
             pass
+        elif command[0] == "load":
+            pass
 
 def printHelp():
     pass
@@ -41,6 +43,9 @@ def saveField(field):
         print("Field is null.")
     else:
         pass
+
+def loadField():
+    pass
 
 if __name__ == "__main__":
     main()

@@ -1,10 +1,8 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DrivetrainSubsystem;
-
+import frc.robot.subsystems.DrivetrainSubsystem.DriveMode;
 import java.util.function.DoubleSupplier;
-
-import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TeleopTankDriveCommand extends CommandBase {
@@ -15,6 +13,7 @@ public class TeleopTankDriveCommand extends CommandBase {
     public TeleopTankDriveCommand(DrivetrainSubsystem drive) {
         addRequirements(drive);
         m_drive = drive;
+        m_drive.setDriveMode(DriveMode.Tank);
     }
 
     public void setSuppliers(DoubleSupplier left, DoubleSupplier right) {
@@ -24,7 +23,7 @@ public class TeleopTankDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_drive.setSpeeds(new DifferentialDriveWheelSpeeds(m_leftSpeedSupplier.getAsDouble(), m_rightSpeedSupplier.getAsDouble()));
+        m_drive.drive(m_leftSpeedSupplier.getAsDouble(), m_rightSpeedSupplier.getAsDouble());
     }
 
 }
