@@ -1,9 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
@@ -38,8 +36,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private final DifferentialDriveKinematics m_kinematics;
     //private final DifferentialDriveOdometry m_odometry;
 
-    private DifferentialDriveWheelSpeeds m_targetSpeeds;
-
+    private DriveMode driveMode = Constants.DEFAULT_DRIVE_MODE;
 
     public DrivetrainSubsystem() {
         m_leftFront = new WPI_TalonSRX(Constants.CAN_DRIVETRAIN_LEFT_FRONT_TALONSRX);
@@ -54,9 +51,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         m_drive = new DifferentialDrive(m_motorGroupLeft, m_motorGroupRight);
 
-
-        m_targetSpeeds = new DifferentialDriveWheelSpeeds();
-
         //TODO Reset gyro
         //TODO Set encoder distanceperpulse (encoders are talons)
 
@@ -67,16 +61,20 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        m_drive.tankDrive(m_targetSpeeds.leftMetersPerSecond, m_targetSpeeds.rightMetersPerSecond, true);
-
         //Update odometry
         //m_odometry.update(Rotation2d.fromDegrees(m_gyro.getAngle()), new DifferentialDriveWheelSpeeds(getRateLeft(), getRateRight()));
     }
 
-    public void setSpeeds(DifferentialDriveWheelSpeeds speeds) {
-        m_targetSpeeds = speeds;
+    public void drive(double left, double right) {
+        if (driveMode == DriveMode.Tank) m_drive.tankDrive(left, right, true);
+        else if (driveMode == DriveMode.Arcade) m_drive.arcadeDrive(left, right);
     }
     
+    public void setDriveMode(DriveMode mode) { driveMode = mode; }
+
+    public DriveMode getDriveMode() { return driveMode; }
+
+
     //TODO get actual rates
     private double getRateLeft() {
         return -1;
@@ -84,5 +82,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     private double getRateRight() {
         return -1;
+    }
+
+    public enum DriveMode {
+        Tank,
+        Arcade
     }
 }

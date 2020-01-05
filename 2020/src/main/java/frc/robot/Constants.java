@@ -1,5 +1,7 @@
 package frc.robot;
 
+import frc.robot.subsystems.DrivetrainSubsystem.DriveMode;
+
 public final class Constants {
     public static int PORT_JOYSTICK_DRIVE = 0;
     public static int PORT_JOYSTICK_OPERATOR = 1;
@@ -23,6 +25,8 @@ public final class Constants {
     
 
     public static double DRIVETRAIN_TRACKWIDTH_METERS = 0.606425;
+
+    public static DriveMode DEFAULT_DRIVE_MODE = DriveMode.Arcade;
 
     public static double TURRET_KP = 0.1;
     public static double TURRET_KI = 0;
