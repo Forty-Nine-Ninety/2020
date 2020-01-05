@@ -1,29 +1,34 @@
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem.DriveMode;
 import java.util.function.DoubleSupplier;
+
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TeleopArcadeDriveCommand extends CommandBase {
 
     private final DrivetrainSubsystem m_drive;
-    private DoubleSupplier m_leftSpeedSupplier, m_rightSpeedSupplier;
+    private DoubleSupplier m_speedSupplier, m_rotationSupplier;
+    private PIDController m_pid;
 
     public TeleopArcadeDriveCommand(DrivetrainSubsystem drive) {
         addRequirements(drive);
         m_drive = drive;
         m_drive.setDriveMode(DriveMode.Arcade);
+        m_pid = new PIDController(Constants.DRIVETRAIN_ARCADE_KP, Constants.DRIVETRAIN_ARCADE_KI, Constants.DRIVETRAIN_ARCADE_KD);
     }
 
     public void setSuppliers(DoubleSupplier left, DoubleSupplier right) {
-        m_leftSpeedSupplier = left;
-        m_rightSpeedSupplier = right;
+        m_speedSupplier = left;
+        m_rotationSupplier = right;
     }
 
     @Override
     public void execute() {
-        m_drive.drive(m_leftSpeedSupplier.getAsDouble(), m_rightSpeedSupplier.getAsDouble());
+        m_drive.drive(m_speedSupplier.getAsDouble(), -1 * m_pid.calculate(m_rotationSupplier.getAsDouble(), m_drive.getGyroRate()));
     }
 
 }

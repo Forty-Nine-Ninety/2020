@@ -28,6 +28,10 @@ public final class Constants {
 
     public static DriveMode DEFAULT_DRIVE_MODE = DriveMode.Arcade;
 
+    public static double DRIVETRAIN_ARCADE_KP = 0.1;
+    public static double DRIVETRAIN_ARCADE_KI = 0.1;
+    public static double DRIVETRAIN_ARCADE_KD = 0.1;
+
     public static double TURRET_KP = 0.1;
     public static double TURRET_KI = 0;
     public static double TURRET_KD = 0;

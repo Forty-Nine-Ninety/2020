@@ -74,7 +74,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     public DriveMode getDriveMode() { return driveMode; }
 
-
+    public double getGyroRate() {
+        //return m_gyro.getAngle();
+        return 0;
+    }
     //TODO get actual rates
     private double getRateLeft() {
         return -1;
