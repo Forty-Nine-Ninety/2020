@@ -4,8 +4,6 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Limelight {
 
-    public Limelight() {}
-
     public static boolean inRange() {
         return getCrosshairVerticalOffset() < 0 && getCrosshairVerticalOffset() > -1;
     }
