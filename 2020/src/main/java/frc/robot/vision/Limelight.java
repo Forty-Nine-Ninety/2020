@@ -20,8 +20,7 @@ public class Limelight {
     /**
      * Gets the horizontal offset from the crosshair to the target.
      * 
-     * @return The horizontal offset from the crosshair to the target (-27 degrees
-     *         to 27 degrees)
+     * @return The horizontal offset from the crosshair to the target (-29.8 to 29.8 degrees)
      */
     public static double getCrosshairHorizontalOffset() {
         return getNetworkTableEntry("tx");
@@ -30,8 +29,7 @@ public class Limelight {
     /**
      * Gets the vertical offset from the crosshair to the target.
      * 
-     * @return The vertical offset from the crosshair to the target (-20.5 degrees
-     *         to 20.5 degrees)
+     * @return The vertical offset from the crosshair to the target (-24.85 to 24.85 degrees)
      */
     public static double getCrosshairVerticalOffset() {
         return getNetworkTableEntry("ty");
