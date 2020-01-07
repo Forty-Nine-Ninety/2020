@@ -6,6 +6,7 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import static frc.robot.Constants.*;
+import io.github.oblarg.oblog.Logger;
 
 public class RobotContainer {
 
@@ -22,11 +23,11 @@ public class RobotContainer {
     public RobotContainer() {
         configureButtonBindings();
         configureDefaultCommands();
+        Logger.configureLoggingAndConfig(this, false);
     }
 
     private void configureButtonBindings() {
 
-        //TODO add drivetrain command bindings (?)
         m_teleopTankDriveCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.JoystickLeftY), () -> joystickDrive.getRawAxis(AxisF310.JoystickRightY));
     }
 
@@ -36,5 +37,9 @@ public class RobotContainer {
 
     public Command getAutonomousCommand() {
         return null;
+    }
+
+    public void updateLoggerEntries() {
+        Logger.updateEntries();
     }
 }
