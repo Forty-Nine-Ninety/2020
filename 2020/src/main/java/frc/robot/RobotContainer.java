@@ -26,7 +26,6 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
 
-        //TODO add drivetrain command bindings (?)
         m_teleopTankDriveCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.JoystickLeftY), () -> joystickDrive.getRawAxis(AxisF310.JoystickRightY));
     }
 
