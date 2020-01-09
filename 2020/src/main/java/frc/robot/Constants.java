@@ -14,6 +14,9 @@ public final class Constants {
     public static int CAN_DRIVETRAIN_RIGHT_REAR_TALONSRX = 34;
     public static int CAN_DRIVETRAIN_RIGHT_FRONT_TALONSRX = 33;
     
+    public static int CAN_CLIMB_MAIN_TALONSRX = -1;
+
+    public static int CAN_BALANCE_CLIMB_MAIN_TALONSRX = -1;
 
     public static double DRIVETRAIN_TRACKWIDTH_METERS = 0.606425;
     public static double DRIVETRAIN_MINIMUM_SPEED_METERS_PER_SECOND = 0.1;
