@@ -23,15 +23,28 @@ import static frc.robot.Constants.*;
 
 public class DrivetrainSubsystem extends SubsystemBase {
 
-    private final WPI_TalonSRX m_left, m_right;
+    private final WPI_TalonSRX m_leftFront;
+    private final WPI_TalonSRX m_leftRear;
+    private final WPI_TalonSRX m_rightFront;
+    private final WPI_TalonSRX m_rightRear;
+
+    private final SpeedControllerGroup m_motorGroupLeft;
+    private final SpeedControllerGroup m_motorGroupRight;
 
     private final DifferentialDrive m_drive;
 
 
     public DrivetrainSubsystem() {
-        m_left = new WPI_TalonSRX(CAN_DRIVETRAIN_LEFT_TALONSRX);
-        m_right = new WPI_TalonSRX(CAN_DRIVETRAIN_RIGHT_TALONSRX);
-        m_drive = new DifferentialDrive(m_left, m_right);
+        m_leftFront = new WPI_TalonSRX(CAN_DRIVETRAIN_LEFT_FRONT_TALONSRX);
+        m_leftRear = new WPI_TalonSRX(CAN_DRIVETRAIN_LEFT_REAR_TALONSRX);
+        m_rightFront = new WPI_TalonSRX(CAN_DRIVETRAIN_RIGHT_FRONT_TALONSRX);
+        m_rightRear = new WPI_TalonSRX(CAN_DRIVETRAIN_RIGHT_REAR_TALONSRX);
+        
+        m_motorGroupLeft = new SpeedControllerGroup(m_leftFront, m_leftRear);
+        m_motorGroupRight = new SpeedControllerGroup(m_rightFront, m_rightRear);
+
+        m_drive = new DifferentialDrive(m_motorGroupLeft, m_motorGroupRight);
+
     }
 
     @Override
