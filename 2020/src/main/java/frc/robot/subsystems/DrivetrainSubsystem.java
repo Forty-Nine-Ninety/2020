@@ -52,6 +52,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public void drive(double left, double right) {
-        m_drive.tankDrive(left, right, true);
+        m_drive.arcadeDrive(left, right);
     }
 }
