@@ -6,6 +6,8 @@ public final class Constants {
     public static int PORT_JOYSTICK_DRIVE = 0;
     public static int PORT_JOYSTICK_OPERATOR = 1;
 
+    public static int PORT_BREAKBEAM_SENSOR = -1;
+
     public static int CAN_PCM = 12;
     public static int CAN_SHOOTER_FIRE_TALONSRX = 36;
     public static int CAN_SHOOTER_AIM_TALONSRX = 36;
@@ -15,8 +17,9 @@ public final class Constants {
     public static int CAN_DRIVETRAIN_RIGHT_FRONT_TALONSRX = 33;
     
     public static int CAN_CLIMB_MAIN_TALONSRX = -1;
-
     public static int CAN_BALANCE_CLIMB_MAIN_TALONSRX = -1;
+    public static int CAN_INTAKE_MAIN_TALONSRX = -1;
+    public static int CAN_SPINNER_MAIN_TALONSRX = -1;
 
     public static double DRIVETRAIN_TRACKWIDTH_METERS = 0.606425;
     public static double DRIVETRAIN_MINIMUM_SPEED_METERS_PER_SECOND = 0.1;
