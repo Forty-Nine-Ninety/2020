@@ -14,7 +14,7 @@ public class RobotContainer {
     private final JoystickF310 joystickOperator = new JoystickF310(PORT_JOYSTICK_OPERATOR);
 
     private final DrivetrainSubsystem m_drivetrain = new DrivetrainSubsystem();
-    private final StorageSubsystem m_storage  = new StorageSubsystem();
+    private final StorageSubsystem m_storage  = new StorageSubsystem();//need to be able to access it from IntakeSubsystem
 
     //TODO Add drivetrain commands
     private final TeleopTankDriveCommand m_teleopTankDriveCommand = new TeleopTankDriveCommand(m_drivetrain);
@@ -42,5 +42,9 @@ public class RobotContainer {
 
     public void updateLoggerEntries() {
         Logger.updateEntries();
+    }
+
+    public StorageSubsystem getStorage(){
+        return this.m_storage;
     }
 }
