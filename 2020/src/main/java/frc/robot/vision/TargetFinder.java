@@ -15,7 +15,7 @@ public class TargetFinder {
     }
 
     
-    public static double findShooterAngleToTarget(double velocity) {
+    public static double estimateShooterVelocityToTarget() {
         //Returns optimal firing angle given a velocity
         return 0;
     }

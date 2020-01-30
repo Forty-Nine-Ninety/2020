@@ -4,6 +4,8 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.vision.Limelight;
+import frc.robot.vision.TargetFinder;
 import static frc.robot.Constants.*;
 
 public class LimelightTargetCommand extends CommandBase {
@@ -24,16 +26,10 @@ public class LimelightTargetCommand extends CommandBase {
         m_pidD = new PIDController(LIMELIGHT_DRIVETRAIN_KP, LIMELIGHT_DRIVETRAIN_KI, LIMELIGHT_DRIVETRAIN_KD);
     }
 
-    public void setTargetAngle(double angle) {
-        m_pidS.setSetpoint(angle);
-    }
-    public void setTargetHeading(double heading) {
-        m_pidD.setSetpoint(heading);
-    }
-
     @Override
     public void execute() {
-        //idk yet
+        m_drive.arcadeDrive(0, m_pidD.calculate(Limelight.getCrosshairHorizontalOffset(), 0));
+        m_shooter.fire(m_pidS.calculate(m_shooter.getRateFire(), TargetFinder.estimateShooterVelocityToTarget()));
     }
 
 }
