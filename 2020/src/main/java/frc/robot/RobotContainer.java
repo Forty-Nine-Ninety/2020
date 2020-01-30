@@ -6,13 +6,16 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import static frc.robot.Constants.*;
+
 import io.github.oblarg.oblog.Logger;
+import io.github.oblarg.oblog.annotations.*;
 
 public class RobotContainer {
 
     private final JoystickF310 joystickDrive = new JoystickF310(PORT_JOYSTICK_DRIVE);
     private final JoystickF310 joystickOperator = new JoystickF310(PORT_JOYSTICK_OPERATOR);
 
+    @Config.NumberSlider(name = "Speed Control", methodName = "setSpeedMultiplier", methodTypes = {double.class}, defaultValue = 0.3, min = 0)
     private final DrivetrainSubsystem m_drivetrain = new DrivetrainSubsystem();
 
     //TODO Add drivetrain commands
@@ -29,7 +32,7 @@ public class RobotContainer {
     private void configureButtonBindings() {
         //m_teleopTankDriveCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.TriggerLeft), () -> joystickDrive.getRawAxis(AxisF310.TriggerRight));
 
-        m_teleopTankDriveCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.JoystickLeftY), () -> joystickDrive.getRawAxis(AxisF310.JoystickRightY));
+        m_teleopTankDriveCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.JoystickLeftY), () -> joystickDrive.getRawAxis(AxisF310.JoystickRightX));
     }
 
     private void configureDefaultCommands() {
