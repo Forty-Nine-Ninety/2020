@@ -4,8 +4,11 @@ public final class Constants {
     public static int PORT_JOYSTICK_DRIVE = 0;
     public static int PORT_JOYSTICK_OPERATOR = 1;
 
-    public static double ENCODER_RESOLUTION = 4096;
-    public static int TALON_TIMEOUT_MS = 5;
+    public static int DIO_BREAKBEAM = -1;
+
+    //Below is format for analog sensors
+    //public static int PWM_NAME = -1;
+    public static int PCM_CLIMB = -1;
 
     public static int CAN_PCM = 12;
     public static int CAN_DRIVETRAIN_LEFT_REAR_TALONSRX = 32;
@@ -18,6 +21,9 @@ public final class Constants {
     public static int CAN_STORAGE_TALONSRX = -1;
     public static int CAN_INTAKE_TALONSRX = -1;
     public static int CAN_SPINNER_TALONSRX = -1;
+
+    public static double ENCODER_RESOLUTION = 4096;
+    public static int TALON_TIMEOUT_MS = 5;
 
     public static double DRIVETRAIN_TRACKWIDTH_METERS = 0.606425;
     public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 8;
