@@ -23,4 +23,14 @@ public class StorageSubsystem extends SubsystemBase {
     public void addBall() {
         //TODO
     }
+    
+    public int getBallsLeft() {
+        return balls.size();
+    }
+
+    public double getNextBall() {
+        //Returns the distance until the ball reaches the end of the storage system
+        //TODO
+        return 0;
+    }
 }
