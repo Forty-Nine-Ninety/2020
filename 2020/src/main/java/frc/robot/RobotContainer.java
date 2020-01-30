@@ -25,8 +25,9 @@ public class RobotContainer {
     }
 
     private void configureButtonBindings() {
+        //m_teleopTankDriveCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.TriggerLeft), () -> joystickDrive.getRawAxis(AxisF310.TriggerRight));
 
-        m_teleopTankDriveCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.JoystickLeftY), () -> joystickDrive.getRawAxis(AxisF310.JoystickRightY));
+        m_teleopTankDriveCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.JoystickLeftY), () -> joystickDrive.getRawAxis(AxisF310.JoystickRightX));
     }
 
     private void configureDefaultCommands() {
