@@ -14,9 +14,11 @@ public class RobotContainer {
     private final JoystickF310 joystickOperator = new JoystickF310(PORT_JOYSTICK_OPERATOR);
 
     private final DrivetrainSubsystem m_drivetrain = new DrivetrainSubsystem();
+    private final CargoSubsystem m_cargo = new CargoSubsystem();
 
     //TODO Add drivetrain commands
     private final TeleopTankDriveCommand m_teleopTankDriveCommand = new TeleopTankDriveCommand(m_drivetrain);
+    private final TeleopRunCargoCommand m_teleopRunCargoCommand = new TeleopRunCargoCommand(m_cargo);
     
     private final Solenoid testSolenoid = new Solenoid(12,1);
 
@@ -27,12 +29,13 @@ public class RobotContainer {
     }
 
     private void configureButtonBindings() {
-
         m_teleopTankDriveCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.JoystickLeftY), () -> joystickDrive.getRawAxis(AxisF310.JoystickRightX));
+        m_teleopRunCargoCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.TriggerLeft), () -> joystickDrive.getRawAxis(AxisF310.TriggerRight));
     }
 
     private void configureDefaultCommands() {
         CommandScheduler.getInstance().setDefaultCommand(m_drivetrain, m_teleopTankDriveCommand);
+        CommandScheduler.getInstance().setDefaultCommand(m_cargo, m_teleopRunCargoCommand);
     }
 
     public Command getAutonomousCommand() {
