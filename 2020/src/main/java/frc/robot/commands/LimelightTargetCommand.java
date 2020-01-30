@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.DrivetrainSubsystem.DriveMode;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import static frc.robot.Constants.*;
@@ -20,7 +19,6 @@ public class LimelightTargetCommand extends CommandBase {
         m_drive = drive;
         m_shooter = shooter;
         //Because PID needs to rotate base
-        m_drive.setDriveMode(DriveMode.Arcade);
 
         m_pidS = new PIDController(LIMELIGHT_SHOOTER_KP, LIMELIGHT_SHOOTER_KI, LIMELIGHT_SHOOTER_KD);
         m_pidD = new PIDController(LIMELIGHT_DRIVETRAIN_KP, LIMELIGHT_DRIVETRAIN_KI, LIMELIGHT_DRIVETRAIN_KD);
