@@ -1,29 +1,26 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
 
-public class StorageSubsystem extends SubsystemBase {
+import java.util.ArrayList;
 
-    private final WPI_TalonSRX m_fireMotor;
-    private final WPI_TalonSRX m_aimMotor;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+public class StorageSubsystem extends SubsystemBase {
+    
+    private ArrayList<Double> balls;
+    private final TalonSRX m_motor;
 
     public StorageSubsystem() {
-        m_fireMotor = new WPI_TalonSRX(CAN_SHOOTER_FIRE_TALONSRX);
-        m_aimMotor = new WPI_TalonSRX(CAN_SHOOTER_AIM_TALONSRX);
+        balls = new ArrayList<>();
+        m_motor = new TalonSRX(CAN_STORAGE_TALONSRX);
     }
 
     @Override
     public void periodic() {}
 
-    public void addBall() {}
-
-    public void fire(double speed) {
-        m_fireMotor.set(speed);
-    }
-
-    public double getRateFire() {
-        return m_fireMotor.getSelectedSensorVelocity() * SHOOTER_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
+    public void addBall() {
+        
     }
 }

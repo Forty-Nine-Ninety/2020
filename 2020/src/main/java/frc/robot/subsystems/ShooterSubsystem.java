@@ -7,11 +7,9 @@ import static frc.robot.Constants.*;
 public class ShooterSubsystem extends SubsystemBase {
 
     private final WPI_TalonSRX m_fireMotor;
-    private final WPI_TalonSRX m_aimMotor;
 
     public ShooterSubsystem() {
-        m_fireMotor = new WPI_TalonSRX(CAN_SHOOTER_FIRE_TALONSRX);
-        m_aimMotor = new WPI_TalonSRX(CAN_SHOOTER_AIM_TALONSRX);
+        m_fireMotor = new WPI_TalonSRX(CAN_SHOOTER_TALONSRX);
     }
 
     @Override
