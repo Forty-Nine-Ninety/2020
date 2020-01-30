@@ -37,23 +37,18 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private final DifferentialDriveKinematics m_kinematics;
     private final DifferentialDriveOdometry m_odometry;
 
-    private DriveMode driveMode = DEFAULT_DRIVE_MODE;
-
     public DrivetrainSubsystem() {
         m_leftFront = new WPI_TalonSRX(CAN_DRIVETRAIN_LEFT_FRONT_TALONSRX);
         m_leftRear = new WPI_TalonSRX(CAN_DRIVETRAIN_LEFT_REAR_TALONSRX);
         m_rightFront = new WPI_TalonSRX(CAN_DRIVETRAIN_RIGHT_FRONT_TALONSRX);
         m_rightRear = new WPI_TalonSRX(CAN_DRIVETRAIN_RIGHT_REAR_TALONSRX);
 
-        m_gyro = new AHRS(SPI.Port.kMXP);
-
         m_motorGroupLeft = new SpeedControllerGroup(m_leftFront, m_leftRear);
         m_motorGroupRight = new SpeedControllerGroup(m_rightFront, m_rightRear);
-
         m_drive = new DifferentialDrive(m_motorGroupLeft, m_motorGroupRight);
 
-        //TODO Reset gyro
-
+        m_gyro = new AHRS(SPI.Port.kMXP);
+        m_gyro.reset();
         m_kinematics = new DifferentialDriveKinematics(DRIVETRAIN_TRACKWIDTH_METERS);
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(m_gyro.getAngle()));
     }
@@ -64,39 +59,31 @@ public class DrivetrainSubsystem extends SubsystemBase {
         m_odometry.update(Rotation2d.fromDegrees(m_gyro.getAngle()), getDistanceLeft(), getDistanceRight());
     }
 
-    public void drive(double left, double right) {
-        if (driveMode == DriveMode.Tank) m_drive.tankDrive(left, right, true);
-        else if (driveMode == DriveMode.Arcade) m_drive.arcadeDrive(left, right);
+    public void tankDrive(double left, double right) {
+        m_drive.tankDrive(left, right, false);
+    }
+
+    public void arcadeDrive(double speed, double rot) {
+        m_drive.arcadeDrive(speed, rot);
     }
 
     public double getGyroRate() {
         return m_gyro.getRate();
     }
 
-    private double getDistanceLeft() {
+    public double getDistanceLeft() {
         return m_leftFront.getSelectedSensorPosition() * DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
     }
 
-    private double getDistanceRight() {
+    public double getDistanceRight() {
         return m_leftFront.getSelectedSensorPosition() * DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
     }
 
-    //TODO get actual rates
-    private double getRateLeft() {
+    public double getRateLeft() {
         return m_leftFront.getSelectedSensorVelocity() * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     }
 
-    private double getRateRight() {
+    public double getRateRight() {
         return m_rightFront.getSelectedSensorVelocity() * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
-    }
-
-
-    public void setDriveMode(DriveMode mode) { driveMode = mode; }
-
-    public DriveMode getDriveMode() { return driveMode; }
-
-    public enum DriveMode {
-        Tank,
-        Arcade
     }
 }
