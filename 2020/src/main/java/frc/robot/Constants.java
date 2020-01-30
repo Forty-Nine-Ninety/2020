@@ -11,4 +11,5 @@ public final class Constants {
     public static int CAN_DRIVETRAIN_RIGHT_FRONT_TALONSRX = 4;
 
     public static double SLOW_MULTIPLIER = 0.3;
+
 }
