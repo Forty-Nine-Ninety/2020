@@ -27,8 +27,15 @@ public class TeleopArcadeDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
+        
+        System.out.println("Running motors at I: " + m_speedSupplier.getAsDouble() + ", " + m_rotationSupplier.getAsDouble() + " ");
+
         double[] tank = convertToTank(m_speedSupplier.getAsDouble(), m_rotationSupplier.getAsDouble());
-        m_drive.tankDrive(m_pidL.calculate(m_drive.getRateLeft(), tank[0] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND), m_pidR.calculate(m_drive.getRateRight(), tank[1] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND));
+        double l = m_pidL.calculate(m_drive.getRateLeft(), tank[0] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND), r = m_pidR.calculate(m_drive.getRateRight(), tank[1] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND);
+
+        System.out.println("LEFT: " + m_drive.getRateLeft() + " " + tank[0] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND + " " + l);
+        System.out.println("RIGHT: " + m_drive.getRateRight() + " " + tank[1] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND + " " + r);
+        m_drive.tankDrive(l, r);
     }
 
     private static double[] convertToTank(double speed, double rot) {

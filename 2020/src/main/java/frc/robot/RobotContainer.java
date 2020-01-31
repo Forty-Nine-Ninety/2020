@@ -17,7 +17,7 @@ public class RobotContainer {
     private final StorageSubsystem m_storage  = new StorageSubsystem();
 
     //TODO Add drivetrain commands
-    private final TeleopTankDriveCommand m_teleopTankDriveCommand = new TeleopTankDriveCommand(m_drivetrain);
+    private final TeleopArcadeDriveCommand m_teleopArcadeDriveCommand = new TeleopArcadeDriveCommand(m_drivetrain);
     
 
 
@@ -29,11 +29,11 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
 
-        m_teleopTankDriveCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.JoystickLeftY), () -> joystickDrive.getRawAxis(AxisF310.JoystickRightY));
+        m_teleopArcadeDriveCommand.setSuppliers(() -> -1 * joystickDrive.getRawAxis(AxisF310.JoystickLeftY), () -> joystickDrive.getRawAxis(AxisF310.JoystickRightX));
     }
 
     private void configureDefaultCommands() {
-        CommandScheduler.getInstance().setDefaultCommand(m_drivetrain, m_teleopTankDriveCommand);
+        CommandScheduler.getInstance().setDefaultCommand(m_drivetrain, m_teleopArcadeDriveCommand);
     }
 
     public Command getAutonomousCommand() {

@@ -33,6 +33,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
         m_rightTalon = new WPI_TalonSRX(CAN_DRIVETRAIN_RIGHT_TALONSRX);
         m_rightVictor = new WPI_VictorSPX(CAN_DRIVETRAIN_RIGHT_VICTORSPX);
 
+        m_leftTalon.configFactoryDefault();
+        m_leftVictor.configFactoryDefault();
+        m_rightTalon.configFactoryDefault();
+        m_rightVictor.configFactoryDefault();
+
+        m_leftTalon.setSensorPhase(true);
+        //m_leftVictor.setInverted(true);
+        
         m_motorGroupLeft = new SpeedControllerGroup(m_leftTalon, m_leftVictor);
         m_motorGroupRight = new SpeedControllerGroup(m_rightTalon, m_rightVictor);
         m_drive = new DifferentialDrive(m_motorGroupLeft, m_motorGroupRight);
