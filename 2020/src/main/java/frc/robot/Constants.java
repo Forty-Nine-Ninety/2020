@@ -10,11 +10,11 @@ public final class Constants {
     //public static int PWM_NAME = -1;
     public static int PCM_CLIMB = -1;
 
-    public static int CAN_PCM = 12;
-    public static int CAN_DRIVETRAIN_LEFT_REAR_TALONSRX = 32;
-    public static int CAN_DRIVETRAIN_LEFT_FRONT_TALONSRX = 31;
-    public static int CAN_DRIVETRAIN_RIGHT_REAR_TALONSRX = 34;
-    public static int CAN_DRIVETRAIN_RIGHT_FRONT_TALONSRX = 33;
+    public static int CAN_PCM = 1;
+    public static int CAN_DRIVETRAIN_RIGHT_TALONSRX = 10;
+    public static int CAN_DRIVETRAIN_RIGHT_VICTORSPX = 15;
+    public static int CAN_DRIVETRAIN_LEFT_TALONSRX = 11;
+    public static int CAN_DRIVETRAIN_LEFT_VICTORSPX = 16;
     public static int CAN_SHOOTER_TALONSRX = 36;
     public static int CAN_CLIMB_MAIN_TALONSRX = -1;
     public static int CAN_CLIMB_BALANCE_TALONSRX = -1;
