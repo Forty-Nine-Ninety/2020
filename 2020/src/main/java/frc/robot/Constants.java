@@ -33,10 +33,10 @@ public final class Constants {
 
     public static double SHOOTER_ENCODER_VELOCITY_TO_METERS_PER_SECOND = 0;
 
-    public static double DRIVETRAIN_LEFT_KP = 0.05;
+    public static double DRIVETRAIN_LEFT_KP = 0.1;
     public static double DRIVETRAIN_LEFT_KI = 0;
     public static double DRIVETRAIN_LEFT_KD = 0;
-    public static double DRIVETRAIN_RIGHT_KP = 0.05;
+    public static double DRIVETRAIN_RIGHT_KP = 0.1;
     public static double DRIVETRAIN_RIGHT_KI = 0;
     public static double DRIVETRAIN_RIGHT_KD = 0;
 

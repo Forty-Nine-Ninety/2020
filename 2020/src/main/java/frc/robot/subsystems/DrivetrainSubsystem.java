@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
@@ -19,9 +20,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     private final AHRS m_gyro;
 
-    private final SpeedControllerGroup m_motorGroupLeft;
-    private final SpeedControllerGroup m_motorGroupRight;
-
     private final DifferentialDrive m_drive;
     
     private final DifferentialDriveKinematics m_kinematics;
@@ -40,10 +38,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         m_leftTalon.setSensorPhase(true);
         //m_leftVictor.setInverted(true);
-        
-        m_motorGroupLeft = new SpeedControllerGroup(m_leftTalon, m_leftVictor);
-        m_motorGroupRight = new SpeedControllerGroup(m_rightTalon, m_rightVictor);
-        m_drive = new DifferentialDrive(m_motorGroupLeft, m_motorGroupRight);
+
+        m_leftVictor.follow(m_leftTalon,FollowerType.PercentOutput);
+        m_rightVictor.follow(m_rightTalon,FollowerType.PercentOutput);
+
+        m_drive = new DifferentialDrive(m_leftTalon, m_rightTalon);
 
         m_gyro = new AHRS(SPI.Port.kMXP);
         m_gyro.reset();
