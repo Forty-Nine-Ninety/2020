@@ -1,11 +1,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.FollowerType;
+import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.SlotConfiguration;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
@@ -31,16 +33,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         m_rightTalon = new WPI_TalonSRX(CAN_DRIVETRAIN_RIGHT_TALONSRX);
         m_rightVictor = new WPI_VictorSPX(CAN_DRIVETRAIN_RIGHT_VICTORSPX);
 
-        m_leftTalon.configFactoryDefault();
-        m_leftVictor.configFactoryDefault();
-        m_rightTalon.configFactoryDefault();
-        m_rightVictor.configFactoryDefault();
-
-        m_leftTalon.setSensorPhase(true);
-        //m_leftVictor.setInverted(true);
-
-        m_leftVictor.follow(m_leftTalon,FollowerType.PercentOutput);
-        m_rightVictor.follow(m_rightTalon,FollowerType.PercentOutput);
+        configureMotors();
 
         m_drive = new DifferentialDrive(m_leftTalon, m_rightTalon);
 
@@ -61,8 +54,47 @@ public class DrivetrainSubsystem extends SubsystemBase {
         m_drive.tankDrive(left, right, false);
     }
 
+    public void tankDrive(double[] speeds) {
+        this.tankDrive(speeds[0], speeds[1]);
+    }
+
     public void arcadeDrive(double speed, double rot) {
         m_drive.arcadeDrive(speed, rot);
+    }
+
+    public void arcadeDrive(double[] speeds) {
+        this.arcadeDrive(speeds[0], speeds[1]);
+    }
+
+    private void configureMotors() {
+        
+        //First setup talons with default settings
+        m_leftTalon.configFactoryDefault();
+        m_leftVictor.configFactoryDefault();
+        m_rightTalon.configFactoryDefault();
+        m_rightVictor.configFactoryDefault();
+
+        
+        //Left side encoder goes in the wrong direction
+        m_leftTalon.setSensorPhase(true);
+
+        m_leftVictor.follow(m_leftTalon, FollowerType.PercentOutput);
+        m_rightVictor.follow(m_rightTalon, FollowerType.PercentOutput);
+
+        //Setup talon built-in PID
+        m_leftTalon.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative, 0, 5);
+        m_rightTalon.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative, 0, 5);
+
+        //Create config objects
+        TalonSRXConfiguration cLeft = new TalonSRXConfiguration(), cRight = new TalonSRXConfiguration();
+
+        //Setup config objects with desired values
+        cLeft.slot0 = DRIVETRAIN_LEFT_FPID;
+        cRight.slot0 = DRIVETRAIN_RIGHT_FPID;
+
+        //Configure talons
+        m_leftTalon.configAllSettings(cLeft);
+        m_rightTalon.configAllSettings(cRight);
     }
 
     public double getGyroRate() {

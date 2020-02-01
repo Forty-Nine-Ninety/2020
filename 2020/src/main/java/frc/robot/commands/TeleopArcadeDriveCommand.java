@@ -2,33 +2,17 @@ package frc.robot.commands;
 
 import static frc.robot.Constants.*;
 import frc.robot.subsystems.DrivetrainSubsystem;
-import io.github.oblarg.oblog.annotations.Log;
-
 import java.util.function.DoubleSupplier;
-
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TeleopArcadeDriveCommand extends CommandBase {
 
     private final DrivetrainSubsystem m_drive;
     private DoubleSupplier m_speedSupplier, m_rotationSupplier;
-    @Log
-    private PIDController m_pidL, m_pidR;
 
     public TeleopArcadeDriveCommand(DrivetrainSubsystem drive) {
         addRequirements(drive);
         m_drive = drive;
-        m_pidL = new PIDController(DRIVETRAIN_LEFT_KP, DRIVETRAIN_LEFT_KI, DRIVETRAIN_LEFT_KD);
-        m_pidR = new PIDController(DRIVETRAIN_RIGHT_KP, DRIVETRAIN_RIGHT_KI, DRIVETRAIN_RIGHT_KD);
-
-        Shuffleboard.getTab("config").addNumber("Left Drive PID Error", () -> m_pidL.getVelocityError());
-        Shuffleboard.getTab("config").addNumber("Right Drive PID Error", () -> m_pidR.getVelocityError());
-        Shuffleboard.getTab("config").addNumber("Left Drive PID Value", () -> m_drive.getRateLeft());
-        Shuffleboard.getTab("config").addNumber("Right Drive PID Value", () -> m_drive.getRateRight());
-        Shuffleboard.getTab("config").addNumber("Left Drive PID Setpoint", () -> m_pidL.getSetpoint());
-        Shuffleboard.getTab("config").addNumber("Right Drive PID Setpoint", () -> m_pidR.getSetpoint());
     }
 
     public void setSuppliers(DoubleSupplier left, DoubleSupplier right) {
@@ -38,16 +22,7 @@ public class TeleopArcadeDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        
-        System.out.println("Running motors at I: " + m_speedSupplier.getAsDouble() + ", " + m_rotationSupplier.getAsDouble() + " ");
-
-        double[] tank = convertToTank(m_speedSupplier.getAsDouble(), m_rotationSupplier.getAsDouble());
-        double l = m_pidL.calculate(m_drive.getRateLeft(), tank[0] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND), r = m_pidR.calculate(m_drive.getRateRight(), tank[1] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND);
-
-        System.out.println("LEFT: " + m_drive.getRateLeft() + " " + tank[0] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND + " " + l);
-        System.out.println("RIGHT: " + m_drive.getRateRight() + " " + tank[1] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND + " " + r);
-        m_drive.tankDrive(l, r);
-
+        m_drive.tankDrive(convertToTank(m_speedSupplier.getAsDouble(), m_rotationSupplier.getAsDouble()));
     }
 
     private static double[] convertToTank(double speed, double rot) {

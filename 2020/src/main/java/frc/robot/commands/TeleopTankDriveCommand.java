@@ -21,7 +21,6 @@ public class TeleopTankDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        System.out.println("Running motors at " + m_leftSpeedSupplier.getAsDouble() + " " + m_rightSpeedSupplier.getAsDouble());
         m_drive.tankDrive(m_leftSpeedSupplier.getAsDouble(), m_rightSpeedSupplier.getAsDouble());
     }
 

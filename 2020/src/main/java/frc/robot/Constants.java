@@ -28,17 +28,18 @@ public final class Constants {
     public static double DRIVETRAIN_TRACKWIDTH_METERS = 0.606425;
     public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 8;
     //For some reason the thing below is broken :(
-    public static double DRIVETRAIN_ENCODER_DISTANCE_TO_METERS = 1f / 4096f * 18.85f / 2.54f / 100f;//1 rotation is 4096 encoder units, encoder is on drivetrain, 6 inch wheels
+    public static double DRIVETRAIN_ENCODER_DISTANCE_TO_METERS = 1f / ENCODER_RESOLUTION * 18.85f / 2.54f / 100f;//1 rotation is 4096 encoder units, encoder is on drivetrain, 6 inch wheels
     public static double DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND = DRIVETRAIN_ENCODER_DISTANCE_TO_METERS * 10f;
 
     public static double SHOOTER_ENCODER_VELOCITY_TO_METERS_PER_SECOND = 0;
 
-    public static double DRIVETRAIN_LEFT_KP = 0.1;
-    public static double DRIVETRAIN_LEFT_KI = 0;
-    public static double DRIVETRAIN_LEFT_KD = 0;
-    public static double DRIVETRAIN_RIGHT_KP = 0.1;
-    public static double DRIVETRAIN_RIGHT_KI = 0;
-    public static double DRIVETRAIN_RIGHT_KD = 0;
+
+    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 15);
+    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.5, 0, 15);
+
+    //The following two could possibly just be normal PID values
+    public static TalonSRXGains LIMELIGHT_SHOOTER_FPID = new TalonSRXGains(0, 0, 0, 0);
+    public static TalonSRXGains LIMELIGHT_DRIVETRAIN_FPID = new TalonSRXGains(0, 0, 0, 0);
 
     public static double LIMELIGHT_SHOOTER_KP = 0.5;
     public static double LIMELIGHT_SHOOTER_KI = 0;
