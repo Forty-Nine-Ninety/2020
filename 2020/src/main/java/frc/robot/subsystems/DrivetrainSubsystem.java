@@ -37,7 +37,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         m_drive = new DifferentialDrive(m_leftTalon, m_rightTalon);
 
-        m_gyro = new AHRS(SPI.Port.kMXP);
+        m_gyro = new AHRS(SPI_PORT_GYRO);
         m_gyro.reset();
 
         m_kinematics = new DifferentialDriveKinematics(DRIVETRAIN_TRACKWIDTH_METERS);
@@ -78,12 +78,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
         //Left side encoder goes in the wrong direction
         m_leftTalon.setSensorPhase(true);
 
-        m_leftVictor.follow(m_leftTalon, FollowerType.PercentOutput);
-        m_rightVictor.follow(m_rightTalon, FollowerType.PercentOutput);
+        m_leftVictor.follow(m_leftTalon, VICTOR_MOTOR_FOLLOWER_TYPE);
+        m_rightVictor.follow(m_rightTalon, VICTOR_MOTOR_FOLLOWER_TYPE);
 
         //Setup talon built-in PID
-        m_leftTalon.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative, 0, 5);
-        m_rightTalon.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative, 0, 5);
+        m_leftTalon.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);
+        m_rightTalon.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);
 
         //Create config objects
         TalonSRXConfiguration cLeft = new TalonSRXConfiguration(), cRight = new TalonSRXConfiguration();

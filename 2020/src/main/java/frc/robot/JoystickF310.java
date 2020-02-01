@@ -18,6 +18,7 @@ public class JoystickF310 extends Joystick {
 	}
 
 	public double getRawAxis(AxisF310 axis) {
+		if (axis == AxisF310.JoystickLeftY || axis == AxisF310.JoystickRightY) return -1 * this.getRawAxis(axis.ordinal());
 		return this.getRawAxis(axis.ordinal());
 	}
 
