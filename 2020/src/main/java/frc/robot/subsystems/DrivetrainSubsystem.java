@@ -1,15 +1,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FollowerType;
-import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.SlotConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
@@ -49,9 +44,17 @@ public class DrivetrainSubsystem extends SubsystemBase {
         m_odometry.update(Rotation2d.fromDegrees(m_gyro.getAngle()), getDistanceLeft(), getDistanceRight());
     }
 
-    public void tankDrive(double left, double right) {
+    //For the next few drive functions, 
+
+    public void driveRaw(double left, double right) {
         m_leftTalon.set(ControlMode.Velocity, left);
         m_rightTalon.set(ControlMode.Velocity, right);
+
+    }
+
+    public void tankDrive(double left, double right) {
+        //Convert from m/s to raw units
+        driveRaw(left, right);
     }
 
     public void tankDrive(double[] speeds) {
@@ -59,7 +62,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public void arcadeDrive(double speed, double rot) {
-        this.tankDrive(Util.arcadeToTankDrive(speed, rot));
+        this.arcadeDrive(Util.arcadeToTankDrive(speed, rot));
     }
 
     public void arcadeDrive(double[] speeds) {

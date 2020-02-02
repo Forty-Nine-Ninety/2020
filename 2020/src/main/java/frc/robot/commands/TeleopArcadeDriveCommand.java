@@ -24,7 +24,7 @@ public class TeleopArcadeDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_drive.tankDrive(Util.arcadeToTankDrive(m_speedSupplier.getAsDouble(), m_rotationSupplier.getAsDouble()));
+        m_drive.tankDrive(Util.arcadeToTankDrive(m_speedSupplier.getAsDouble() * ARCADE_SPEED_MULTIPLIER, m_rotationSupplier.getAsDouble() * ARCADE_ROTATION_MULTIPLIER));
     }
 
 }

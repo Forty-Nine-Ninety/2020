@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.SlotConfiguration;
 
 import edu.wpi.first.wpilibj.SPI;
+import io.github.oblarg.oblog.annotations.Config;
 
 public final class Constants {
     
@@ -50,7 +51,6 @@ public final class Constants {
     public static double DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND = DRIVETRAIN_ENCODER_DISTANCE_TO_METERS * 10f;
     public static double SHOOTER_ENCODER_VELOCITY_TO_METERS_PER_SECOND = 0;
 
-
     //PID
     public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 15);
     public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.5, 0, 15);
@@ -67,6 +67,18 @@ public final class Constants {
     public static double LIMELIGHT_DRIVETRAIN_KI = 0;
     public static double LIMELIGHT_DRIVETRAIN_KD = 0;
 
+    //Miscellaneous
+    public static double JOYSTICKF310_AXIS_DEADBAND = 0.05;
+    public static double JOYSTICK_INPUT_EXPONENT = 2;
+
+    //Operation config
+    @Config(name = "Rotation Input Multiplier", tabName = "Drive Configuration")
+    public static double ARCADE_ROTATION_MULTIPLIER = 0.5;
+
+    @Config(name = "Speed Input Multiplier", tabName = "Drive Configuration")
+    public static double ARCADE_SPEED_MULTIPLIER = 0.75;
+
+    //Classes
     public static class TalonSRXGains extends SlotConfiguration {
 
         public TalonSRXGains(double kF, double kP, double kI, double kD) {
@@ -76,6 +88,11 @@ public final class Constants {
             this.kI = kI;
             this.kD = kD;
         }
+
+        public TalonSRXGains(double kF, double kP, double kI, double kD, double iA, int iZ) {
+            this(kF, kP, kI, kD);
+            this.maxIntegralAccumulator = iA;
+            this.integralZone = iZ;
+        }
     }
-    
 }

@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
+import static frc.robot.Constants.*;
+
 public class JoystickF310 extends Joystick {
     
 	public JoystickF310(int joystickNumber) { super(joystickNumber); }
@@ -20,6 +22,10 @@ public class JoystickF310 extends Joystick {
 	public double getRawAxis(AxisF310 axis) {
 		if (axis == AxisF310.JoystickLeftY || axis == AxisF310.JoystickRightY) return -1 * this.getRawAxis(axis.ordinal());
 		return this.getRawAxis(axis.ordinal());
+	}
+
+	public double getRawAxis(int axis) {
+		return Math.abs(super.getRawAxis(axis)) < JOYSTICKF310_AXIS_DEADBAND ? 0 : super.getRawAxis(axis);
 	}
 
 	public static enum POVF310 {
