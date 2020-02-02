@@ -44,16 +44,15 @@ public class DrivetrainSubsystem extends SubsystemBase {
         m_odometry.update(Rotation2d.fromDegrees(m_gyro.getAngle()), getDistanceLeft(), getDistanceRight());
     }
 
-    //For the next few drive functions, 
-
+    //Assumes left and right are in encoder units per 100ms
     public void driveRaw(double left, double right) {
         m_leftTalon.set(ControlMode.Velocity, left);
         m_rightTalon.set(ControlMode.Velocity, right);
-
     }
 
+    //Functions below are for 0-1
     public void tankDrive(double left, double right) {
-        //Convert from m/s to raw units
+        //Convert from value in range [0, 1] to raw encoder units
         driveRaw(left, right);
     }
 
@@ -62,7 +61,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public void arcadeDrive(double speed, double rot) {
-        this.arcadeDrive(Util.arcadeToTankDrive(speed, rot));
+        this.tankDrive(Util.arcadeToTankDrive(speed, rot));
     }
 
     public void arcadeDrive(double[] speeds) {

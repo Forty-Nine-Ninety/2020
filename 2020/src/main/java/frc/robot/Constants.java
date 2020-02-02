@@ -44,9 +44,11 @@ public final class Constants {
 
     //Odometry information
     public static double DRIVETRAIN_TRACKWIDTH_METERS = 0.606425;
-    public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 8;
+    public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 3;
     
     //Conversions
+    //TODO fix conversion numbers
+    public static double METERS_PER_SECOND_TO_DRIVETRAIN_ENCODER_VELOCITY = 0;
     public static double DRIVETRAIN_ENCODER_DISTANCE_TO_METERS = 1f / TALON_ENCODER_RESOLUTION * 18.85f / 2.54f / 100f;//1 rotation is 4096 encoder units, encoder is on drivetrain, 6 inch wheels
     public static double DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND = DRIVETRAIN_ENCODER_DISTANCE_TO_METERS * 10f;
     public static double SHOOTER_ENCODER_VELOCITY_TO_METERS_PER_SECOND = 0;

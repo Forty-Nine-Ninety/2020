@@ -2,6 +2,9 @@ package frc.robot;
 
 public class Util {
     
+    public static double powCopySign(double a, double b) {
+        return Math.copySign(Math.pow(a, b), a);
+    }
 
     public static double[] arcadeToTankDrive(double speed, double rot) {
         double left, right, maxSpeed;
