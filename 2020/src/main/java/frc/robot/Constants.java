@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.SlotConfiguration;
 
 import edu.wpi.first.wpilibj.SPI;
 
@@ -65,4 +66,16 @@ public final class Constants {
     public static double LIMELIGHT_DRIVETRAIN_KP = 0.5;
     public static double LIMELIGHT_DRIVETRAIN_KI = 0;
     public static double LIMELIGHT_DRIVETRAIN_KD = 0;
+
+    public static class TalonSRXGains extends SlotConfiguration {
+
+        public TalonSRXGains(double kF, double kP, double kI, double kD) {
+            super();
+            this.kF = kF;
+            this.kP = kP;
+            this.kI = kI;
+            this.kD = kD;
+        }
+    }
+    
 }
