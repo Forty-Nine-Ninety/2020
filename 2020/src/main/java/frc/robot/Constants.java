@@ -42,16 +42,22 @@ public final class Constants {
     public static TalonSRXFeedbackDevice TALON_DEFAULT_FEEDBACK_DEVICE = TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative;
     public static FollowerType VICTOR_MOTOR_FOLLOWER_TYPE = FollowerType.PercentOutput;
 
-    //Odometry information
+    //Drivetrain physical characteristics
     public static double DRIVETRAIN_TRACKWIDTH_METERS = 0.606425;
-    public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 3;
+    public static double DRIVETRAIN_WHEEL_RADIUS_METERS = 0.0762;//3 inches
+
     
     //Conversions
-    //TODO fix conversion numbers
-    public static double METERS_PER_SECOND_TO_DRIVETRAIN_ENCODER_VELOCITY = 0;
-    public static double DRIVETRAIN_ENCODER_DISTANCE_TO_METERS = 1f / TALON_ENCODER_RESOLUTION * 18.85f / 2.54f / 100f;//1 rotation is 4096 encoder units, encoder is on drivetrain, 6 inch wheels
-    public static double DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND = DRIVETRAIN_ENCODER_DISTANCE_TO_METERS * 10f;
+    public static double ENCODER_VELOCITY_UNIT_TO_SECONDS = 0.1;//Encoder measures things in units per 0.1s
+    public static double DRIVETRAIN_ENCODER_DISTANCE_TO_METERS = 1 / TALON_ENCODER_RESOLUTION * 2 * Math.PI * DRIVETRAIN_WHEEL_RADIUS_METERS;
+    public static double DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND = DRIVETRAIN_ENCODER_DISTANCE_TO_METERS / ENCODER_VELOCITY_UNIT_TO_SECONDS;
+    public static double METERS_PER_SECOND_TO_DRIVETRAIN_ENCODER_VELOCITY = 1 / DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     public static double SHOOTER_ENCODER_VELOCITY_TO_METERS_PER_SECOND = 0;
+
+    //Drivetrain movement information
+    public static double MAXIMUM_TESTED_ENCODER_VELOCITY = 3000;//TODO find this number
+    public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 2.5;
+    public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
 
     //PID
     public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 15);

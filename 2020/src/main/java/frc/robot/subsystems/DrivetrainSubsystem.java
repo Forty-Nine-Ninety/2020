@@ -53,6 +53,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     //Functions below are for 0-1
     public void tankDrive(double left, double right) {
         //Convert from value in range [0, 1] to raw encoder units
+        left *= MAXIMUM_TESTED_ENCODER_VELOCITY;
+        right *= MAXIMUM_TESTED_ENCODER_VELOCITY;
         driveRaw(left, right);
     }
 
