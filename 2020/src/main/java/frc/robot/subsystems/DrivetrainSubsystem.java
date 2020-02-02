@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.SlotConfiguration;
@@ -13,6 +14,8 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Util;
+
 import static frc.robot.Constants.*;
 
 public class DrivetrainSubsystem extends SubsystemBase {
@@ -21,8 +24,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private final WPI_VictorSPX m_leftVictor, m_rightVictor;
 
     private final AHRS m_gyro;
-
-    private final DifferentialDrive m_drive;
     
     private final DifferentialDriveKinematics m_kinematics;
     private final DifferentialDriveOdometry m_odometry;
@@ -34,8 +35,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
         m_rightVictor = new WPI_VictorSPX(CAN_DRIVETRAIN_RIGHT_VICTORSPX);
 
         configureMotors();
-
-        m_drive = new DifferentialDrive(m_leftTalon, m_rightTalon);
 
         m_gyro = new AHRS(SPI_PORT_GYRO);
         m_gyro.reset();
@@ -51,7 +50,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public void tankDrive(double left, double right) {
-        m_drive.tankDrive(left, right, false);
+        m_leftTalon.set(ControlMode.Velocity, left);
+        m_rightTalon.set(ControlMode.Velocity, right);
     }
 
     public void tankDrive(double[] speeds) {
@@ -59,7 +59,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public void arcadeDrive(double speed, double rot) {
-        m_drive.arcadeDrive(speed, rot);
+        this.tankDrive(Util.arcadeToTankDrive(speed, rot));
     }
 
     public void arcadeDrive(double[] speeds) {

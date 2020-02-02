@@ -1,6 +1,8 @@
 package frc.robot.commands;
 
 import static frc.robot.Constants.*;
+
+import frc.robot.Util;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -22,36 +24,7 @@ public class TeleopArcadeDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_drive.tankDrive(convertToTank(m_speedSupplier.getAsDouble(), m_rotationSupplier.getAsDouble()));
-    }
-
-    private static double[] convertToTank(double speed, double rot) {
-        double left, right, maxSpeed;
-
-        if (Math.abs(speed) > Math.abs(rot)) maxSpeed = speed;
-        else maxSpeed = speed > 0 ? Math.abs(rot) : Math.abs(rot) * -1;
-
-        if (speed > 0) {
-            if (rot > 0) {
-                left = maxSpeed;
-                right = speed - rot;
-            }
-            else {
-                left = speed + rot;
-                right = maxSpeed;
-            }
-        }
-        else {
-            if (rot > 0) {
-                left = speed + rot;
-                right = maxSpeed;
-            }
-            else {
-                left = maxSpeed;
-                right = speed - rot;
-            }
-        }
-        return new double[] {left, right};
+        m_drive.tankDrive(Util.arcadeToTankDrive(m_speedSupplier.getAsDouble(), m_rotationSupplier.getAsDouble()));
     }
 
 }
