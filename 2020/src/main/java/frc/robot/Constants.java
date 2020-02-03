@@ -28,7 +28,7 @@ public final class Constants {
     public static int CAN_DRIVETRAIN_RIGHT_VICTORSPX = 16;
     public static int CAN_DRIVETRAIN_LEFT_TALONSRX = 10;
     public static int CAN_DRIVETRAIN_LEFT_VICTORSPX = 15;
-    public static int CAN_SHOOTER_TALONSRX = 36;
+    public static int CAN_SHOOTER_TALONSRX = -1;
     public static int CAN_CLIMB_MAIN_TALONSRX = -1;
     public static int CAN_CLIMB_BALANCE_TALONSRX = -1;
     public static int CAN_STORAGE_TALONSRX = -1;
@@ -42,10 +42,9 @@ public final class Constants {
     public static TalonSRXFeedbackDevice TALON_DEFAULT_FEEDBACK_DEVICE = TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative;
     public static FollowerType VICTOR_MOTOR_FOLLOWER_TYPE = FollowerType.PercentOutput;
 
-    //Drivetrain physical characteristics
+    //Robot physical characteristics
     public static double DRIVETRAIN_TRACKWIDTH_METERS = 0.606425;
     public static double DRIVETRAIN_WHEEL_RADIUS_METERS = 0.0762;//3 inches
-
     
     //Conversions
     public static double ENCODER_VELOCITY_UNIT_TO_SECONDS = 0.1;//Encoder measures things in units per 0.1s
@@ -60,8 +59,8 @@ public final class Constants {
     public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
 
     //PID
-    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 15);
-    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.5, 0, 15);
+    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
+    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
 
     //The following two could possibly just be normal PID values
     public static TalonSRXGains LIMELIGHT_SHOOTER_FPID = new TalonSRXGains(0, 0, 0, 0);

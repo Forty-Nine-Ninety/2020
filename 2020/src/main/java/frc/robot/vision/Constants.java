@@ -2,6 +2,7 @@ package frc.robot.vision;
 
 
 public final class Constants {
+    //Move some of these to the other Constants file
     public static double TARGET_HEIGHT = 0;
     public static double LIMELIGHT_HEIGHT = 0;
     public static double LIMELIGHT_ANGLE_DEGREES = 0;
