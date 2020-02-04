@@ -11,29 +11,23 @@ import edu.wpi.first.wpilibj.util.Units;
 public class TargetFinder {
 
     public TargetFinder() {
-        //
+        //nothing here yet!
     }
 
     
     public static double estimateShooterVelocityToTarget() {
         //Returns optimal firing angle given a velocity
-        return 0;
+        //See https://physics.stackexchange.com/questions/27992/solving-for-initial-velocity-required-to-launch-a-projectile-to-a-given-destinat for explanation
+        //y0 in our case is negative because final target is up, not down.
+        double d = findDistanceToTarget(), h = TARGET_HEIGHT_METERS - SHOOTER_HEIGHT_METERS;
+        double denominator = 2 * (d * Math.tan(SHOOTER_ANGLE_RADIANS) - h) * Math.pow(Math.cos(SHOOTER_ANGLE_RADIANS), 2);
+        return Math.sqrt(GRAVITY * Math.pow(d, 2) / denominator);
     }
 
-    //Estimates air resistance rather than finding its exact value
-    public static double estimateShooterAngleToTarget() {
-        double d = findDistanceToTarget();
-        double h = TARGET_HEIGHT - LIMELIGHT_HEIGHT + d * AIR_RESISTANCE_FACTOR;
-        double a = -1 * GRAVITY * d * d / 2 / INITIAL_VELOCITY / INITIAL_VELOCITY, b = d, c = -1 * GRAVITY * d * d / 2 / INITIAL_VELOCITY / INITIAL_VELOCITY - h;
-        double p1 = Math.atan((-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)), p2 = Math.atan((-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a));
-
-        //Modify to return the higher one that has a max height of less than a constant (representing the roof)
-        return Math.max(p1, p2) * 180 / Math.PI;
-    }
 
     // http://docs.limelightvision.io/en/latest/cs_estimating_distance.html
     public static double findDistanceToTarget() {
-        return (TARGET_HEIGHT - LIMELIGHT_HEIGHT) / Math.tan(findAngleToTarget());
+        return (TARGET_HEIGHT_METERS - LIMELIGHT_HEIGHT_METERS) / Math.tan(findAngleToTarget());
     }
 
     public static double findAngleToTarget() {
