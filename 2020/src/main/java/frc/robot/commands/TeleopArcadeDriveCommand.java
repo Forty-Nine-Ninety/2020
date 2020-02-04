@@ -1,23 +1,20 @@
 package frc.robot.commands;
 
 import static frc.robot.Constants.*;
+
+import frc.robot.Util;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import java.util.function.DoubleSupplier;
-
-import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TeleopArcadeDriveCommand extends CommandBase {
 
     private final DrivetrainSubsystem m_drive;
     private DoubleSupplier m_speedSupplier, m_rotationSupplier;
-    private PIDController m_pidL, m_pidR;
 
     public TeleopArcadeDriveCommand(DrivetrainSubsystem drive) {
         addRequirements(drive);
         m_drive = drive;
-        m_pidL = new PIDController(DRIVETRAIN_LEFT_KP, DRIVETRAIN_LEFT_KI, DRIVETRAIN_LEFT_KD);
-        m_pidR = new PIDController(DRIVETRAIN_RIGHT_KP, DRIVETRAIN_RIGHT_KI, DRIVETRAIN_RIGHT_KD);
     }
 
     public void setSuppliers(DoubleSupplier left, DoubleSupplier right) {
@@ -27,37 +24,11 @@ public class TeleopArcadeDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        double[] tank = convertToTank(m_speedSupplier.getAsDouble(), m_rotationSupplier.getAsDouble());
-        m_drive.tankDrive(m_pidL.calculate(m_drive.getRateLeft(), tank[0] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND), m_pidR.calculate(m_drive.getRateRight(), tank[1] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND));
-    }
-
-    private static double[] convertToTank(double speed, double rot) {
-        double left, right, maxSpeed;
-
-        if (Math.abs(speed) > Math.abs(rot)) maxSpeed = speed;
-        else maxSpeed = speed > 0 ? Math.abs(rot) : Math.abs(rot) * -1;
-
-        if (speed > 0) {
-            if (rot > 0) {
-                left = maxSpeed;
-                right = speed - rot;
-            }
-            else {
-                left = speed + rot;
-                right = maxSpeed;
-            }
-        }
-        else {
-            if (rot > 0) {
-                left = speed + rot;
-                right = maxSpeed;
-            }
-            else {
-                left = maxSpeed;
-                right = speed - rot;
-            }
-        }
-        return new double[] {left, right};
+        double[] speeds = Util.arcadeToTankDrive(m_speedSupplier.getAsDouble() * ARCADE_SPEED_MULTIPLIER, m_rotationSupplier.getAsDouble() * ARCADE_ROTATION_MULTIPLIER);
+        //Convert speeds to target speeds in meters per second, and then divide by hypothetical maximum movement speed
+        speeds[0] = speeds[0] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND / DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND;
+        speeds[1] = speeds[1] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND / DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND;
+        m_drive.tankDrive(speeds);
     }
 
 }
