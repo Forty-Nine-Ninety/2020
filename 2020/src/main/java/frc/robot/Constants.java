@@ -45,6 +45,10 @@ public final class Constants {
     //Robot physical characteristics
     public static double DRIVETRAIN_TRACKWIDTH_METERS = 0.606425;
     public static double DRIVETRAIN_WHEEL_RADIUS_METERS = 0.0762;//3 inches
+    public static double SHOOTER_HEIGHT_METERS = 0;
+    public static double SHOOTER_ANGLE_RADIANS = 0;
+    public static double LIMELIGHT_HEIGHT_METERS = 0;
+    public static double LIMELIGHT_ANGLE_RADIANS = 0;
     
     //Conversions
     public static double ENCODER_VELOCITY_UNIT_TO_SECONDS = 0.1;//Encoder measures things in units per 0.1s

@@ -1,6 +1,7 @@
 package frc.robot.vision;
 
 import static frc.robot.vision.Constants.*;
+import static frc.robot.Constants.*;
 
 import edu.wpi.first.wpilibj.util.Units;
 
@@ -31,6 +32,6 @@ public class TargetFinder {
     }
 
     public static double findAngleToTarget() {
-        return Units.degreesToRadians(LIMELIGHT_ANGLE_DEGREES) + Units.degreesToRadians(Limelight.getCrosshairVerticalOffset());
+        return LIMELIGHT_ANGLE_RADIANS + Units.degreesToRadians(Limelight.getCrosshairVerticalOffset());
     }
 }
