@@ -53,8 +53,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     //Functions below are for 0-1
     public void tankDrive(double left, double right) {
         //Convert from value in range [0, 1] to raw encoder units
-        left *= MAXIMUM_TESTED_ENCODER_VELOCITY;
-        right *= MAXIMUM_TESTED_ENCODER_VELOCITY;
+        left *= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
+        right *= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
         driveRaw(left, right);
     }
 
@@ -82,8 +82,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
         //Left side encoder goes in the wrong direction
         m_leftTalon.setSensorPhase(true);
 
-        m_leftVictor.follow(m_leftTalon, VICTOR_MOTOR_FOLLOWER_TYPE);
-        m_rightVictor.follow(m_rightTalon, VICTOR_MOTOR_FOLLOWER_TYPE);
+        m_leftVictor.follow(m_leftTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
+        m_rightVictor.follow(m_rightTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
 
         //Setup talon built-in PID
         m_leftTalon.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);

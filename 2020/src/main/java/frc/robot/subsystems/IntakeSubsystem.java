@@ -13,7 +13,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public IntakeSubsystem() {
         m_motor = new WPI_TalonSRX(CAN_INTAKE_TALONSRX);
-        m_ballSensor = new DigitalInput(DIO_BREAKBEAM);
+        m_ballSensor = new DigitalInput(DIO_BREAKBEAM_INTAKE);
     }
 
     @Override

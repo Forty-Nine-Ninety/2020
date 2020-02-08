@@ -1,20 +1,21 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import static frc.robot.Constants.*;
-
 import java.util.ArrayList;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import static frc.robot.Constants.*;
 
 public class StorageSubsystem extends SubsystemBase {
     
     private ArrayList<Double> balls;
-    private final TalonSRX m_motor;
+    private final WPI_TalonSRX m_motorLow, m_motorHigh;
 
     public StorageSubsystem() {
         balls = new ArrayList<>();
-        m_motor = new TalonSRX(CAN_STORAGE_TALONSRX);
+        m_motorLow = new WPI_TalonSRX(CAN_STORAGE_LOW_TALONSRX);
+        m_motorHigh = new WPI_TalonSRX(CAN_STORAGE_HIGH_TALONSRX);
     }
 
     @Override
