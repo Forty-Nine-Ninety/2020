@@ -14,7 +14,8 @@ public final class Constants {
     public static int PORT_JOYSTICK_OPERATOR = 1;
 
     //RoboRIO sensor ports
-    public static int DIO_BREAKBEAM = -1;
+    public static int DIO_BREAKBEAM_INTAKE = -1;
+    public static int DIO_BREAKBEAM_HOPPER = -1;
     //Below is format for analog sensors
     //public static int PWM_NAME = -1;
     public static SPI.Port SPI_PORT_GYRO = SPI.Port.kMXP;
@@ -29,18 +30,21 @@ public final class Constants {
     public static int CAN_DRIVETRAIN_LEFT_TALONSRX = 10;
     public static int CAN_DRIVETRAIN_LEFT_VICTORSPX = 15;
     public static int CAN_SHOOTER_TALONSRX = -1;
+    public static int CAN_SHOOTER_SLAVE_TALONSRX = -1;
     public static int CAN_CLIMB_MAIN_TALONSRX = -1;
     public static int CAN_CLIMB_BALANCE_TALONSRX = -1;
-    public static int CAN_STORAGE_TALONSRX = -1;
+    public static int CAN_STORAGE_LOW_TALONSRX = -1;
+    public static int CAN_STORAGE_HIGH_TALONSRX = -1;
     public static int CAN_INTAKE_TALONSRX = -1;
     public static int CAN_SPINNER_TALONSRX = -1;
+    public static int CAN_HOPPER_TALONSRX = -1;
 
     //Talon and Victor information
     public static double TALON_ENCODER_RESOLUTION = 4096;
     public static int TALON_TIMEOUT_MS = 5;
     public static int TALON_DEFAULT_PID_ID = 0;//0 is primary, 1 is auxilary
     public static TalonSRXFeedbackDevice TALON_DEFAULT_FEEDBACK_DEVICE = TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative;
-    public static FollowerType VICTOR_MOTOR_FOLLOWER_TYPE = FollowerType.PercentOutput;
+    public static FollowerType DEFAULT_MOTOR_FOLLOWER_TYPE = FollowerType.PercentOutput;
 
     //Robot physical characteristics
     public static double DRIVETRAIN_TRACKWIDTH_METERS = 0.606425;
@@ -59,13 +63,17 @@ public final class Constants {
     public static double SPINNER_ENCODER_VELOCITY_TO_METERS_PER_SECOND = 0;
 
     //Drivetrain movement information
-    public static double MAXIMUM_TESTED_ENCODER_VELOCITY = 3000;//TODO find this number
+    public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 3000;//TODO find this number
     public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 2.5;
-    public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
+    public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
+
+    //Shooter movement information
+    public static double SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY = 3000;//TODO find this number
 
     //PID
     public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
     public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
+    public static TalonSRXGains SHOOTER_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
 
     //The following two could possibly just be normal PID values
     public static TalonSRXGains LIMELIGHT_SHOOTER_FPID = new TalonSRXGains(0, 0, 0, 0);
@@ -84,11 +92,17 @@ public final class Constants {
     public static double JOYSTICK_INPUT_EXPONENT = 2;
 
     //Operation config
-    @Config(name = "Rotation Input Multiplier", tabName = "Drive Configuration")
+    @Config(name = "Rotation Input Multiplier", tabName = "Op Configuration")
     public static double ARCADE_ROTATION_MULTIPLIER = 0.5;
 
-    @Config(name = "Speed Input Multiplier", tabName = "Drive Configuration")
+    @Config(name = "Speed Input Multiplier", tabName = "Op Configuration")
     public static double ARCADE_SPEED_MULTIPLIER = 0.75;
+
+    @Config(name = "Intake Motor Speed", tabName = "Op Configuration")
+    public static double INTAKE_MOTOR_SPEED = 0.75;
+
+    @Config(name = "Hopper Motor Speed", tabName = "Op Configuration")
+    public static double HOPPER_MOTOR_SPEED = 0.75;
 
     //Classes
     public static class TalonSRXGains extends SlotConfiguration {
