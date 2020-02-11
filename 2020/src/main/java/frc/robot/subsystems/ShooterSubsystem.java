@@ -28,8 +28,12 @@ public class ShooterSubsystem extends SubsystemBase {
         fireRaw(speed * SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY);
     }
     
-    public double getRateFire() {
+    public double getVelocity() {
         return m_motor.getSelectedSensorVelocity() * SHOOTER_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
+    }
+
+    public double getVelocityError() {
+        return m_motor.getClosedLoopError();
     }
 
     private void configureMotors() {
