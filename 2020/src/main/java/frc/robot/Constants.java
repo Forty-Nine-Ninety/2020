@@ -16,6 +16,8 @@ public final class Constants {
     //RoboRIO sensor ports
     public static int DIO_BREAKBEAM_INTAKE = -1;
     public static int DIO_BREAKBEAM_HOPPER = -1;
+    public static int DIO_BREAKBEAM_STORAGE_LOW = -1;
+    public static int DIO_BREAKBEAM_STORAGE_HIGH = -1;
     //Below is format for analog sensors
     //public static int PWM_NAME = -1;
     public static SPI.Port SPI_PORT_GYRO = SPI.Port.kMXP;

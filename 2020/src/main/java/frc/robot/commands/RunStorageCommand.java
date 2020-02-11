@@ -11,6 +11,7 @@ public class RunStorageCommand extends CommandBase {
         addRequirements(storage);
         m_storage = storage;
     }
+    
     @Override
     public void execute() {
         
