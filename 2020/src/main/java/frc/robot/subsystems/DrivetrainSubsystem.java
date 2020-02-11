@@ -105,6 +105,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
         return m_gyro.getRate();
     }
 
+    public double getGyroTilt() {//Figure out which one we're using
+        return Math.max(m_gyro.getPitch(), m_gyro.getRoll());
+    }
+
     public double getDistanceLeft() {
         return m_leftTalon.getSelectedSensorPosition() * DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
     }

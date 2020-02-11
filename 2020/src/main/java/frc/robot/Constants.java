@@ -63,12 +63,13 @@ public final class Constants {
     public static double SPINNER_ENCODER_VELOCITY_TO_METERS_PER_SECOND = 0;
 
     //Drivetrain movement information
-    public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 3000;//TODO find this number
+    public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 3000;//TODO find this number, ~3200
     public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 2.5;
     public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
 
     //Shooter movement information
-    public static double SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY = 3000;//TODO find this number
+    public static double SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY = 50;//TODO find this number
+    public static double SHOOTER_MAXIMUM_ALLOWED_VELOCITY_ERROR = 50;//TODO find this number
 
     //PID
     public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
@@ -103,6 +104,9 @@ public final class Constants {
 
     @Config(name = "Hopper Motor Speed", tabName = "Op Configuration")
     public static double HOPPER_MOTOR_SPEED = 0.75;
+
+    @Config(name = "Storage Motor Speed", tabName = "Op Configuration")
+    public static double STORAGE_MOTOR_SPEED = 0.75;
 
     //Classes
     public static class TalonSRXGains extends SlotConfiguration {

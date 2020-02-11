@@ -20,7 +20,7 @@ public class HopperSubsystem extends SubsystemBase {
     public void periodic() {}
 
     public void set(boolean on) {
-        m_motor.set( on ? HOPPER_MOTOR_SPEED : 0);
+        m_motor.set(on ? HOPPER_MOTOR_SPEED : 0);
     }
 
     public boolean hasBall() {

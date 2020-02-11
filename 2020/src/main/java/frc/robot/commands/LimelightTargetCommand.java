@@ -29,7 +29,7 @@ public class LimelightTargetCommand extends CommandBase {
     @Override
     public void execute() {
         m_drive.arcadeDrive(0, m_pidD.calculate(Limelight.getCrosshairHorizontalOffset(), 0));
-        m_shooter.fire(m_pidS.calculate(m_shooter.getRateFire(), TargetFinder.estimateShooterVelocityToTarget()));
+        m_shooter.fire(m_pidS.calculate(m_shooter.getVelocity(), TargetFinder.estimateShooterVelocityToTarget()));
     }
 
 }
