@@ -73,6 +73,9 @@ public final class Constants {
     public static double SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY = 50;//TODO find this number
     public static double SHOOTER_MAXIMUM_ALLOWED_VELOCITY_ERROR = 50;//TODO find this number
 
+    //Storage movement information
+    public static double STORAGE_MINIMUM_BALL_SPACING_ENCODER_UNITS = 50;//TODO find this number
+
     //PID
     public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
     public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
@@ -102,13 +105,13 @@ public final class Constants {
     public static double ARCADE_SPEED_MULTIPLIER = 0.75;
 
     @Config(name = "Intake Motor Speed", tabName = "Op Configuration")
-    public static double INTAKE_MOTOR_SPEED = 0.75;
+    public static double INTAKE_MOTOR_SPEED = 0.5;
 
     @Config(name = "Hopper Motor Speed", tabName = "Op Configuration")
-    public static double HOPPER_MOTOR_SPEED = 0.75;
+    public static double HOPPER_MOTOR_SPEED = 0.3;
 
     @Config(name = "Storage Motor Speed", tabName = "Op Configuration")
-    public static double STORAGE_MOTOR_SPEED = 0.75;
+    public static double STORAGE_MOTOR_SPEED = 0.5;
 
     //Classes
     public static class TalonSRXGains extends SlotConfiguration {

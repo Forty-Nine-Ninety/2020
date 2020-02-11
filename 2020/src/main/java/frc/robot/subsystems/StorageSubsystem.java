@@ -57,8 +57,16 @@ public class StorageSubsystem extends SubsystemBase {
         ballsHigh -= 1;
     }
 
-    public int totalBalls() {
+    public int getTotalBalls() {
         return ballsLow + ballsHigh;
+    }
+    
+    public int getBallsLow() {
+        return ballsLow;
+    }
+
+    public int getBallsHigh() {
+        return ballsHigh;
     }
 
     public double getLastEntered() {
