@@ -24,6 +24,7 @@ public final class Constants {
 
     //Solenoid PCM ports
     public static int PCM_CLIMB = -1;
+    public static int PCM_INTAKE = -1;
 
     //CAN Bus IDs
     public static int CAN_PCM = 1;
