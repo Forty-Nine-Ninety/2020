@@ -75,6 +75,7 @@ public final class Constants {
 
     //Storage movement information
     public static double STORAGE_MINIMUM_BALL_SPACING_ENCODER_UNITS = 50;//TODO find this number
+    public static double STORAGE_LENGTH_ENCODER_UNITS = 250;//TODO find this number
 
     //PID
     public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);

@@ -8,7 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import static frc.robot.Constants.*;
 
 public class StorageSubsystem extends SubsystemBase {
-    private int ballsLow, ballsHigh;
+    private int ballsLow, ballsHigh, lastBall;
     private boolean enabled;
     private final WPI_TalonSRX m_motorLow, m_motorHigh;
     private final DigitalInput m_ballSensorLow, m_ballSensorHigh;
@@ -51,6 +51,7 @@ public class StorageSubsystem extends SubsystemBase {
     public void moveBall() {
         ballsLow -= 1;
         ballsHigh += 1;
+        lastBall = m_motorHigh.getSelectedSensorPosition();
     }
 
     public void removeBall() {
@@ -69,12 +70,8 @@ public class StorageSubsystem extends SubsystemBase {
         return ballsHigh;
     }
 
-    public double getLastEntered() {
-        return 0;
-    }
-
-    public double getLastExited() {
-        return 0;
+    public int getLastEntered() {
+        return m_motorHigh.getSelectedSensorPosition() - lastBall;
     }
 
     public void setEnabled(boolean e) {
