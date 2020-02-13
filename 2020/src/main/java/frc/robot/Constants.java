@@ -1,5 +1,8 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.SlotConfiguration;
+
 import frc.robot.subsystems.DrivetrainSubsystem.DriveMode;
 
 public final class Constants {
@@ -38,10 +41,36 @@ public final class Constants {
     public static double LIMELIGHT_SHOOTER_KI = 0.1;
     public static double LIMELIGHT_SHOOTER_KD = 0.1;
 
+    public static double BALANCE_KP = 0.1;
+    public static double BALANCE_KI = 0.1;
+    public static double BALANCE_KD = 0.1;
+
     public static double LIMELIGHT_DRIVETRAIN_KP = 0.1;
     public static double LIMELIGHT_DRIVETRAIN_KI = 0.1;
     public static double LIMELIGHT_DRIVETRAIN_KD = 0.1;
 
     public static double ENCODER_RESOLUTION = 4096;
     public static int TALON_TIMEOUT_MS = 5;
+    public static int TALON_DEFAULT_PID_ID = 0;//0 is primary, 1 is auxilary
+    public static TalonSRXFeedbackDevice TALON_DEFAULT_FEEDBACK_DEVICE = TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative;
+
+    public static TalonSRXGains CLIMB_FPID = new TalonSRXGains(0, 0, 0, 0);
+    public static int CLIMB_ENCODER_TICKS = -1;
+
+    public static class TalonSRXGains extends SlotConfiguration {
+
+        public TalonSRXGains(double kF, double kP, double kI, double kD) {
+            super();
+            this.kF = kF;
+            this.kP = kP;
+            this.kI = kI;
+            this.kD = kD;
+        }
+
+        public TalonSRXGains(double kF, double kP, double kI, double kD, double iA, int iZ) {
+            this(kF, kP, kI, kD);
+            this.maxIntegralAccumulator = iA;
+            this.integralZone = iZ;
+        }
+    }
 }

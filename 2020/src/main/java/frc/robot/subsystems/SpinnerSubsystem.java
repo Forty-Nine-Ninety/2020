@@ -7,6 +7,7 @@ import static frc.robot.Constants.*;
 public class SpinnerSubsystem extends SubsystemBase {
 
     private final WPI_TalonSRX m_main;
+    private final double spinSpeed = -1;
 
     public SpinnerSubsystem() {
         m_main = new WPI_TalonSRX(CAN_SPINNER_MAIN_TALONSRX);
@@ -16,7 +17,7 @@ public class SpinnerSubsystem extends SubsystemBase {
     public void periodic() {
     }
 
-    public void setSpeed(double speed){
-        m_main.set(speed);
+    public void setSpeed(){
+        m_main.set(this.spinSpeed);
     }
 }

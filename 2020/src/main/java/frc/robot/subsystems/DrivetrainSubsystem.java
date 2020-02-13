@@ -73,6 +73,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
         return m_gyro.getRate();
     }
 
+    public double getGyroTilt(){
+       return m_gyro.getPitch();
+    }
     private double getDistanceLeft() {
         return m_leftFront.getSelectedSensorPosition() * DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
     }
