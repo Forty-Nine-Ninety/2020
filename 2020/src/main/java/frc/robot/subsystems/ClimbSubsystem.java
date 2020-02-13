@@ -29,7 +29,7 @@ public class ClimbSubsystem extends SubsystemBase {
         
         //First setup talons with default settings
         m_climb.configFactoryDefault();
-
+        m_balance.configFactoryDefault();
 
         //Setup talon built-in PID
         m_climb.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);
