@@ -11,6 +11,8 @@ public final class Constants {
 
     public static int PORT_BREAKBEAM_SENSOR = -1;
 
+    public static int PCM_CLIMB = -1;
+
     public static int CAN_PCM = 12;
     public static int CAN_SHOOTER_FIRE_TALONSRX = 36;
     public static int CAN_SHOOTER_AIM_TALONSRX = 36;
@@ -55,7 +57,8 @@ public final class Constants {
     public static TalonSRXFeedbackDevice TALON_DEFAULT_FEEDBACK_DEVICE = TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative;
 
     public static TalonSRXGains CLIMB_FPID = new TalonSRXGains(0, 0, 0, 0);
-    public static int CLIMB_ENCODER_TICKS = -1;
+    public static int CLIMB_TARGET_ENCODER_TICKS = -1;
+    public static int CLIMB_LOCK_MAXIMUM_ALLOWED_ERROR = -1;
 
     public static class TalonSRXGains extends SlotConfiguration {
 

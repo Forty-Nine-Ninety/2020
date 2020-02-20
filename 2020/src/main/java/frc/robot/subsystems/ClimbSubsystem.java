@@ -3,16 +3,21 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
 
 public class ClimbSubsystem extends SubsystemBase {
 
     private final WPI_TalonSRX m_climb, m_balance;
+    private final Solenoid m_solenoid;
 
     public ClimbSubsystem() {
         m_climb = new WPI_TalonSRX(CAN_CLIMB_MAIN_TALONSRX);
         m_balance = new WPI_TalonSRX(CAN_BALANCE_CLIMB_MAIN_TALONSRX);
+
+        m_solenoid = new Solenoid(CAN_PCM, PCM_CLIMB);
+		m_solenoid.set(false);
 
         configureMotors();
     }
@@ -23,6 +28,14 @@ public class ClimbSubsystem extends SubsystemBase {
 
     public void climb(double position) {
         m_climb.set(ControlMode.Position, position);
+    }
+    
+    public int getEncoderTicks(){
+        return m_climb.getSelectedSensorPosition();
+    }
+
+    public void setLock(boolean lock){
+        m_solenoid.set(lock);
     }
 
     private void configureMotors() {

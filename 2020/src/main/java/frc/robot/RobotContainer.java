@@ -15,8 +15,6 @@ public class RobotContainer {
 
     private final DrivetrainSubsystem m_drivetrain = new DrivetrainSubsystem();
     private final StorageSubsystem m_storage  = new StorageSubsystem();
-    private RobotContainer instance = this;
-
     //TODO Add drivetrain commands
     private final TeleopTankDriveCommand m_teleopTankDriveCommand = new TeleopTankDriveCommand(m_drivetrain);
     
@@ -43,9 +41,5 @@ public class RobotContainer {
 
     public void updateLoggerEntries() {
         Logger.updateEntries();
-    }
-
-    public static RobotContainer getInstance(){
-        return RobotContainer.instance;
     }
 }
