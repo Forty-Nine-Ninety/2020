@@ -25,19 +25,21 @@ public class ShootBallCommand extends CommandBase {
         if (m_storage.getTotalBalls() == 0) m_shooter.fire(0);
         else m_shooter.fire(m_speed.getAsDouble());
         
-        if (Math.abs(m_shooter.getVelocityError()) < SHOOTER_MAXIMUM_ALLOWED_VELOCITY_ERROR) {
-            m_storage.setEnabled(true);
-        }
-        else {
-            m_storage.setEnabled(false);
-        }
+        m_storage.setEnabled(getStorageState());
     }
 
-    public void disableStorage() {
-        m_storage.setEnabled(false);
+    @Override
+    public boolean isFinished() {
+        return m_storage.getTotalBalls() == 0;
+    }
+
+    public boolean getStorageState() {
+        //Make sure ball can be shot
+        return Math.abs(m_shooter.getVelocityError()) < SHOOTER_MAXIMUM_ALLOWED_VELOCITY_ERROR;
     }
 
     public void setSupplier(DoubleSupplier sp) {
         m_speed = sp;
     }
+
 }

@@ -27,8 +27,16 @@ public class LimelightShootBallCommand extends ShootBallCommand {
     public void execute() {
         super.execute();
 
-        //Don't shoot if angle is off as well
-        if (Math.abs(Limelight.getCrosshairHorizontalOffset()) > SHOOTER_MAXIMUM_ALLOWED_ANGULAR_ERROR_DEGREES) disableStorage();
         m_drive.arcadeDrive(0, m_pid.calculate(Limelight.getCrosshairHorizontalOffset(), 0));
+    }
+
+    @Override
+    public boolean getStorageState() {
+        return super.getStorageState() && Math.abs(Limelight.getCrosshairHorizontalOffset()) < SHOOTER_MAXIMUM_ALLOWED_ANGULAR_ERROR_DEGREES;
+    }
+
+    @Override
+    public boolean isFinished() {
+        return super.isFinished() || ! Limelight.hasValidTarget();
     }
 }

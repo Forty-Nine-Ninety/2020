@@ -40,6 +40,7 @@ public class RobotContainer {
         joystickOperator.getButton(ButtonF310.Start).whenPressed(m_climbBalanceCommand);
         joystickOperator.getButton(ButtonF310.Back).whenPressed(m_climbCommand);
         joystickOperator.getButton(ButtonF310.A).whenPressed(m_toggleIntakeCommand);
+        
         m_teleopArcadeDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightX), JOYSTICK_INPUT_EXPONENT));
         m_teleopTankDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightY), JOYSTICK_INPUT_EXPONENT));
     }
@@ -48,7 +49,7 @@ public class RobotContainer {
         CommandScheduler.getInstance().setDefaultCommand(m_drivetrain, m_teleopArcadeDriveCommand);
         CommandScheduler.getInstance().setDefaultCommand(m_hopper, m_runHopperCommand);
         CommandScheduler.getInstance().setDefaultCommand(m_storage, m_runStorageCommand);
-        CommandScheduler.getInstance().setDefaultCommand(m_shooter, m_limelightShootBallCommand);
+        CommandScheduler.getInstance().setDefaultCommand(m_shooter, m_shootBallCommand);
     }
 
     public Command getAutonomousCommand() {
