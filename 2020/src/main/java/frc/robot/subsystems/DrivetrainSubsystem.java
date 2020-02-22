@@ -6,6 +6,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
@@ -75,6 +76,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     public double getGyroTilt(){
        return m_gyro.getPitch();
+    }
+
+    public Pose2d getPose(){
+        return m_odometry.getPoseMeters();
     }
     private double getDistanceLeft() {
         return m_leftFront.getSelectedSensorPosition() * DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
