@@ -20,11 +20,11 @@ public class RobotContainer {
     private final ShooterSubsystem m_shooter = new ShooterSubsystem();
     private final StorageSubsystem m_storage  = new StorageSubsystem();
 
-    private final ClimbBalanceCommand m_climbBalanceCommand = new ClimbBalanceCommand(m_climb);
+    private final ClimbBalanceCommand m_climbBalanceCommand = new ClimbBalanceCommand(m_climb, m_drivetrain);
     private final ClimbCommand m_climbCommand = new ClimbCommand(m_climb);
+    private final FollowPathCommand m_followPathCommand = new FollowPathCommand();
     private final LimelightShootBallCommand m_limelightShootBallCommand = new LimelightShootBallCommand(m_shooter, m_storage, m_drivetrain);
-    private final RunHopperCommand m_runHopperCommand = new RunHopperCommand(m_hopper, m_storage);
-    private final RunStorageCommand m_runStorageCommand = new RunStorageCommand(m_storage);
+    private final RunStorageCommand m_runStorageCommand = new RunStorageCommand(m_storage, m_hopper);
     private final ShootBallCommand m_shootBallCommand = new ShootBallCommand(m_shooter, m_storage);
     private final TeleopArcadeDriveCommand m_teleopArcadeDriveCommand = new TeleopArcadeDriveCommand(m_drivetrain);
     private final TeleopTankDriveCommand m_teleopTankDriveCommand = new TeleopTankDriveCommand(m_drivetrain);
@@ -40,16 +40,20 @@ public class RobotContainer {
         joystickOperator.getButton(ButtonF310.Start).whenPressed(m_climbBalanceCommand);
         joystickOperator.getButton(ButtonF310.Back).whenPressed(m_climbCommand);
         joystickOperator.getButton(ButtonF310.A).whenPressed(m_toggleIntakeCommand);
+        joystickOperator.getButton(ButtonF310.BumperRight).toggleWhenPressed(m_shootBallCommand);
+        joystickOperator.getButton(ButtonF310.BumperLeft).toggleWhenPressed(m_shootBallCommand);
+        joystickOperator.getButton(ButtonF310.B).toggleWhenPressed(m_climbCommand);
         
         m_teleopArcadeDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightX), JOYSTICK_INPUT_EXPONENT));
         m_teleopTankDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightY), JOYSTICK_INPUT_EXPONENT));
+        m_shootBallCommand.setSupplier(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftY));
     }
 
     private void configureDefaultCommands() {
         CommandScheduler.getInstance().setDefaultCommand(m_drivetrain, m_teleopArcadeDriveCommand);
-        CommandScheduler.getInstance().setDefaultCommand(m_hopper, m_runHopperCommand);
+        //Hopper is run by storage command
+        CommandScheduler.getInstance().setDefaultCommand(m_hopper, m_runStorageCommand);
         CommandScheduler.getInstance().setDefaultCommand(m_storage, m_runStorageCommand);
-        CommandScheduler.getInstance().setDefaultCommand(m_shooter, m_shootBallCommand);
     }
 
     public Command getAutonomousCommand() {

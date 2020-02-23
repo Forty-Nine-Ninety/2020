@@ -12,11 +12,11 @@ public class ClimbBalanceCommand extends CommandBase {
     private final PIDController m_pid;
     private final ClimbSubsystem m_climb;
 
-    public ClimbBalanceCommand(DrivetrainSubsystem drive, ClimbSubsystem climb) {
+    public ClimbBalanceCommand(ClimbSubsystem climb, DrivetrainSubsystem drive) {
         addRequirements(climb);
         m_drive = drive;
         m_climb = climb;
-        m_pid = new PIDController(BALANCE_KP, BALANCE_KI, BALANCE_KD);
+        m_pid = new PIDController(CLIMB_BALANCE_KP, CLIMB_BALANCE_KI, CLIMB_BALANCE_KD);
     }
 
     @Override

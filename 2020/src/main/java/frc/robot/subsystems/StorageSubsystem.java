@@ -8,70 +8,45 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import static frc.robot.Constants.*;
 
 public class StorageSubsystem extends SubsystemBase {
-    private int ballsLow, ballsHigh, lastBall;
+    private int balls, lastBall;
     private boolean enabled;
-    private final WPI_TalonSRX m_motorLow, m_motorHigh;
-    private final DigitalInput m_ballSensorLow, m_ballSensorHigh;
+    private final WPI_TalonSRX m_motor;
+    private final DigitalInput m_sensor;
 
     public StorageSubsystem() {
-        m_motorLow = new WPI_TalonSRX(CAN_STORAGE_LOW_TALONSRX);
-        m_motorHigh = new WPI_TalonSRX(CAN_STORAGE_HIGH_TALONSRX);
-        m_ballSensorLow = new DigitalInput(DIO_BREAKBEAM_STORAGE_LOW);
-        m_ballSensorHigh = new DigitalInput(DIO_BREAKBEAM_STORAGE_HIGH);
+        m_motor = new WPI_TalonSRX(CAN_STORAGE_LOW_TALONSRX);
+        m_sensor = new DigitalInput(DIO_BREAKBEAM_STORAGE_LOW);
 
-        ballsLow = 0;
-        ballsHigh = 0;
+        balls = 0;
         enabled = false;
     }
 
     @Override
     public void periodic() {}
 
-    public void runHigh(boolean b) {
-        b = b && enabled;
-        m_motorHigh.set(b ? STORAGE_MOTOR_SPEED : 0);
-    }
-    
-    public void runLow(boolean b) {
-        m_motorLow.set(b ? STORAGE_MOTOR_SPEED : 0);
+    public void run(boolean b) {
+        m_motor.set(b && enabled ? STORAGE_MOTOR_SPEED : 0);
     }
 
-    public boolean hasBallLow() {
-        return m_ballSensorLow.get();
-    }
-
-    public boolean hasBallHigh() {
-        return m_ballSensorHigh.get();
+    public boolean hasBall() {
+        return m_sensor.get();
     }
     
     public void insertBall() {
-        ballsLow += 1;
+        balls += 1;
+        lastBall = m_motor.getSelectedSensorPosition();
     }
 
-    public void moveBall() {
-        ballsLow -= 1;
-        ballsHigh += 1;
-        lastBall = m_motorHigh.getSelectedSensorPosition();
+    public int getEmptyDistance() {
+        return m_motor.getSelectedSensorPosition() - lastBall;
     }
 
     public void removeBall() {
-        ballsHigh -= 1;
+        balls -= 1;
     }
 
-    public int getTotalBalls() {
-        return ballsLow + ballsHigh;
-    }
-    
-    public int getBallsLow() {
-        return ballsLow;
-    }
-
-    public int getBallsHigh() {
-        return ballsHigh;
-    }
-
-    public int getLastEntered() {
-        return m_motorHigh.getSelectedSensorPosition() - lastBall;
+    public int getBallCount() {
+        return balls;
     }
 
     public void setEnabled(boolean e) {

@@ -34,10 +34,10 @@ public final class Constants {
     public static int CAN_DRIVETRAIN_LEFT_VICTORSPX = 15;
     public static int CAN_SHOOTER_TALONSRX = -1;
     public static int CAN_SHOOTER_SLAVE_TALONSRX = -1;
+    public static int CAN_SHOOTER_INSERTER_TALONSRX = -1;
     public static int CAN_CLIMB_MAIN_TALONSRX = -1;
     public static int CAN_CLIMB_BALANCE_TALONSRX = -1;
     public static int CAN_STORAGE_LOW_TALONSRX = -1;
-    public static int CAN_STORAGE_HIGH_TALONSRX = -1;
     public static int CAN_INTAKE_TALONSRX = -1;
     public static int CAN_SPINNER_TALONSRX = -1;
     public static int CAN_HOPPER_TALONSRX = -1;
@@ -65,6 +65,10 @@ public final class Constants {
     public static double SHOOTER_ENCODER_VELOCITY_TO_METERS_PER_SECOND = 0;
     public static double SPINNER_ENCODER_VELOCITY_TO_METERS_PER_SECOND = 0;
 
+    //Climb movement information
+    public static int CLIMB_TARGET_ENCODER_TICKS = 0;
+    public static int CLIMB_LOCK_MAXIMUM_ALLOWED_ERROR = 0;
+
     //Drivetrain movement information
     public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 3000;//TODO find this number, ~3200
     public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 2.5;
@@ -74,6 +78,7 @@ public final class Constants {
     public static double SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY = 50;//TODO find this number
     public static double SHOOTER_MAXIMUM_ALLOWED_VELOCITY_ERROR = 50;//TODO find this number
     public static double SHOOTER_MAXIMUM_ALLOWED_ANGULAR_ERROR_DEGREES = 0.1;//TODO find this number
+    public static double SHOOTER_INSERTER_SPEED_MULTIPLIER = 0.25;//TODO find this number
 
     //Storage movement information
     public static double STORAGE_MINIMUM_BALL_SPACING_ENCODER_UNITS = 50;//TODO find this number
@@ -83,6 +88,8 @@ public final class Constants {
     public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
     public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
     public static TalonSRXGains SHOOTER_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
+    public static TalonSRXGains SHOOTER_INSERTER_FPID = new TalonSRXGains(0, 0, 0, 0);
+    public static TalonSRXGains CLIMB_FPID = new TalonSRXGains(0, 0, 0, 0);
 
     //The following two could possibly just be normal PID values
     public static TalonSRXGains LIMELIGHT_SHOOTER_FPID = new TalonSRXGains(0, 0, 0, 0);
@@ -95,6 +102,10 @@ public final class Constants {
     public static double LIMELIGHT_DRIVETRAIN_KP = 0.5;
     public static double LIMELIGHT_DRIVETRAIN_KI = 0;
     public static double LIMELIGHT_DRIVETRAIN_KD = 0;
+
+    public static double CLIMB_BALANCE_KP = 0.5;
+    public static double CLIMB_BALANCE_KI = 0;
+    public static double CLIMB_BALANCE_KD = 0;
 
     //Miscellaneous
     public static double JOYSTICKF310_AXIS_DEADBAND = 0.05;

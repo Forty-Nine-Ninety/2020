@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -22,15 +23,20 @@ public class ShootBallCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if (m_storage.getTotalBalls() == 0) m_shooter.fire(0);
-        else m_shooter.fire(m_speed.getAsDouble());
+        if (m_storage.getBallCount() == 0) m_shooter.setFireSpeed(0);
+        else m_shooter.setFireSpeed(m_speed.getAsDouble());
         
         m_storage.setEnabled(getStorageState());
     }
 
     @Override
     public boolean isFinished() {
-        return m_storage.getTotalBalls() == 0;
+        return m_storage.getBallCount() == 0;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        m_shooter.setFireSpeed(0);
     }
 
     public boolean getStorageState() {

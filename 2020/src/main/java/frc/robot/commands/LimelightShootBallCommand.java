@@ -9,6 +9,7 @@ import frc.robot.vision.TargetFinder;
 
 import static frc.robot.Constants.*;
 
+
 public class LimelightShootBallCommand extends ShootBallCommand {
 
     private final DrivetrainSubsystem m_drive;
@@ -19,7 +20,6 @@ public class LimelightShootBallCommand extends ShootBallCommand {
         m_drive = drive;
         addRequirements(drive);
 
-        super.setSupplier(() -> TargetFinder.estimateShooterVelocityToTarget());
         m_pid = new PIDController(LIMELIGHT_DRIVETRAIN_KP, LIMELIGHT_DRIVETRAIN_KI, LIMELIGHT_DRIVETRAIN_KD);
     }
 
@@ -38,5 +38,9 @@ public class LimelightShootBallCommand extends ShootBallCommand {
     @Override
     public boolean isFinished() {
         return super.isFinished() || ! Limelight.hasValidTarget();
+    }
+
+    public void setSupplier() {
+        super.setSupplier(() -> TargetFinder.estimateShooterVelocityToTarget());
     }
 }
