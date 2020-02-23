@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
 
+import java.util.function.BiConsumer;
+
 //See https://docs.wpilib.org/en/latest/docs/software/commandbased/pid-subsystems-commands.html
 //And perhaps https://github.com/wpilibsuite/allwpilib/blob/master/wpilibjExamples/src/main/java/edu/wpi/first/wpilibj/examples/gyrodrivecommands/commands/TurnToAngle.java
 
@@ -80,6 +82,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     public Pose2d getPose(){
         return m_odometry.getPoseMeters();
+    }
+
+    public DifferentialDriveKinematics getKinematics(){
+        return m_kinematics;
+    }
+
+    public BiConsumer<Double, Double> getOutputMetersPerSecond(){
+        return this::drive;
     }
     private double getDistanceLeft() {
         return m_leftFront.getSelectedSensorPosition() * DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;

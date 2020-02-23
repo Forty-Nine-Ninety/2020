@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.function.BiConsumer;
 
 import static frc.robot.Constants.*;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -24,13 +25,19 @@ public class AutoDriveCommand extends CommandBase{
      
     DrivetrainSubsystem m_drive;
 
-    public AutoDriveCommand(){
-        Command command = doAuto();
-        command.schedule();
+    public AutoDriveCommand(DrivetrainSubsystem drive){
+        m_drive = drive;
+        try{
+            Command command = doAuto();
+            command.schedule();
+        }
+        catch(IOException ex){
+			DriverStation.reportError("Uh oh, something went wrong in auto", ex.getStackTrace());
+        }
 
     }
 
-    public Command doAuto(){
+    public Command doAuto() throws IOException{
         // Create a voltage constraint to ensure we don't accelerate too fast
         DifferentialDriveVoltageConstraint autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
@@ -51,16 +58,9 @@ public class AutoDriveCommand extends CommandBase{
         RamseteCommand ramseteCommand = new RamseteCommand(
             trajectory,
             () -> m_drive.getPose(),
-            new RamseteController(K_RAMSETE_B, K_RAMSETE_Z),
-            new SimpleMotorFeedforward(KS_VOLTS,
-            KV_VOLT_SECONDS_PER_METER,
-            KA_VOLT_SECONDS_SQUARED_PER_METER),
-            K_DRIVE_KINEMATICS,
-            /*get wheel speeds(Supplier)*/,
-            new PIDController(LIMELIGHT_DRIVETRAIN_KP, 0, 0),
-            new PIDController(LIMELIGHT_DRIVETRAIN_KP, 0, 0),
-            // RamseteCommand passes volts to the callback
-            /*output volts (BiConsumer)*/,
+            new RamseteController(),
+            m_drive.getKinematics(),
+            m_drive.getOutputMetersPerSecond(),
             m_drive
         );
 
