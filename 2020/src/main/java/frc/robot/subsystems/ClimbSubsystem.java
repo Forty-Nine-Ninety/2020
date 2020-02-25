@@ -1,8 +1,9 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
@@ -11,10 +12,16 @@ public class ClimbSubsystem extends SubsystemBase {
 
     private final WPI_TalonSRX m_climb, m_balance;
     private final Solenoid m_solenoid;
+    private DigitalInput m_topLimit1, m_topLimit2, m_bottomLimit1, m_bottomLimit2;
 
     public ClimbSubsystem() {
         m_climb = new WPI_TalonSRX(CAN_CLIMB_MAIN_TALONSRX);
         m_balance = new WPI_TalonSRX(CAN_CLIMB_BALANCE_TALONSRX);
+
+        m_topLimit1 = new DigitalInput(DIO_LIMIT_CLIMB_TOP_1);
+        m_topLimit2 = new DigitalInput(DIO_LIMIT_CLIMB_TOP_2);
+        m_bottomLimit1 = new DigitalInput(DIO_LIMIT_CLIMB_BOTTOM_1);
+        m_bottomLimit2 = new DigitalInput(DIO_LIMIT_CLIMB_BOTTOM_2);
 
         m_solenoid = new Solenoid(CAN_PCM, PCM_CLIMB);
 		m_solenoid.set(false);
@@ -26,16 +33,21 @@ public class ClimbSubsystem extends SubsystemBase {
     public void periodic() {
     }
 
-    public void climb(double position) {
-        m_climb.set(ControlMode.Position, position);
+    public void runClimb(double speed) {
+        m_climb.set(speed);
     }
     
-    public int getEncoderTicks(){
-        return m_climb.getSelectedSensorPosition();
-    }
 
     public void setLock(boolean lock){
         m_solenoid.set(lock);
+    }
+
+    public boolean getTopSensors() {
+        return m_topLimit1.get() || m_topLimit2.get();
+    }
+    
+    public boolean getBottomSensors() {
+        return m_bottomLimit1.get() || m_bottomLimit2.get();
     }
 
     private void configureMotors() {

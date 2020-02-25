@@ -18,6 +18,10 @@ public final class Constants {
     public static int DIO_BREAKBEAM_HOPPER = -1;
     public static int DIO_BREAKBEAM_STORAGE_LOW = -1;
     public static int DIO_BREAKBEAM_STORAGE_HIGH = -1;
+    public static int DIO_LIMIT_CLIMB_TOP_1 = -1;
+    public static int DIO_LIMIT_CLIMB_TOP_2 = -1;
+    public static int DIO_LIMIT_CLIMB_BOTTOM_1 = -1;
+    public static int DIO_LIMIT_CLIMB_BOTTOM_2 = -1;
     //Below is format for analog sensors
     //public static int PWM_NAME = -1;
     public static SPI.Port SPI_PORT_GYRO = SPI.Port.kMXP;
@@ -126,6 +130,9 @@ public final class Constants {
 
     @Config(name = "Storage Motor Speed", tabName = "Op Configuration")
     public static double STORAGE_MOTOR_SPEED = 0.5;
+
+    @Config(name = "Climb Motor Speed", tabName = "Op Configuration")
+    public static double CLIMB_MOTOR_SPEED = 0.5;
 
     //Classes
     public static class TalonSRXGains extends SlotConfiguration {
