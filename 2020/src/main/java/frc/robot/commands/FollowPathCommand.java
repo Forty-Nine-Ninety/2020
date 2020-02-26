@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class FollowPathCommand extends CommandBase {
 
-    public FollowPathCommand() throws IOException {
-        Trajectory t = TrajectoryUtil.fromPathweaverJson(p);
+    public FollowPathCommand() {
+        //Trajectory t = TrajectoryUtil.fromPathweaverJson(p);
         
     }
 

@@ -21,7 +21,8 @@ public class RobotContainer {
     private final StorageSubsystem m_storage  = new StorageSubsystem();
 
     private final ClimbBalanceCommand m_climbBalanceCommand = new ClimbBalanceCommand(m_climb, m_drivetrain);
-    private final ClimbCommand m_climbCommand = new ClimbCommand(m_climb);
+    private final ExtendClimbCommand m_extendClimbCommand = new ExtendClimbCommand(m_climb);
+    private final RetractClimbCommand m_retractClimbCommand = new RetractClimbCommand(m_climb);
     private final FollowPathCommand m_followPathCommand = new FollowPathCommand();
     private final LimelightShootBallCommand m_limelightShootBallCommand = new LimelightShootBallCommand(m_shooter, m_storage, m_drivetrain);
     private final RunStorageCommand m_runStorageCommand = new RunStorageCommand(m_storage, m_hopper);
@@ -38,11 +39,9 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         joystickOperator.getButton(ButtonF310.Start).whenPressed(m_climbBalanceCommand);
-        joystickOperator.getButton(ButtonF310.Back).whenPressed(m_climbCommand);
         joystickOperator.getButton(ButtonF310.A).whenPressed(m_toggleIntakeCommand);
-        joystickOperator.getButton(ButtonF310.BumperRight).toggleWhenPressed(m_shootBallCommand);
-        joystickOperator.getButton(ButtonF310.BumperLeft).toggleWhenPressed(m_shootBallCommand);
-        joystickOperator.getButton(ButtonF310.B).toggleWhenPressed(m_climbCommand);
+        joystickOperator.getButton(ButtonF310.BumperRight).whenPressed(m_extendClimbCommand);
+        joystickOperator.getButton(ButtonF310.BumperLeft).whenPressed(m_retractClimbCommand);
         
         m_teleopArcadeDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightX), JOYSTICK_INPUT_EXPONENT));
         m_teleopTankDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightY), JOYSTICK_INPUT_EXPONENT));
