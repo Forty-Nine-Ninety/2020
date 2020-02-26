@@ -19,6 +19,9 @@ public class IntakeSubsystem extends SubsystemBase {
         m_motor = new WPI_TalonSRX(CAN_INTAKE_TALONSRX);
         m_ballSensor = new DigitalInput(DIO_BREAKBEAM_INTAKE);
         m_solenoid = new DoubleSolenoid(PCM_INTAKE_FORWARD,PCM_INTAKE_REVERSE);
+
+        m_solenoid.set(Value.kOff);
+        m_motor.setInverted(true);
     }
 
     @Override
@@ -27,8 +30,8 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void set(boolean on) {
-        m_solenoid.set(Value.kForward);
-        m_motor.set(on ? HOPPER_MOTOR_SPEED : 0);
+        m_solenoid.set(on ? Value.kForward : Value.kReverse);
+        m_motor.set(on ? INTAKE_MOTOR_SPEED : 0);
     }
 
     public Value get() {

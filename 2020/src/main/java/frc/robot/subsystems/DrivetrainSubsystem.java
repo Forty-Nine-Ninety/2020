@@ -46,6 +46,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     //Assumes left and right are in encoder units per 100ms
     public void driveRaw(double left, double right) {
+        //System.out.println("Target:\t" + (int)left + " " + (int)right);
+        //System.out.println("Encoder:\t" + (int)m_leftTalon.getSelectedSensorVelocity() + " " + (int)m_rightTalon.getSelectedSensorVelocity());
         m_leftTalon.set(ControlMode.Velocity, left);
         m_rightTalon.set(ControlMode.Velocity, right);
     }
@@ -81,9 +83,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
         
         //Left side encoder goes in the wrong direction
         m_leftTalon.setSensorPhase(true);
+        m_rightTalon.setSensorPhase(true);
+
+        m_rightTalon.setInverted(true);
+        m_rightVictor.setInverted(true);
+
 
         m_leftVictor.follow(m_leftTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
-        m_rightVictor.follow(m_rightTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
+        //m_rightVictor.follow(m_rightTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
 
         //Setup talon built-in PID
         m_leftTalon.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);

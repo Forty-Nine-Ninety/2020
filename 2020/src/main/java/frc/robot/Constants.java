@@ -14,14 +14,14 @@ public final class Constants {
     public static int PORT_JOYSTICK_OPERATOR = 1;
 
     //RoboRIO sensor ports
-    public static int DIO_BREAKBEAM_INTAKE = -1;
-    public static int DIO_BREAKBEAM_HOPPER = -1;
-    public static int DIO_BREAKBEAM_STORAGE_LOW = -1;
-    public static int DIO_BREAKBEAM_STORAGE_HIGH = -1;
-    public static int DIO_LIMIT_CLIMB_TOP_1 = -1;
-    public static int DIO_LIMIT_CLIMB_TOP_2 = -1;
-    public static int DIO_LIMIT_CLIMB_BOTTOM_1 = -1;
-    public static int DIO_LIMIT_CLIMB_BOTTOM_2 = -1;
+    public static int DIO_BREAKBEAM_INTAKE = 0;
+    public static int DIO_BREAKBEAM_HOPPER = 1;
+    public static int DIO_BREAKBEAM_STORAGE_LOW = 2;
+    public static int DIO_BREAKBEAM_STORAGE_HIGH = 3;
+    public static int DIO_LIMIT_CLIMB_TOP_1 = 4;
+    public static int DIO_LIMIT_CLIMB_TOP_2 = 5;
+    public static int DIO_LIMIT_CLIMB_BOTTOM_1 = 6;
+    public static int DIO_LIMIT_CLIMB_BOTTOM_2 = 7;
     //Below is format for analog sensors
     //public static int PWM_NAME = -1;
     public static SPI.Port SPI_PORT_GYRO = SPI.Port.kMXP;
@@ -93,8 +93,8 @@ public final class Constants {
     public static double STORAGE_LENGTH_ENCODER_UNITS = 250;//TODO find this number
 
     //PID
-    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
-    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
+    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 15);
+    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.5, 0, 15);
     public static TalonSRXGains SHOOTER_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
     public static TalonSRXGains SHOOTER_INSERTER_FPID = new TalonSRXGains(0, 0, 0, 0);
     public static TalonSRXGains CLIMB_FPID = new TalonSRXGains(0, 0, 0, 0);
@@ -127,7 +127,7 @@ public final class Constants {
     public static double ARCADE_SPEED_MULTIPLIER = 0.75;
 
     @Config(name = "Intake Motor Speed", tabName = "Op Configuration")
-    public static double INTAKE_MOTOR_SPEED = 0.5;
+    public static double INTAKE_MOTOR_SPEED = 0.35;
 
     @Config(name = "Hopper Motor Speed", tabName = "Op Configuration")
     public static double HOPPER_MOTOR_SPEED = 0.3;
