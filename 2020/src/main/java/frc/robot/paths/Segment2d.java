@@ -3,10 +3,7 @@ package frc.robot.paths;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 
 public class Segment2d {
-    private Translation2d m_start;
-    private Translation2d m_altStart;
-    private Translation2d m_end;
-    private Translation2d m_altEnd;
+    private Translation2d m_start, m_end;
 
     public Segment2d() {
         this(new Translation2d(), new Translation2d());
@@ -17,28 +14,12 @@ public class Segment2d {
         m_end = e;
     }
 
-    public void setAltStart(Translation2d a) {
-        m_altStart = a;
-    }
-
-    public void setAltEnd(Translation2d a) {
-        m_altEnd = a;
-    }
-
     public Translation2d getStart() {
         return m_start;
     }
 
     public Translation2d getEnd() {
         return m_end;
-    }
-
-    public Translation2d getAltStart() {
-        return m_altStart == null ? m_start : m_altStart;
-    }
-
-    public Translation2d getAltEnd() {
-        return m_altEnd == null ? m_end : m_altEnd;
     }
 
     public double getLength() {

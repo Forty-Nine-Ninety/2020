@@ -6,10 +6,9 @@ import java.util.*;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 
 public class PathBuilder {
-    private static Segment2d[] m_fieldElements;
+    private static Quad2d[] m_obstacles;
 
     //Do this in separate thread
     public static Trajectory generatePath(Translation2d start, Translation2d end, boolean reversed) {
@@ -26,10 +25,14 @@ public class PathBuilder {
         
     }
 
-    public static boolean loadFieldFromFile(String fileName) {
-        System.out.println("Loading field from " + Filesystem.getDeployDirectory().toString() + fileName);
+    public static boolean loadObstaclesFromFile(String fileName) {
+        System.out.println("Loading field obstacles from " + Filesystem.getDeployDirectory().toString() + fileName);
         try {
             Scanner s = new Scanner(new File(Filesystem.getDeployDirectory().toString() + fileName));
+            int count = s.nextInt();
+            for (int i = 0; i < count; i++) {
+
+            }
             s.close();
         } catch (FileNotFoundException e) {
             System.out.println("Could not find file " + fileName);
