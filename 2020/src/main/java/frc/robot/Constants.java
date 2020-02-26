@@ -27,24 +27,28 @@ public final class Constants {
     public static SPI.Port SPI_PORT_GYRO = SPI.Port.kMXP;
 
     //Solenoid PCM ports
-    public static int PCM_CLIMB = -1;
-    public static int PCM_INTAKE = -1;
+    public static int PCM_CLIMB = 0;
+    public static int PCM_INTAKE_FORWARD = 1;
+    public static int PCM_INTAKE_REVERSE = 2;
 
     //CAN Bus IDs
-    public static int CAN_PCM = 1;
-    public static int CAN_DRIVETRAIN_RIGHT_TALONSRX = 11;
-    public static int CAN_DRIVETRAIN_RIGHT_VICTORSPX = 16;
-    public static int CAN_DRIVETRAIN_LEFT_TALONSRX = 10;
-    public static int CAN_DRIVETRAIN_LEFT_VICTORSPX = 15;
-    public static int CAN_SHOOTER_TALONSRX = -1;
-    public static int CAN_SHOOTER_SLAVE_TALONSRX = -1;
-    public static int CAN_SHOOTER_INSERTER_TALONSRX = -1;
-    public static int CAN_CLIMB_MAIN_TALONSRX = -1;
-    public static int CAN_CLIMB_BALANCE_TALONSRX = -1;
-    public static int CAN_STORAGE_LOW_TALONSRX = -1;
-    public static int CAN_INTAKE_TALONSRX = -1;
+    public static int CAN_PDP = 0;
+    public static int CAN_PCM = 0;
+    public static int CAN_DRIVETRAIN_RIGHT_TALONSRX = 0;
+    public static int CAN_DRIVETRAIN_RIGHT_VICTORSPX = 1;
+    public static int CAN_DRIVETRAIN_LEFT_TALONSRX = 15;
+    public static int CAN_DRIVETRAIN_LEFT_VICTORSPX = 14;
+    public static int CAN_SHOOTER_TALONSRX = 2;
+    public static int CAN_SHOOTER_SLAVE_TALONSRX = 3;
+    public static int CAN_SHOOTER_INSERTER_TALONSRX = 5;
+    public static int CAN_CLIMB_MAIN_TALONSRX = 13;
+    public static int CAN_CLIMB_MAIN_VICTORSPX = 12;
+    public static int CAN_CLIMB_BALANCE_TALONSRX = 10;
+    public static int CAN_STORAGE_LOW_TALONSRX = 6;
+    public static int CAN_INTAKE_TALONSRX = 8;
     public static int CAN_SPINNER_TALONSRX = -1;
-    public static int CAN_HOPPER_TALONSRX = -1;
+    public static int CAN_LEFT_HOPPER_TALONSRX = 9;
+    public static int CAN_RIGHT_HOPPER_TALONSRX = 7;
 
     //Talon and Victor information
     public static double TALON_ENCODER_RESOLUTION = 4096;

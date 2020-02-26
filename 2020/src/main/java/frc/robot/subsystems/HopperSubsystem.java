@@ -12,7 +12,7 @@ public class HopperSubsystem extends SubsystemBase {
     private final DigitalInput m_ballSensor;
 
     public HopperSubsystem() {
-        m_motor = new WPI_TalonSRX(CAN_HOPPER_TALONSRX);
+        m_motor = new WPI_TalonSRX(CAN_LEFT_HOPPER_TALONSRX);
         m_ballSensor = new DigitalInput(DIO_BREAKBEAM_HOPPER);
     }
 

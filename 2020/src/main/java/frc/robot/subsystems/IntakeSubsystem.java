@@ -2,7 +2,9 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.*;
@@ -10,13 +12,13 @@ import static frc.robot.Constants.*;
 public class IntakeSubsystem extends SubsystemBase {
 
     private final WPI_TalonSRX m_motor;
-    private final Solenoid m_solenoid;
+    private final DoubleSolenoid m_solenoid;
     private final DigitalInput m_ballSensor;
 
     public IntakeSubsystem() {
         m_motor = new WPI_TalonSRX(CAN_INTAKE_TALONSRX);
         m_ballSensor = new DigitalInput(DIO_BREAKBEAM_INTAKE);
-        m_solenoid = new Solenoid(PCM_INTAKE);
+        m_solenoid = new DoubleSolenoid(PCM_INTAKE_FORWARD,PCM_INTAKE_REVERSE);
     }
 
     @Override
@@ -25,11 +27,11 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void set(boolean on) {
-        m_solenoid.set(on);
+        m_solenoid.set(Value.kForward);
         m_motor.set(on ? HOPPER_MOTOR_SPEED : 0);
     }
 
-    public boolean get() {
+    public Value get() {
         return m_solenoid.get();
     }
 
