@@ -1,28 +1,38 @@
 package frc.robot;
 
+import java.util.HashMap;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.commands.AutoDriveCommand;
+import frc.robot.paths.PathBuilder;
+import frc.robot.subsystems.DrivetrainSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import io.github.oblarg.oblog.annotations.Config;
 
 public class AutonomousChooser{
     
     //chooses starting position
-    SendableChooser<Command> m_commandChooser;
+    SendableChooser<String> m_stringChooser;
+
     
-    public AutonomousChooser(SendableChooser<Command> commandChooser){
-        m_commandChooser = commandChooser;
-        commandChooser.setDefaultOption("MoveOnly", new AutoDriveCommand());
-        commandChooser.addOption("ShootMove", /*corresponding command*/);
-        commandChooser.addOption("ShootGetBalls", /*corresponding command*/);
+    public AutonomousChooser(SendableChooser<String> stringChooser){
+        m_stringChooser = stringChooser;  
     }
 
-    @Config.ToggleButton
-    void runSelectedCommand(boolean run) {
-        if (run) {
-            m_commandChooser.getSelected().schedule();
-        } 
-        else {
-            m_commandChooser.getSelected().cancel();
+
+    public void AutoChooser1(){
+
+        for (String key : PathBuilder.MENU1.keySet()){
+            m_stringChooser.addOption(key, key);
         }
+
+    }
+
+    public void AutoChooser2(){
+
+        for (String key : PathBuilder.MENU2.keySet()){
+            m_stringChooser.addOption(key, key);
+        }
+
+    }
 }

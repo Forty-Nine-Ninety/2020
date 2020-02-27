@@ -21,19 +21,22 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 
 
-public class AutoDriveCommand extends CommandBase{
+public class AutoDriveCommand extends RamseteCommand {
      
     DrivetrainSubsystem m_drive;
 
-    public AutoDriveCommand(DrivetrainSubsystem drive){
+    public AutoDriveCommand(DrivetrainSubsystem drive) {
+
+        super(
+            PathBuilder.generatePath(),
+            () -> m_drive.getPose(),
+            new RamseteController(),
+            drive.getKinematics(),
+            drive.getOutputMetersPerSecond(),
+            drive
+        );
+
         m_drive = drive;
-        try{
-            Command command = doAuto();
-            command.schedule();
-        }
-        catch(IOException ex){
-			DriverStation.reportError("Uh oh, something went wrong in auto", ex.getStackTrace());
-        }
 
     }
 
