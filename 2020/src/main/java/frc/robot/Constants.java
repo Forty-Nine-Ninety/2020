@@ -127,7 +127,7 @@ public final class Constants {
     public static double ARCADE_SPEED_MULTIPLIER = 0.75;
 
     @Config(name = "Intake Motor Speed", tabName = "Op Configuration")
-    public static double INTAKE_MOTOR_SPEED = 0.35;
+    public static double INTAKE_MOTOR_SPEED = 0.5;
 
     @Config(name = "Hopper Motor Speed", tabName = "Op Configuration")
     public static double HOPPER_MOTOR_SPEED = 0.3;
