@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Util;
+import io.github.oblarg.oblog.annotations.Config;
 
 import static frc.robot.Constants.*;
 
@@ -17,6 +18,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     private final WPI_TalonSRX m_leftTalon, m_rightTalon;
     private final WPI_VictorSPX m_leftVictor, m_rightVictor;
+
+    @Config(tabName="Fudge Numbers")
+    private final double m_speedMultiplier = 0.75;
 
     private final AHRS m_gyro;
     
@@ -48,8 +52,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
     public void driveRaw(double left, double right) {
         //System.out.println("Target:\t" + (int)left + " " + (int)right);
         //System.out.println("Encoder:\t" + (int)m_leftTalon.getSelectedSensorVelocity() + " " + (int)m_rightTalon.getSelectedSensorVelocity());
-        m_leftTalon.set(ControlMode.Velocity, left);
-        m_rightTalon.set(ControlMode.Velocity, right);
+        left /= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
+        right /= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
+        right *= m_speedMultiplier;
+        m_leftTalon.set(left);
+        m_rightTalon.set(right);
     }
 
     //Functions below are for 0-1
