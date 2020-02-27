@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import static frc.robot.Constants.*;
 import io.github.oblarg.oblog.Logger;
+import io.github.oblarg.oblog.annotations.*;
 
 public class RobotContainer {
 
@@ -14,6 +15,7 @@ public class RobotContainer {
     private final JoystickF310 joystickOperator = new JoystickF310(PORT_JOYSTICK_OPERATOR);
 
     //private final ClimbSubsystem m_climb = new ClimbSubsystem();
+    @Config.NumberSlider(name="Multiplier", methodName="setMultiplier", methodTypes= {double.class}, defaultValue = {1.1}, min = 0, max = 2)
     private final DrivetrainSubsystem m_drivetrain = new DrivetrainSubsystem();
     //private final HopperSubsystem m_hopper = new HopperSubsystem();
     private final IntakeSubsystem m_intake = new IntakeSubsystem();

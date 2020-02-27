@@ -19,8 +19,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private final WPI_TalonSRX m_leftTalon, m_rightTalon;
     private final WPI_VictorSPX m_leftVictor, m_rightVictor;
 
-    @Config(tabName="Fudge Numbers")
-    private final double m_speedMultiplier = 0.75;
+    private double m_speedMultiplier = 0.75;
 
     private final AHRS m_gyro;
     
@@ -137,5 +136,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     public double getRateRight() {
         return m_rightTalon.getSelectedSensorVelocity() * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
+    }
+
+    public void setMultiplier(double d) {
+        m_speedMultiplier = d;
     }
 }
