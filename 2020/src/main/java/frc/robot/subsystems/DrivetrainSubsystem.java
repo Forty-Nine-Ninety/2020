@@ -19,7 +19,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private final WPI_TalonSRX m_leftTalon, m_rightTalon;
     private final WPI_VictorSPX m_leftVictor, m_rightVictor;
 
-    private double m_speedMultiplier = 0.75;
+    private double m_speedMultiplier = 1.25;
 
     private final AHRS m_gyro;
     
