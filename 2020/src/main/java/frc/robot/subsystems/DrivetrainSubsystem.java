@@ -22,6 +22,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     
     private final DifferentialDriveKinematics m_kinematics;
     private final DifferentialDriveOdometry m_odometry;
+    private boolean m_reversed;
 
     public DrivetrainSubsystem() {
         m_leftTalon = new WPI_TalonSRX(CAN_DRIVETRAIN_LEFT_TALONSRX);
@@ -123,5 +124,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     public double getRateRight() {
         return m_rightTalon.getSelectedSensorVelocity() * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
+    }
+
+    public boolean isReversed() {
+        return m_reversed;
+    }
+
+    public void setReversed(boolean b) {
+        m_reversed = b;
     }
 }

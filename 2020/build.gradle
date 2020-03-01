@@ -58,7 +58,7 @@ dependencies {
     // upon debugging
     simulation wpi.deps.sim.gui(wpi.platforms.desktop, false)
 
-    implementation "com.github.oblarg:Oblog:3.0.2"
+    implementation "com.github.oblarg:Oblog:3.1.2"
 }
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
