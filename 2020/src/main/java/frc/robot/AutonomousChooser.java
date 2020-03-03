@@ -12,18 +12,25 @@ import io.github.oblarg.oblog.annotations.Config;
 public class AutonomousChooser{
     
     //chooses starting position
-    SendableChooser<String> m_stringChooser;
+    public SendableChooser<String> m_positionChooser;
+
+    //chooses what it will do
+    public SendableChooser<String> m_actionChooser;
 
     
-    public AutonomousChooser(SendableChooser<String> stringChooser){
-        m_stringChooser = stringChooser;  
+    public AutonomousChooser(SendableChooser<String> posChooser, SendableChooser<String> actChooser){
+        m_positionChooser = posChooser;
+        m_actionChooser = actChooser;
+
+        AutoChooser1();
+        AutoChooser2();
     }
 
 
     public void AutoChooser1(){
 
         for (String key : PathBuilder.MENU1.keySet()){
-            m_stringChooser.addOption(key, key);
+            m_positionChooser.addOption(key, key);
         }
 
     }
@@ -31,7 +38,7 @@ public class AutonomousChooser{
     public void AutoChooser2(){
 
         for (String key : PathBuilder.MENU2.keySet()){
-            m_stringChooser.addOption(key, key);
+            m_actionChooser.addOption(key, key);
         }
 
     }

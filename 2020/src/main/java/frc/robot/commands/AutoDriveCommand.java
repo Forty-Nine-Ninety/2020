@@ -24,8 +24,9 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 public class AutoDriveCommand extends RamseteCommand {
      
     DrivetrainSubsystem m_drive;
+    Trajectory m_autoPath;
 
-    public AutoDriveCommand(DrivetrainSubsystem drive) {
+    public AutoDriveCommand(DrivetrainSubsystem drive, Trajectory trajectory) {
 
         super(
             PathBuilder.generatePath(),
@@ -37,6 +38,8 @@ public class AutoDriveCommand extends RamseteCommand {
         );
 
         m_drive = drive;
+
+        m_autoPath = trajectory;
 
     }
 
@@ -55,9 +58,6 @@ public class AutoDriveCommand extends RamseteCommand {
             // Apply the voltage constraint
             .addConstraint(autoVoltageConstraint);
         
-        String trajectoryJSON = "paths/YourPath.wpilib.json";
-        Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-        Trajectory trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
         RamseteCommand ramseteCommand = new RamseteCommand(
             trajectory,
             () -> m_drive.getPose(),
