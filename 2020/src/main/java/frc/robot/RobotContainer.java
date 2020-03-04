@@ -2,6 +2,7 @@ package frc.robot;
 
 import frc.robot.JoystickF310.*;
 import frc.robot.commands.*;
+import frc.robot.paths.PathWeaver;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -16,11 +17,14 @@ public class RobotContainer {
     private final JoystickF310 joystickOperator = new JoystickF310(PORT_JOYSTICK_OPERATOR);
 
     @Config
-    private final SendableChooser<Command> commandChooser = new SendableChooser<>();
+    private final SendableChooser<String> m_positionChooser = new SendableChooser<>();
+    @Config
+    private final SendableChooser<Command> m_actionChooser = new SendableChooser<>(); 
 
 
     private final DrivetrainSubsystem m_drivetrain = new DrivetrainSubsystem();
     private final StorageSubsystem m_storage  = new StorageSubsystem();
+    private final ShooterSubsystem m_shooter = new ShooterSubsystem();
     //TODO Add drivetrain commands
     private final TeleopTankDriveCommand m_teleopTankDriveCommand = new TeleopTankDriveCommand(m_drivetrain);
     
@@ -50,6 +54,16 @@ public class RobotContainer {
     }
 
     public void chooseAutoActions(){
-        AutonomousChooser autoChooser = new AutonomousChooser(commandChooser);
+        //AutonomousChooser autoChooser = new AutonomousChooser(commandChooser);
+        PathWeaver auto = new PathWeaver(m_positionChooser, m_actionChooser, m_drivetrain, m_shooter, m_storage);
+        
+        @Config
+        auto.AutoChooser1();
+
+        @Config
+        auto.AutoChooser2();
+
+        @Config.ToggleButton
+        auto.runAction(run);
     }
 }
