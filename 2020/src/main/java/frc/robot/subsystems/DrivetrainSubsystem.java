@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Util;
+import io.github.oblarg.oblog.Loggable;
 import io.github.oblarg.oblog.annotations.Config;
 import io.github.oblarg.oblog.annotations.Log;
 
@@ -17,7 +18,7 @@ import static frc.robot.Constants.*;
 
 import java.util.function.DoubleSupplier;
 
-public class DrivetrainSubsystem extends SubsystemBase {
+public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
 
     private final WPI_TalonSRX m_leftTalon, m_rightTalon;
     private final WPI_VictorSPX m_leftVictor, m_rightVictor;
@@ -28,9 +29,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
     
     private final DifferentialDriveKinematics m_kinematics;
     private final DifferentialDriveOdometry m_odometry;
-
-    @Log
-    DoubleSupplier leftVelocity,rightVelocity,leftError,rightError;
 
     public DrivetrainSubsystem() {
         m_leftTalon = new WPI_TalonSRX(CAN_DRIVETRAIN_LEFT_TALONSRX);
@@ -46,10 +44,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
         m_kinematics = new DifferentialDriveKinematics(DRIVETRAIN_TRACKWIDTH_METERS);
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(m_gyro.getAngle()));
 
-        leftVelocity = () -> m_leftTalon.getSelectedSensorVelocity();
+       /* leftVelocity = () -> m_leftTalon.getSelectedSensorVelocity();
         rightVelocity = () -> m_rightTalon.getSelectedSensorVelocity();
         leftError = () -> m_leftTalon.getClosedLoopError();
-        rightError = () -> m_rightTalon.getClosedLoopError();
+        rightError = () -> m_rightTalon.getClosedLoopError();*/
     }
 
     @Override
@@ -153,5 +151,25 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     public void setMultiplier(double d) {
         m_speedMultiplier = d;
+    }
+
+    @Log
+    public int getVelocityRight() {
+        return m_rightTalon.getSelectedSensorVelocity();
+    }
+
+    @Log
+    public int getVelocityLeft() {
+        return m_leftTalon.getSelectedSensorVelocity();
+    }
+
+    @Log
+    public int getErrorLeft() {
+        return m_leftTalon.getClosedLoopError();
+    }
+
+    @Log
+    public int getErrorRight() {
+        return m_rightTalon.getClosedLoopError();
     }
 }
