@@ -78,7 +78,7 @@ public final class Constants {
     public static int CLIMB_LOCK_MAXIMUM_ALLOWED_ERROR = 0;
 
     //Drivetrain movement information
-    public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 3000;//TODO find this number, ~3200
+    public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 1800;//TODO find this number, ~3200
     public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 2.5;
     public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
 
@@ -93,8 +93,8 @@ public final class Constants {
     public static double STORAGE_LENGTH_ENCODER_UNITS = 250;//TODO find this number
 
     //PID
-    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0, 2.35, 0, 0);
-    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0, 2.35, 0, 0);
+    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 15);
+    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.5, 0, 15);
     public static TalonSRXGains SHOOTER_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
     public static TalonSRXGains SHOOTER_INSERTER_FPID = new TalonSRXGains(0, 0, 0, 0);
     public static TalonSRXGains CLIMB_FPID = new TalonSRXGains(0, 0, 0, 0);
