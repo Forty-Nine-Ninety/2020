@@ -72,6 +72,7 @@ public final class Constants {
     //Climb movement information
     public static int CLIMB_TARGET_ENCODER_TICKS = 0;
     public static int CLIMB_LOCK_MAXIMUM_ALLOWED_ERROR = 0;
+    public static int CLIMB_TIMEOUT_S = 5;
 
     //Drivetrain movement information
     public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 3000;//TODO find this number, ~3200

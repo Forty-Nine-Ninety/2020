@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.trajectory.Trajectory;
 
 public class PathBuilder {
     private static Quad2d[] m_obstacles;
+    private static boolean m_initialized = false;
 
     //Do this in separate thread
     public static Trajectory generatePath(Translation2d start, Translation2d end, boolean reversed) {
@@ -21,23 +22,29 @@ public class PathBuilder {
         return null;
     }
 
-    private static void generatePaths() {
-        
+    public static void initialize() {
+        try {
+            if (! loadObstaclesFromFile("field_2020.dat")) return;
+            m_initialized = true;
+        }
+        catch (Exception e) {
+
+        }
     }
 
-    public static boolean loadObstaclesFromFile(String fileName) {
-        System.out.println("Loading field obstacles from " + Filesystem.getDeployDirectory().toString() + fileName);
-        try {
-            Scanner s = new Scanner(new File(Filesystem.getDeployDirectory().toString() + fileName));
-            int count = s.nextInt();
-            for (int i = 0; i < count; i++) {
+    public static boolean isInitialized() {
+        return m_initialized;
+    }
 
-            }
-            s.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Could not find file " + fileName);
-            return false;
+    public static boolean loadObstaclesFromFile(String fileName) throws IOException {
+        System.out.println("Loading field obstacles from " + Filesystem.getDeployDirectory().toString() + fileName);
+        Scanner s = new Scanner(new File(Filesystem.getDeployDirectory().toString() + fileName));
+        int count = s.nextInt();
+        m_obstacles = new Quad2d[count];
+        for (int i = 0; i < count; i++) {
+            m_obstacles[i] = new Quad2d(new Translation2d(s.nextDouble(), s.nextDouble()), new Translation2d(s.nextDouble(), s.nextDouble()), new Translation2d(s.nextDouble(), s.nextDouble()), new Translation2d(s.nextDouble(), s.nextDouble()));
         }
+        s.close();
         return true;
     }
 }

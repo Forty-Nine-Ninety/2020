@@ -5,6 +5,8 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+
 import static frc.robot.Constants.*;
 import io.github.oblarg.oblog.Logger;
 
@@ -21,8 +23,8 @@ public class RobotContainer {
     private final StorageSubsystem m_storage  = new StorageSubsystem();
 
     private final ClimbBalanceCommand m_climbBalanceCommand = new ClimbBalanceCommand(m_climb, m_drivetrain);
-    private final ExtendClimbCommand m_extendClimbCommand = new ExtendClimbCommand(m_climb);
-    private final RetractClimbCommand m_retractClimbCommand = new RetractClimbCommand(m_climb);
+    private final ParallelRaceGroup m_extendClimbCommand = (new ExtendClimbCommand(m_climb)).withTimeout(CLIMB_TIMEOUT_S);
+    private final ParallelRaceGroup m_retractClimbCommand = (new RetractClimbCommand(m_climb)).withTimeout(CLIMB_TIMEOUT_S);
     private final FollowPathCommand m_followPathCommand = new FollowPathCommand();
     private final LimelightShootBallCommand m_limelightShootBallCommand = new LimelightShootBallCommand(m_shooter, m_storage, m_drivetrain);
     private final RunStorageCommand m_runStorageCommand = new RunStorageCommand(m_storage, m_hopper);
