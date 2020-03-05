@@ -79,7 +79,7 @@ public final class Constants implements Loggable {
     public static int CLIMB_LOCK_MAXIMUM_ALLOWED_ERROR = 0;
 
     //Drivetrain movement information
-    public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 1800;//TODO find this number, ~3200
+    public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 1800;//free speed ~3200
     public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 2.5;
     public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
 
