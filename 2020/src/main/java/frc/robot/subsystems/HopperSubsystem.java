@@ -3,10 +3,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
+import io.github.oblarg.oblog.Loggable;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public class HopperSubsystem extends SubsystemBase {
+public class HopperSubsystem extends SubsystemBase implements Loggable {
     
     private final WPI_TalonSRX m_motor;
     private final DigitalInput m_ballSensor;

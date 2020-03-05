@@ -4,10 +4,11 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import io.github.oblarg.oblog.Loggable;
 
 import static frc.robot.Constants.*;
 
-public class StorageSubsystem extends SubsystemBase {
+public class StorageSubsystem extends SubsystemBase implements Loggable {
     private int balls, lastBall;
     private boolean enabled;
     private final WPI_TalonSRX m_motor;

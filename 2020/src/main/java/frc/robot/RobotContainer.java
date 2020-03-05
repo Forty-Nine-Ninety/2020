@@ -11,7 +11,9 @@ import static frc.robot.Constants.*;
 import io.github.oblarg.oblog.Logger;
 
 public class RobotContainer {
-
+    //So that Oblog can find it
+    private Constants _constants;
+    
     private final JoystickF310 joystickDrive = new JoystickF310(PORT_JOYSTICK_DRIVE);
     private final JoystickF310 joystickOperator = new JoystickF310(PORT_JOYSTICK_OPERATOR);
 
@@ -34,9 +36,11 @@ public class RobotContainer {
     private final ToggleIntakeCommand m_toggleIntakeCommand = new ToggleIntakeCommand(m_intake);
 
     public RobotContainer() {
+        
+        Logger.configureLoggingAndConfig(this, false);
+
         configureButtonBindings();
         configureDefaultCommands();
-        Logger.configureLoggingAndConfig(this, false);
     }
 
     private void configureButtonBindings() {

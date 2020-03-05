@@ -10,10 +10,11 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Util;
+import io.github.oblarg.oblog.Loggable;
 
 import static frc.robot.Constants.*;
 
-public class DrivetrainSubsystem extends SubsystemBase {
+public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
 
     private final WPI_TalonSRX m_leftTalon, m_rightTalon;
     private final WPI_VictorSPX m_leftVictor, m_rightVictor;

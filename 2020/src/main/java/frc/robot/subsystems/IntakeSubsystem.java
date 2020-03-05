@@ -4,10 +4,11 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import io.github.oblarg.oblog.Loggable;
 
 import static frc.robot.Constants.*;
 
-public class IntakeSubsystem extends SubsystemBase {
+public class IntakeSubsystem extends SubsystemBase implements Loggable {
 
     private final WPI_TalonSRX m_motor;
     private final Solenoid m_solenoid;
@@ -27,15 +28,11 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public void set(boolean on) {
         m_solenoid.set(on);
-        if (on){
-            if (m_reversed){
-                m_motor.set(-1 * INTAKE_MOTOR_SPEED);
-            } else {
-                m_motor.set(INTAKE_MOTOR_SPEED);
-            }
-        } else{
-            m_motor.set(0);
+        if (on) {
+            if (m_reversed) m_motor.set(-1 * INTAKE_MOTOR_SPEED);
+            else m_motor.set(INTAKE_MOTOR_SPEED);
         }
+        else m_motor.set(0);
     }
 
     public boolean get() {
