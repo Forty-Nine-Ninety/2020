@@ -25,6 +25,7 @@ public class RobotContainer {
     private final DrivetrainSubsystem m_drivetrain = new DrivetrainSubsystem();
     private final StorageSubsystem m_storage  = new StorageSubsystem();
     private final ShooterSubsystem m_shooter = new ShooterSubsystem();
+    private final AutonomousChooser auto = new AutonomousChooser(m_positionChooser, m_actionChooser, m_drivetrain, m_shooter, m_storage);
     //TODO Add drivetrain commands
     private final TeleopTankDriveCommand m_teleopTankDriveCommand = new TeleopTankDriveCommand(m_drivetrain);
     
@@ -54,16 +55,10 @@ public class RobotContainer {
     }
 
     public void chooseAutoActions(){
-        //AutonomousChooser autoChooser = new AutonomousChooser(commandChooser);
-        PathWeaver auto = new PathWeaver(m_positionChooser, m_actionChooser, m_drivetrain, m_shooter, m_storage);
         
-        @Config
         auto.AutoChooser1();
-
-        @Config
         auto.AutoChooser2();
 
-        @Config.ToggleButton
-        auto.runAction(run);
+        auto.runAction(false);
     }
 }
