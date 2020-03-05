@@ -12,6 +12,7 @@ public class IntakeSubsystem extends SubsystemBase {
     private final WPI_TalonSRX m_motor;
     private final Solenoid m_solenoid;
     private final DigitalInput m_ballSensor;
+    private boolean m_reversed;
 
     public IntakeSubsystem() {
         m_motor = new WPI_TalonSRX(CAN_INTAKE_TALONSRX);
@@ -26,7 +27,15 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public void set(boolean on) {
         m_solenoid.set(on);
-        m_motor.set(on ? HOPPER_MOTOR_SPEED : 0);
+        if (on){
+            if (m_reversed){
+                m_motor.set(-1 * INTAKE_MOTOR_SPEED);
+            } else {
+                m_motor.set(INTAKE_MOTOR_SPEED);
+            }
+        } else{
+            m_motor.set(0);
+        }
     }
 
     public boolean get() {
@@ -35,5 +44,13 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public boolean hasBall() {
         return m_ballSensor.get();
+    }
+
+    public boolean isReversed() {
+        return m_reversed;
+    }
+
+    public void setReversed(boolean b) {
+        m_reversed = b;
     }
 }
