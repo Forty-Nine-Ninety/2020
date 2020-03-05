@@ -23,6 +23,7 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
     private final WPI_TalonSRX m_leftTalon, m_rightTalon;
     private final WPI_VictorSPX m_leftVictor, m_rightVictor;
 
+    @Config.NumberSlider(name = "OBLOG_TEST SPEED MULT", defaultValue = 1.1, min = 0, max = 2)
     private double m_speedMultiplier = 1.25;
 
     private final AHRS m_gyro;
@@ -53,6 +54,7 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
     @Override
     public void periodic() {
         //Update odometry
+        //System.out.println("Current speed multiplier: " + m_speedMultiplier);
         m_odometry.update(Rotation2d.fromDegrees(m_gyro.getAngle()), getDistanceLeft(), getDistanceRight());
     }
 

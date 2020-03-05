@@ -68,7 +68,7 @@ public class Robot extends TimedRobot {
             m_autonomousCommand.cancel();
         }
         Compressor test = new Compressor();
-        test.setClosedLoopControl(false);
+        //test.setClosedLoopControl(false);
     }
 
     @Override

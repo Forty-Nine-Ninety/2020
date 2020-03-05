@@ -5,23 +5,24 @@ import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.SlotConfiguration;
 
 import edu.wpi.first.wpilibj.SPI;
+import io.github.oblarg.oblog.Loggable;
 import io.github.oblarg.oblog.annotations.Config;
 
-public final class Constants {
+public final class Constants implements Loggable {
     
     //Laptop ports
     public static int PORT_JOYSTICK_DRIVE = 0;
     public static int PORT_JOYSTICK_OPERATOR = 1;
 
     //RoboRIO sensor ports
-    public static int DIO_BREAKBEAM_INTAKE = 0;
-    public static int DIO_BREAKBEAM_HOPPER = 1;
-    public static int DIO_BREAKBEAM_STORAGE_LOW = 2;
-    public static int DIO_BREAKBEAM_STORAGE_HIGH = 3;
-    public static int DIO_LIMIT_CLIMB_TOP_1 = 4;
-    public static int DIO_LIMIT_CLIMB_TOP_2 = 5;
-    public static int DIO_LIMIT_CLIMB_BOTTOM_1 = 6;
-    public static int DIO_LIMIT_CLIMB_BOTTOM_2 = 7;
+    public static int DIO_BREAKBEAM_INTAKE = 4;
+    public static int DIO_BREAKBEAM_HOPPER = 5;
+    public static int DIO_BREAKBEAM_STORAGE_LOW = 6;
+    public static int DIO_BREAKBEAM_STORAGE_HIGH = 7;
+    public static int DIO_LIMIT_CLIMB_TOP_1 = 2;
+    public static int DIO_LIMIT_CLIMB_TOP_2 = 3;
+    public static int DIO_LIMIT_CLIMB_BOTTOM_1 = 0;
+    public static int DIO_LIMIT_CLIMB_BOTTOM_2 = 1;
     //Below is format for analog sensors
     //public static int PWM_NAME = -1;
     public static SPI.Port SPI_PORT_GYRO = SPI.Port.kMXP;
@@ -136,7 +137,7 @@ public final class Constants {
     public static double STORAGE_MOTOR_SPEED = 0.5;
 
     @Config(name = "Climb Motor Speed", tabName = "Op Configuration")
-    public static double CLIMB_MOTOR_SPEED = 0.5;
+    public static double CLIMB_MOTOR_SPEED = 0.25;
 
     //Classes
     public static class TalonSRXGains extends SlotConfiguration {

@@ -15,13 +15,20 @@ public class RetractClimbCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_climb.runClimb(m_climb.getBottomSensors() ? 0 : -1 * CLIMB_MOTOR_SPEED);
+        m_climb.runClimb(m_climb.getBottomSensors() ? 0 : -1 * 0.4);
+        if (m_climb.getBottomSensors()) this.cancel();
     }
 
     @Override
     public void end(boolean bool) {
+        System.out.println("Stopping climb.");
         m_climb.setLock(true);
         m_climb.runClimb(0);
+    }
+
+    @Override
+    public boolean isFinished() {
+        return m_climb.getBottomSensors();
     }
 
 }
