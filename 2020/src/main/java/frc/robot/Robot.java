@@ -42,9 +42,7 @@ public class Robot extends TimedRobot {
     }
 
     @Override
-    public void disabledInit() {
-        CommandScheduler.getInstance().cancelAll();
-    }
+    public void disabledInit() {}
 
     @Override
     public void disabledPeriodic() {}
@@ -68,7 +66,7 @@ public class Robot extends TimedRobot {
             m_autonomousCommand.cancel();
         }
         Compressor test = new Compressor();
-        //test.setClosedLoopControl(false);
+        test.setClosedLoopControl(false);
     }
 
     @Override
