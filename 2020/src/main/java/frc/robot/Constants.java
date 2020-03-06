@@ -52,7 +52,7 @@ public final class Constants implements Loggable {
     public static int CAN_RIGHT_HOPPER_TALONSRX = 7;
 
     //Talon and Victor information
-    public static double TALON_ENCODER_RESOLUTION = 4096;
+    public static double TALON_ENCODER_RESOLUTION = 4096; // = EPR = CPR
     public static int TALON_TIMEOUT_MS = 5;
     public static int TALON_DEFAULT_PID_ID = 0;//0 is primary, 1 is auxilary
     public static TalonSRXFeedbackDevice TALON_DEFAULT_FEEDBACK_DEVICE = TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative;
@@ -82,6 +82,7 @@ public final class Constants implements Loggable {
     public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 1800;//free speed ~3200
     public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 2.5;
     public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
+    public static double DRIVETRAIN_CLOSED_LOOP_RAMP = 0.2; //seconds from 0 to full or full to 0
 
     //Shooter movement information
     public static double SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY = 50;//TODO find this number
@@ -94,8 +95,8 @@ public final class Constants implements Loggable {
     public static double STORAGE_LENGTH_ENCODER_UNITS = 250;//TODO find this number
 
     //PID
-    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 15);
-    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.5, 0, 15);
+    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 25);
+    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 1.0, 0, 25);
     public static TalonSRXGains SHOOTER_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
     public static TalonSRXGains SHOOTER_INSERTER_FPID = new TalonSRXGains(0, 0, 0, 0);
     public static TalonSRXGains CLIMB_FPID = new TalonSRXGains(0, 0, 0, 0);

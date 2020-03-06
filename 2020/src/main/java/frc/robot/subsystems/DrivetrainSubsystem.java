@@ -121,6 +121,8 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
         //Setup config objects with desired values
         cLeft.slot0 = DRIVETRAIN_LEFT_FPID;
         cRight.slot0 = DRIVETRAIN_RIGHT_FPID;
+        cLeft.closedloopRamp = DRIVETRAIN_CLOSED_LOOP_RAMP;
+        cRight.closedloopRamp = DRIVETRAIN_CLOSED_LOOP_RAMP;
 
         //Configure talons
         m_leftTalon.configAllSettings(cLeft);
