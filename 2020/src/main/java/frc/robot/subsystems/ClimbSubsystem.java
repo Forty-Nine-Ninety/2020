@@ -13,14 +13,12 @@ import static frc.robot.Constants.*;
 public class ClimbSubsystem extends SubsystemBase {
 
     private final WPI_TalonSRX m_climb, m_balance;
-    private final WPI_VictorSPX m_slave;
     private final Solenoid m_solenoid;
     private DigitalInput m_topLimit1, m_topLimit2, m_bottomLimit1, m_bottomLimit2;
 
     public ClimbSubsystem() {
         m_climb = new WPI_TalonSRX(CAN_CLIMB_MAIN_TALONSRX);
         m_balance = new WPI_TalonSRX(CAN_CLIMB_BALANCE_TALONSRX);
-        m_slave = new WPI_VictorSPX(CAN_CLIMB_MAIN_VICTORSPX);
 
         m_topLimit1 = new DigitalInput(DIO_LIMIT_CLIMB_TOP_1);
         m_topLimit2 = new DigitalInput(DIO_LIMIT_CLIMB_TOP_2);
@@ -38,7 +36,7 @@ public class ClimbSubsystem extends SubsystemBase {
     }
 
     public void runClimb(double speed) {
-        System.out.println("Climbing at " + speed);
+        //System.out.println("Climbing at " + speed);
         if (getBottomSensors() && speed < 0) speed = 0;
         if (getTopSensors() && speed > 0) speed = 0;
         m_climb.set(speed);
@@ -66,9 +64,7 @@ public class ClimbSubsystem extends SubsystemBase {
         //First setup talons with default settings
         m_climb.configFactoryDefault();
         m_balance.configFactoryDefault();
-        m_slave.configFactoryDefault();
-
-        m_slave.follow(m_climb, FollowerType.PercentOutput);
+        //m_climb.setInverted(true);
 
         //Setup talon built-in PID
         m_climb.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);

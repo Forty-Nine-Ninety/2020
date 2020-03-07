@@ -109,7 +109,7 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
 
 
         m_leftVictor.follow(m_leftTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
-        //m_rightVictor.follow(m_rightTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
+        m_rightVictor.follow(m_rightTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
 
         //Setup talon built-in PID
         m_leftTalon.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);

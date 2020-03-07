@@ -43,7 +43,6 @@ public final class Constants implements Loggable {
     public static int CAN_SHOOTER_SLAVE_TALONSRX = 3;
     public static int CAN_SHOOTER_INSERTER_TALONSRX = 5;
     public static int CAN_CLIMB_MAIN_TALONSRX = 13;
-    public static int CAN_CLIMB_MAIN_VICTORSPX = 12;
     public static int CAN_CLIMB_BALANCE_TALONSRX = 10;
     public static int CAN_STORAGE_LOW_TALONSRX = 6;
     public static int CAN_INTAKE_TALONSRX = 8;
@@ -79,10 +78,10 @@ public final class Constants implements Loggable {
     public static int CLIMB_LOCK_MAXIMUM_ALLOWED_ERROR = 0;
 
     //Drivetrain movement information
-    public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 1800;//free speed ~3200
+    public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 3600;//free speed ~3200
     public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 2.5;
     public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
-    public static double DRIVETRAIN_CLOSED_LOOP_RAMP = 0.2; //seconds from 0 to full or full to 0
+    public static double DRIVETRAIN_CLOSED_LOOP_RAMP = 0.1; //seconds from 0 to full or full to 0
 
     //Shooter movement information
     public static double SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY = 50;//TODO find this number
@@ -95,8 +94,8 @@ public final class Constants implements Loggable {
     public static double STORAGE_LENGTH_ENCODER_UNITS = 250;//TODO find this number
 
     //PID
-    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.5, 0, 25);
-    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 1.0, 0, 25);
+    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.6, 0, 25);
+    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.8, 0, 25);
     public static TalonSRXGains SHOOTER_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
     public static TalonSRXGains SHOOTER_INSERTER_FPID = new TalonSRXGains(0, 0, 0, 0);
     public static TalonSRXGains CLIMB_FPID = new TalonSRXGains(0, 0, 0, 0);
@@ -138,7 +137,7 @@ public final class Constants implements Loggable {
     public static double STORAGE_MOTOR_SPEED = 0.5;
 
     @Config(name = "Climb Motor Speed", tabName = "Op Configuration")
-    public static double CLIMB_MOTOR_SPEED = 0.25;
+    public static double CLIMB_MOTOR_SPEED = 0.45;
 
     //Classes
     public static class TalonSRXGains extends SlotConfiguration {
