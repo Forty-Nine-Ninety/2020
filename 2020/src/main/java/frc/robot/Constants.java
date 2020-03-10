@@ -40,6 +40,16 @@ public final class Constants {
     public static double DRIVETRAIN_MAXIMUM_SPEED_METERS_PER_SECOND = 8;
     public static DriveMode DEFAULT_DRIVE_MODE = DriveMode.Arcade;
 
+    //Left-side PID values for drivetrain
+    public static double DRIVETRAIN_LEFT_KP = 0;
+    public static double DRIVETRAIN_LEFT_KI = 0;
+    public static double DRIVETRAIN_LEFT_KD = 0;
+
+    //Right-side PID values for drivetrain
+    public static double DRIVETRAIN_RIGHT_KP = 0;
+    public static double DRIVETRAIN_RIGHT_KI = 0;
+    public static double DRIVETRAIN_RIGHT_KD = 0;
+    
     public static double SHOOTER_ENCODER_VELOCITY_TO_METERS_PER_SECOND = 0;
 
     public static double DRIVETRAIN_ARCADE_KP = 0.1;
@@ -54,6 +64,7 @@ public final class Constants {
     public static TalonSRXGains SHOOTER_FPID = new TalonSRXGains(0, 0, 0, 0);
     public static double SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY = -1;
     public static int SHOOTER_MAXIMUM_ALLOWED_ANGULAR_ERROR_DEGREES = -1;
+    public static double SHOOTER_MAXIMUM_ALLOWED_VELOCITY_ERROR = 50;
 
     public static double BALANCE_KP = 0.1;
     public static double BALANCE_KI = 0.1;

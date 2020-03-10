@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
 
@@ -99,7 +100,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
         return m_leftFront.getSelectedSensorPosition() * DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
     }
 
-    //TODO get actual rates
     private double getRateLeft() {
         return m_leftFront.getSelectedSensorVelocity() * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     }
@@ -108,6 +108,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
         return m_rightFront.getSelectedSensorVelocity() * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     }
 
+    public DifferentialDriveWheelSpeeds getSpeeds() {
+        return new DifferentialDriveWheelSpeeds(getRateLeft(), getRateRight());
+    }
 
     public void setDriveMode(DriveMode mode) { driveMode = mode; }
 

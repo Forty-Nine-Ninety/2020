@@ -2,14 +2,26 @@ package frc.robot;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.nio.file.Path;
+import java.util.function.BiConsumer;
+
+import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.commands.AutoDriveCommand;
+import frc.robot.commands.MoveOnlyCommand;
+import frc.robot.commands.ShootGetBallsCommand;
+import frc.robot.commands.ShootMoveCommand;
+import frc.robot.commands.ShootShieldGenCommand;
+import frc.robot.commands.ShootTrenchRunCommand;
 import frc.robot.paths.PathBuilder;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.StorageSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import io.github.oblarg.oblog.annotations.Config;
 import io.github.oblarg.oblog.Loggable;
 
@@ -19,7 +31,7 @@ public class AutonomousChooser implements Loggable{
     public SendableChooser<String> m_positionChooser;
 
     //chooses what it will do
-    public SendableChooser<String> m_actionChooser;
+    public SendableChooser<SequentialCommandGroup> m_actionChooser;
 
     private final DrivetrainSubsystem m_drive;
     private final ShooterSubsystem m_shooter;
@@ -29,7 +41,7 @@ public class AutonomousChooser implements Loggable{
 
 
     
-    public AutonomousChooser(SendableChooser<String> posChooser, SendableChooser<String> actChooser,
+    public AutonomousChooser(SendableChooser<String> posChooser, SendableChooser<SequentialCommandGroup> actChooser,
         DrivetrainSubsystem drive, ShooterSubsystem shooter, StorageSubsystem storage){
 
         m_positionChooser = posChooser;
@@ -68,9 +80,19 @@ public class AutonomousChooser implements Loggable{
 
     public void AutoChooser2() {
         try{
-            m_actionChooser.setDefaultOption("Move Only", new AutoDriveCommand(m_drive, getTrajectory("/paths/MoveOnly.wpilib.json")));
+            m_actionChooser.setDefaultOption("Move Only", new MoveOnlyCommand(m_drive, getTrajectory("/paths/MoveOnly.wpilib.json")));
             m_actionChooser.addOption("Shoot, Move", new ShootMoveCommand(m_shooter, m_storage, m_drive, getTrajectory("/paths/ShootMove.wpilib.json")));
-            m_actionChooser.addOption("Shoot, Get Balls", new ShootGetBallsCommand(m_shooter, m_storage, m_drive, getTrajectory(m_BallLocation)));
+            
+            if (m_positionChooser.getSelected() == "left"){
+                m_actionChooser.addOption("Shoot, Get Balls", new ShootShieldGenCommand(m_shooter, m_storage, m_drive, getTrajectory(m_ballLocation)));
+            }
+            else if (m_positionChooser.getSelected() == "center"){
+                m_actionChooser.addOption("Shoot, Get Balls", new ShootShieldGenCommand(m_shooter, m_storage, m_drive, getTrajectory(m_ballLocation)));
+            }
+
+            else{
+                m_actionChooser.addOption("Shoot, Get Balls", new ShootTrenchRunCommand(m_shooter, m_storage, m_drive, getTrajectory(m_ballLocation)));
+            }
         } catch (IOException io){
             io.printStackTrace();
         }

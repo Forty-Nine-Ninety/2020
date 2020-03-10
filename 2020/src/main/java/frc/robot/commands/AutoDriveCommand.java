@@ -1,23 +1,16 @@
 package frc.robot.commands;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.function.BiConsumer;
+
 
 import static frc.robot.Constants.*;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Filesystem;
+
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
-import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 
 
@@ -27,48 +20,20 @@ public class AutoDriveCommand extends RamseteCommand {
     Trajectory m_autoPath;
 
     public AutoDriveCommand(DrivetrainSubsystem drive, Trajectory trajectory) {
-
         super(
-            PathBuilder.generatePath(),
-            () -> m_drive.getPose(),
-            new RamseteController(),
+            trajectory,
+            () -> drive.getPose(),
+            new RamseteController(K_RAMSETE_B, K_RAMSETE_Z),
+            new SimpleMotorFeedforward(KS_VOLTS,
+                                    KV_VOLT_SECONDS_PER_METER,
+                                    KA_VOLT_SECONDS_SQUARED_PER_METER),
             drive.getKinematics(),
-            drive.getOutputMetersPerSecond(),
+            ()  -> drive.getSpeeds(),
+            new PIDController(DRIVETRAIN_LEFT_KP, DRIVETRAIN_LEFT_KI, DRIVETRAIN_LEFT_KD),
+            new PIDController(DRIVETRAIN_RIGHT_KP, DRIVETRAIN_RIGHT_KI, DRIVETRAIN_RIGHT_KD),
+            drive::drive,
             drive
         );
-
-        m_drive = drive;
-
-        m_autoPath = trajectory;
-
-    }
-
-    public Command doAuto() throws IOException{
-        // Create a voltage constraint to ensure we don't accelerate too fast
-        DifferentialDriveVoltageConstraint autoVoltageConstraint =
-        new DifferentialDriveVoltageConstraint(
-            new SimpleMotorFeedforward(KS_VOLTS, KV_VOLT_SECONDS_PER_METER, KA_VOLT_SECONDS_SQUARED_PER_METER),
-            K_DRIVE_KINEMATICS,
-            10);
-        // Create config for trajectory
-        TrajectoryConfig config =
-        new TrajectoryConfig(K_MAX_SPEED_METERS_PER_SECOND, K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
-            // Add kinematics to ensure max speed is actually obeyed
-            .setKinematics(K_DRIVE_KINEMATICS)
-            // Apply the voltage constraint
-            .addConstraint(autoVoltageConstraint);
-        
-        RamseteCommand ramseteCommand = new RamseteCommand(
-            trajectory,
-            () -> m_drive.getPose(),
-            new RamseteController(),
-            m_drive.getKinematics(),
-            m_drive.getOutputMetersPerSecond(),
-            m_drive
-        );
-
-        // Run path following command, then stop at the end.
-        return ramseteCommand;
     }
 
     @Override

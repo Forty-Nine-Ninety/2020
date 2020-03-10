@@ -27,7 +27,7 @@ public class LimelightShootBallCommand extends ShootBallCommand {
     public void execute() {
         super.execute();
 
-        m_drive.arcadeDrive(0, m_pid.calculate(Limelight.getCrosshairHorizontalOffset(), 0));
+        m_drive.drive(0, m_pid.calculate(Limelight.getCrosshairHorizontalOffset(), 0));
     }
 
     @Override

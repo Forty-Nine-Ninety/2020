@@ -2,11 +2,13 @@ package frc.robot;
 
 import frc.robot.JoystickF310.*;
 import frc.robot.commands.*;
-import frc.robot.paths.PathWeaver;
+import frc.robot.AutonomousChooser;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
 import static frc.robot.Constants.*;
 import io.github.oblarg.oblog.Logger;
 import io.github.oblarg.oblog.annotations.Config;
@@ -19,13 +21,14 @@ public class RobotContainer {
     @Config
     private final SendableChooser<String> m_positionChooser = new SendableChooser<>();
     @Config
-    private final SendableChooser<Command> m_actionChooser = new SendableChooser<>(); 
+    private final SendableChooser<SequentialCommandGroup> m_actionChooser = new SendableChooser<>(); 
 
 
     private final DrivetrainSubsystem m_drivetrain = new DrivetrainSubsystem();
     private final StorageSubsystem m_storage  = new StorageSubsystem();
     private final ShooterSubsystem m_shooter = new ShooterSubsystem();
     private final AutonomousChooser auto = new AutonomousChooser(m_positionChooser, m_actionChooser, m_drivetrain, m_shooter, m_storage);
+    
     //TODO Add drivetrain commands
     private final TeleopTankDriveCommand m_teleopTankDriveCommand = new TeleopTankDriveCommand(m_drivetrain);
     
