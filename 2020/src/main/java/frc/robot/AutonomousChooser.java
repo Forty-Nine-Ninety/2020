@@ -37,7 +37,9 @@ public class AutonomousChooser implements Loggable{
     private final ShooterSubsystem m_shooter;
     private final StorageSubsystem m_storage;
 
-    private String m_ballLocation;
+    private String m_movePath;
+    private String m_getballPath;
+    private SequentialCommandGroup m_ballCommand;
 
 
     
@@ -70,29 +72,35 @@ public class AutonomousChooser implements Loggable{
     }*/
 
     public void AutoChooser1() {
-        //TODO add code using starting position info
         m_positionChooser.setDefaultOption("Left", "left");
         m_positionChooser.addOption("Center", "center");
         m_positionChooser.addOption("Right", "right");
-        getStartingPosition();
 
     }
 
     public void AutoChooser2() {
-        try{
-            m_actionChooser.setDefaultOption("Move Only", new MoveOnlyCommand(m_drive, getTrajectory("/paths/MoveOnly.wpilib.json")));
-            m_actionChooser.addOption("Shoot, Move", new ShootMoveCommand(m_shooter, m_storage, m_drive, getTrajectory("/paths/ShootMove.wpilib.json")));
-            
-            if (m_positionChooser.getSelected() == "left"){
-                m_actionChooser.addOption("Shoot, Get Balls", new ShootShieldGenCommand(m_shooter, m_storage, m_drive, getTrajectory(m_ballLocation)));
-            }
-            else if (m_positionChooser.getSelected() == "center"){
-                m_actionChooser.addOption("Shoot, Get Balls", new ShootShieldGenCommand(m_shooter, m_storage, m_drive, getTrajectory(m_ballLocation)));
+        try{       
+            switch (m_positionChooser.getSelected()){
+                case "left":
+                    m_getballPath = "/paths/ShieldGen.wpilib.json";//goes to shield gen to get ball
+                    m_movePath = "/paths/LeftMoveOnly.wpilib.json";
+                    m_ballCommand = new ShootShieldGenCommand(m_shooter, m_storage, m_drive, getTrajectory(m_getballPath));
+                    break;
+                case "center":
+                    m_getballPath = "/paths/ShieldGen.wpilib.json";//same as above
+                    m_movePath = "/paths/CenterMoveOnly.wpilib.json";
+                    m_ballCommand = new ShootShieldGenCommand(m_shooter, m_storage, m_drive, getTrajectory(m_getballPath));
+                    break;
+                case "right":
+                    m_getballPath = "/paths/TrenchRun.wpilib.json";//goes to trench to get ball
+                    m_movePath = "/paths/RightMoveOnly.wpilib.json";
+                    m_ballCommand = new ShootTrenchRunCommand(m_shooter, m_storage, m_drive, getTrajectory(m_getballPath));
+                    break;
             }
 
-            else{
-                m_actionChooser.addOption("Shoot, Get Balls", new ShootTrenchRunCommand(m_shooter, m_storage, m_drive, getTrajectory(m_ballLocation)));
-            }
+            m_actionChooser.setDefaultOption("Move Only", new MoveOnlyCommand(m_drive, getTrajectory(m_movePath)));
+            m_actionChooser.addOption("Shoot, Move", new ShootMoveCommand(m_shooter, m_storage, m_drive, getTrajectory("/paths/ShootMove.wpilib.json")));
+            m_actionChooser.addOption("Shoot, Get Balls", m_ballCommand);
         } catch (IOException io){
             io.printStackTrace();
         }
@@ -103,21 +111,6 @@ public class AutonomousChooser implements Loggable{
         Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
         Trajectory trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
         return trajectory;
-    }
-
-    private void getStartingPosition(){
-       
-        switch (m_positionChooser.getSelected()){
-            case "left":
-                m_ballLocation = "/paths/ShieldGen.wpilib.json";//goes to shield gen to get ball
-                break;
-            case "center":
-                m_ballLocation = "/paths/ShieldGen.wpilib.json";//same as above
-                break;
-            case "right":
-                m_ballLocation = "/paths/TrenchRun.wpilib.json";//goes to trench to get ball
-                break;
-        }
     }
 
     @Config.ToggleButton
