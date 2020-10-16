@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Util;
 import io.github.oblarg.oblog.Loggable;
@@ -30,6 +31,7 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
     
     private final DifferentialDriveKinematics m_kinematics;
     private final DifferentialDriveOdometry m_odometry;
+
 
     public DrivetrainSubsystem() {
         m_leftTalon = new WPI_TalonSRX(CAN_DRIVETRAIN_LEFT_TALONSRX);
@@ -175,5 +177,15 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
     @Log
     public int getErrorRight() {
         return m_rightTalon.getClosedLoopError();
+    }
+
+    @Log
+    public double getTargetLeft() {
+        return m_leftTalon.getControlMode() == ControlMode.Velocity ? m_leftTalon.getClosedLoopTarget() : 0;
+    }
+
+    @Log
+    public double getTargetRight() {
+        return m_rightTalon.getControlMode() == ControlMode.Velocity ? m_rightTalon.getClosedLoopTarget() : 0;
     }
 }

@@ -12,7 +12,7 @@ import static frc.robot.Constants.*;
 public class IntakeSubsystem extends SubsystemBase {
 
     private final WPI_TalonSRX m_motor;
-    private final DoubleSolenoid m_solenoid;
+    public final DoubleSolenoid m_solenoid;
     private final DigitalInput m_ballSensor;
 
     public IntakeSubsystem() {

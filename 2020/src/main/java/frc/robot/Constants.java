@@ -28,7 +28,7 @@ public final class Constants implements Loggable {
     public static SPI.Port SPI_PORT_GYRO = SPI.Port.kMXP;
 
     //Solenoid PCM ports
-    public static int PCM_CLIMB = 0;
+    public static int PCM_CLIMB = 7;
     public static int PCM_INTAKE_FORWARD = 1;
     public static int PCM_INTAKE_REVERSE = 2;
 
@@ -78,7 +78,7 @@ public final class Constants implements Loggable {
     public static int CLIMB_LOCK_MAXIMUM_ALLOWED_ERROR = 0;
 
     //Drivetrain movement information
-    public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 3600;//free speed ~3200
+    public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 6000;//free speed ~3200
     public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 2.5;
     public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     public static double DRIVETRAIN_CLOSED_LOOP_RAMP = 0.1; //seconds from 0 to full or full to 0
