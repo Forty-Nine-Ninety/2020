@@ -27,11 +27,14 @@ public class RobotContainer {
     private final DrivetrainSubsystem m_drivetrain = new DrivetrainSubsystem();
     private final StorageSubsystem m_storage  = new StorageSubsystem();
     private final ShooterSubsystem m_shooter = new ShooterSubsystem();
+    private final ClimbSubsystem m_climb = new ClimbSubsystem();
     private final AutonomousChooser auto = new AutonomousChooser(m_positionChooser, m_actionChooser, m_drivetrain, m_shooter, m_storage);
     
     //TODO Add drivetrain commands
     private final TeleopTankDriveCommand m_teleopTankDriveCommand = new TeleopTankDriveCommand(m_drivetrain);
     
+    //Mech Tests
+    private final ElevatorTestCommand m_elevatorTestCommand = new ElevatorTestCommand(m_climb);
 
 
     public RobotContainer() {
@@ -42,7 +45,11 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
 
-        m_teleopTankDriveCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.JoystickLeftY), () -> joystickDrive.getRawAxis(AxisF310.JoystickRightY));
+        m_teleopTankDriveCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.JoystickLeftY), 
+        () -> joystickDrive.getRawAxis(AxisF310.JoystickRightY));
+
+        //TODO bind buttons for elevator test
+        m_elevatorTestCommand.setSuppliers(lock, climb);
     }
 
     private void configureDefaultCommands() {
