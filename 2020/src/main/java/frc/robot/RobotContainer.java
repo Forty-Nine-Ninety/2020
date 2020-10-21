@@ -2,11 +2,14 @@ package frc.robot;
 
 import frc.robot.JoystickF310.*;
 import frc.robot.commands.*;
+//import frc.robot.AutonomousChooser;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import static frc.robot.Constants.*;
@@ -40,12 +43,13 @@ public class RobotContainer {
     private final TeleopTankDriveCommand m_teleopTankDriveCommand = new TeleopTankDriveCommand(m_drivetrain);
     private final ToggleIntakeCommand m_toggleIntakeCommand = new ToggleIntakeCommand(m_intake);
 
-    private final ClimbBalanceManualCommand m_climbBalanceManualCommand = new ClimbBalanceManualCommand(m_climb);
+    //private final ClimbBalanceManualCommand m_climbBalanceManualCommand = new ClimbBalanceManualCommand(m_climb);
+    private final ElevatorTestCommand m_elevatorTestCommand = new ElevatorTestCommand(m_climb);
 
     public RobotContainer() {
         configureButtonBindings();
         configureDefaultCommands();
-        Logger.configureLoggingAndConfig(this, false);
+        //Logger.configureLoggingAndConfig(this, false);
     }
 
     private void configureButtonBindings() {
@@ -53,19 +57,21 @@ public class RobotContainer {
         joystickOperator.getButton(ButtonF310.A).whenPressed(m_toggleIntakeCommand);
         joystickOperator.getButton(ButtonF310.BumperRight).toggleWhenPressed(m_extendClimbCommand);
         joystickOperator.getButton(ButtonF310.BumperLeft).toggleWhenPressed(m_retractClimbCommand);
-        joystickOperator.getButton(ButtonF310.B).whenPressed(new InstantCommand(() -> m_climb.setLock(! m_climb.isLocked()), m_climb));
+        joystickOperator.getButton(ButtonF310.B).whenPressed(m_elevatorTestCommand.lockSupplier());
         joystickOperator.getButton(ButtonF310.X).whenPressed(new InstantCommand(() -> m_intake.m_solenoid.set(m_intake.get() == Value.kForward ? Value.kReverse : Value.kForward), m_intake));
         joystickOperator.getButton(ButtonF310.Start).whenPressed(new InstantCommand(() -> m_compressor.setClosedLoopControl(! m_compressor.getClosedLoopControl())));
         
+        m_elevatorTestCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.JoystickLeftY), () -> joystickDrive.getRawAxis(AxisF310.JoystickRightY));
+
         m_teleopArcadeDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightX), JOYSTICK_INPUT_EXPONENT));
         m_teleopTankDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightY), JOYSTICK_INPUT_EXPONENT));
-        m_climbBalanceManualCommand.setSupplier(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftX));
+        //m_climbBalanceManualCommand.setSupplier(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftX));
         //m_shootBallCommand.setSupplier(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftY));
     }
 
     private void configureDefaultCommands() {
         CommandScheduler.getInstance().setDefaultCommand(m_drivetrain, m_teleopArcadeDriveCommand);
-        CommandScheduler.getInstance().setDefaultCommand(m_climb, m_climbBalanceManualCommand);
+        //CommandScheduler.getInstance().setDefaultCommand(m_climb, m_climbBalanceManualCommand);
         //Hopper is run by storage command
         //CommandScheduler.getInstance().setDefaultCommand(m_hopper, m_runStorageCommand);
         //CommandScheduler.getInstance().setDefaultCommand(m_storage, m_runStorageCommand);
@@ -78,4 +84,12 @@ public class RobotContainer {
     public void updateLoggerEntries() {
         Logger.updateEntries();
     }
+
+    // public void chooseAutoActions(){
+        
+    //     auto.AutoChooser1();
+    //     auto.AutoChooser2();
+
+    //     auto.runAction(false);
+    // }
 }

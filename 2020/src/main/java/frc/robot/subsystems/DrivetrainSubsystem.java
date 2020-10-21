@@ -31,6 +31,7 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
     
     private final DifferentialDriveKinematics m_kinematics;
     private final DifferentialDriveOdometry m_odometry;
+    private boolean m_reversed;
 
 
     public DrivetrainSubsystem() {
@@ -154,7 +155,6 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
     public double getRateRight() {
         return m_rightTalon.getSelectedSensorVelocity() * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     }
-
     public void setMultiplier(double d) {
         m_speedMultiplier = d;
     }
