@@ -4,7 +4,6 @@ import frc.robot.subsystems.ClimbSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 public class ElevatorTestCommand extends CommandBase {
@@ -19,8 +18,13 @@ public class ElevatorTestCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_climb.runClimb(m_climbSpeedSupplier.getAsDouble());
-        m_climb.runBalance(m_balanceSpeedSupplier.getAsDouble());
+        double climbSpeed = m_climbSpeedSupplier.getAsDouble();
+        double balanceSpeed = m_balanceSpeedSupplier.getAsDouble();
+
+        System.out.println("Climb: " + climbSpeed);
+        System.out.println("Balance: " + balanceSpeed);
+        m_climb.runClimb(climbSpeed);
+        m_climb.runBalance(balanceSpeed);
     }
 
     public InstantCommand lockSupplier() {
