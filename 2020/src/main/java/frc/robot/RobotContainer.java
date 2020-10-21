@@ -3,6 +3,7 @@ package frc.robot;
 import frc.robot.JoystickF310.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -26,6 +27,7 @@ public class RobotContainer {
     private final IntakeSubsystem m_intake = new IntakeSubsystem();
     //private final ShooterSubsystem m_shooter = new ShooterSubsystem();
     //private final StorageSubsystem m_storage  = new StorageSubsystem();
+    private final Compressor m_compressor = new Compressor();
 
     //private final ClimbBalanceCommand m_climbBalanceCommand = new ClimbBalanceCommand(m_climb, m_drivetrain);
     private final ExtendClimbCommand m_extendClimbCommand = new ExtendClimbCommand(m_climb);
@@ -53,6 +55,7 @@ public class RobotContainer {
         joystickOperator.getButton(ButtonF310.BumperLeft).toggleWhenPressed(m_retractClimbCommand);
         joystickOperator.getButton(ButtonF310.B).whenPressed(new InstantCommand(() -> m_climb.setLock(! m_climb.isLocked()), m_climb));
         joystickOperator.getButton(ButtonF310.X).whenPressed(new InstantCommand(() -> m_intake.m_solenoid.set(m_intake.get() == Value.kForward ? Value.kReverse : Value.kForward), m_intake));
+        joystickOperator.getButton(ButtonF310.Start).whenPressed(new InstantCommand(() -> m_compressor.setClosedLoopControl(! m_compressor.getClosedLoopControl())));
         
         m_teleopArcadeDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightX), JOYSTICK_INPUT_EXPONENT));
         m_teleopTankDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightY), JOYSTICK_INPUT_EXPONENT));
