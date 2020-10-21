@@ -9,7 +9,6 @@ import io.github.oblarg.oblog.Loggable;
 import io.github.oblarg.oblog.annotations.Config;
 
 public final class Constants implements Loggable {
-    
     //Laptop ports
     public static int PORT_JOYSTICK_DRIVE = 0;
     public static int PORT_JOYSTICK_OPERATOR = 1;
@@ -76,6 +75,7 @@ public final class Constants implements Loggable {
     //Climb movement information
     public static int CLIMB_TARGET_ENCODER_TICKS = 0;
     public static int CLIMB_LOCK_MAXIMUM_ALLOWED_ERROR = 0;
+    public static int CLIMB_TIMEOUT_S = 5;
 
     //Drivetrain movement information
     public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 6000;//free speed ~3200

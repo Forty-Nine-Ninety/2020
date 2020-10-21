@@ -2,7 +2,13 @@ package frc.robot;
 
 import frc.robot.JoystickF310.*;
 import frc.robot.commands.*;
+//import frc.robot.AutonomousChooser;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -51,6 +57,7 @@ public class RobotContainer {
         joystickOperator.getButton(ButtonF310.A).whenPressed(m_toggleIntakeCommand);
         joystickOperator.getButton(ButtonF310.BumperRight).toggleWhenPressed(m_extendClimbCommand);
         joystickOperator.getButton(ButtonF310.BumperLeft).toggleWhenPressed(m_retractClimbCommand);
+        joystickOperator.getButton(ButtonF310.B).whenPressed(m_elevatorTestCommand.lockSupplier());
         joystickOperator.getButton(ButtonF310.B).whenPressed(new InstantCommand(() -> m_climb.setLock(! m_climb.isLocked()), m_climb));
         joystickOperator.getButton(ButtonF310.X).whenPressed(new InstantCommand(() -> m_intake.m_solenoid.set(m_intake.get() == Value.kForward ? Value.kReverse : Value.kForward), m_intake));
         
@@ -75,4 +82,12 @@ public class RobotContainer {
     public void updateLoggerEntries() {
         Logger.updateEntries();
     }
+
+    // public void chooseAutoActions(){
+        
+    //     auto.AutoChooser1();
+    //     auto.AutoChooser2();
+
+    //     auto.runAction(false);
+    // }
 }
