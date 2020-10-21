@@ -8,22 +8,31 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Util;
 import io.github.oblarg.oblog.Loggable;
+import io.github.oblarg.oblog.annotations.Config;
+import io.github.oblarg.oblog.annotations.Log;
 
 import static frc.robot.Constants.*;
+
+import java.util.function.DoubleSupplier;
 
 public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
 
     private final WPI_TalonSRX m_leftTalon, m_rightTalon;
     private final WPI_VictorSPX m_leftVictor, m_rightVictor;
 
+    @Config.NumberSlider(name = "OBLOG_TEST SPEED MULT", defaultValue = 1.1, min = 0, max = 2)
+    private double m_speedMultiplier = 1.25;
+
     private final AHRS m_gyro;
     
     private final DifferentialDriveKinematics m_kinematics;
     private final DifferentialDriveOdometry m_odometry;
     private boolean m_reversed;
+
 
     public DrivetrainSubsystem() {
         m_leftTalon = new WPI_TalonSRX(CAN_DRIVETRAIN_LEFT_TALONSRX);
@@ -38,18 +47,31 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
 
         m_kinematics = new DifferentialDriveKinematics(DRIVETRAIN_TRACKWIDTH_METERS);
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(m_gyro.getAngle()));
+
+       /* leftVelocity = () -> m_leftTalon.getSelectedSensorVelocity();
+        rightVelocity = () -> m_rightTalon.getSelectedSensorVelocity();
+        leftError = () -> m_leftTalon.getClosedLoopError();
+        rightError = () -> m_rightTalon.getClosedLoopError();*/
     }
 
     @Override
     public void periodic() {
         //Update odometry
+        //System.out.println("Current speed multiplier: " + m_speedMultiplier);
         m_odometry.update(Rotation2d.fromDegrees(m_gyro.getAngle()), getDistanceLeft(), getDistanceRight());
     }
 
     //Assumes left and right are in encoder units per 100ms
     public void driveRaw(double left, double right) {
-        m_leftTalon.set(ControlMode.Velocity, left);
-        m_rightTalon.set(ControlMode.Velocity, right);
+        //System.out.println("Target:\t" + (int)left + " " + (int)right);
+        //System.out.println("Encoder:\t" + (int)m_leftTalon.getSelectedSensorVelocity() + " " + (int)m_rightTalon.getSelectedSensorVelocity());
+        /*left /= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
+        right /= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
+        right *= m_speedMultiplier;
+        m_leftTalon.set(left);
+        m_rightTalon.set(right);*/
+        m_leftTalon.set(ControlMode.Velocity,left);
+        m_rightTalon.set(ControlMode.Velocity,right);
     }
 
     //Functions below are for 0-1
@@ -83,6 +105,11 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
         
         //Left side encoder goes in the wrong direction
         m_leftTalon.setSensorPhase(true);
+        m_rightTalon.setSensorPhase(true);
+
+        m_rightTalon.setInverted(true);
+        m_rightVictor.setInverted(true);
+
 
         m_leftVictor.follow(m_leftTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
         m_rightVictor.follow(m_rightTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
@@ -97,6 +124,8 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
         //Setup config objects with desired values
         cLeft.slot0 = DRIVETRAIN_LEFT_FPID;
         cRight.slot0 = DRIVETRAIN_RIGHT_FPID;
+        cLeft.closedloopRamp = DRIVETRAIN_CLOSED_LOOP_RAMP;
+        cRight.closedloopRamp = DRIVETRAIN_CLOSED_LOOP_RAMP;
 
         //Configure talons
         m_leftTalon.configAllSettings(cLeft);
@@ -126,12 +155,37 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
     public double getRateRight() {
         return m_rightTalon.getSelectedSensorVelocity() * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     }
-
-    public boolean isReversed() {
-        return m_reversed;
+    public void setMultiplier(double d) {
+        m_speedMultiplier = d;
     }
 
-    public void setReversed(boolean b) {
-        m_reversed = b;
+    @Log
+    public int getVelocityRight() {
+        return m_rightTalon.getSelectedSensorVelocity();
+    }
+
+    @Log
+    public int getVelocityLeft() {
+        return m_leftTalon.getSelectedSensorVelocity();
+    }
+
+    @Log
+    public int getErrorLeft() {
+        return m_leftTalon.getClosedLoopError();
+    }
+
+    @Log
+    public int getErrorRight() {
+        return m_rightTalon.getClosedLoopError();
+    }
+
+    @Log
+    public double getTargetLeft() {
+        return m_leftTalon.getControlMode() == ControlMode.Velocity ? m_leftTalon.getClosedLoopTarget() : 0;
+    }
+
+    @Log
+    public double getTargetRight() {
+        return m_rightTalon.getControlMode() == ControlMode.Velocity ? m_rightTalon.getClosedLoopTarget() : 0;
     }
 }

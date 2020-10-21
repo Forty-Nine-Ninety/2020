@@ -15,13 +15,21 @@ public class ExtendClimbCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_climb.runClimb(m_climb.getTopSensors() ? 0 : -1 * CLIMB_MOTOR_SPEED);
+        m_climb.setLock(false);
+        m_climb.runClimb(m_climb.getTopSensors() ? 0 : CLIMB_MOTOR_SPEED);
+        if (m_climb.getTopSensors()) this.cancel();
     }
 
     @Override
     public void end(boolean bool) {
+        System.out.println("Stopping climb.");
         m_climb.setLock(true);
         m_climb.runClimb(0);
+    }
+
+    @Override
+    public boolean isFinished() {
+        return m_climb.getTopSensors();
     }
 
 }

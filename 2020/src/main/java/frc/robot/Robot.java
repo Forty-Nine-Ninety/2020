@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -41,9 +42,7 @@ public class Robot extends TimedRobot {
     }
 
     @Override
-    public void disabledInit() {
-        CommandScheduler.getInstance().cancelAll();
-    }
+    public void disabledInit() {}
 
     @Override
     public void disabledPeriodic() {}
@@ -66,6 +65,8 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
+        Compressor test = new Compressor();
+        test.setClosedLoopControl(false);
     }
 
     @Override
