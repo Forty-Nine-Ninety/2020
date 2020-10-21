@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.ClimbSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
@@ -9,7 +10,6 @@ import java.util.function.DoubleSupplier;
 public class ElevatorTestCommand extends CommandBase {
 
     private final ClimbSubsystem m_climb;
-    private BooleanSupplier m_setLockSupplier;
     private DoubleSupplier m_climbSpeedSupplier, m_balanceSpeedSupplier;
 
     public ElevatorTestCommand(ClimbSubsystem climb) {
@@ -20,12 +20,14 @@ public class ElevatorTestCommand extends CommandBase {
     @Override
     public void execute() {
         m_climb.runClimb(m_climbSpeedSupplier.getAsDouble());
-        m_climb.setLock(m_setLockSupplier.getAsBoolean());
         m_climb.runBalance(m_balanceSpeedSupplier.getAsDouble());
     }
 
-    public void setSuppliers(BooleanSupplier lock, DoubleSupplier climb, DoubleSupplier balance) {
-        m_setLockSupplier = lock;
+    public InstantCommand lockSupplier() {
+        return new InstantCommand(() -> m_climb.setLock(! m_climb.isLocked()), m_climb);
+    }
+
+    public void setSuppliers(DoubleSupplier climb, DoubleSupplier balance) {
         m_climbSpeedSupplier = climb;
         m_balanceSpeedSupplier = balance;
     }

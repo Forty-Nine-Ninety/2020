@@ -59,16 +59,16 @@ s    private final ExtendClimbCommand m_extendClimbCommand = new ExtendClimbComm
         joystickOperator.getButton(ButtonF310.A).whenPressed(m_toggleIntakeCommand);
         joystickOperator.getButton(ButtonF310.BumperRight).whenPressed(m_extendClimbCommand);
         joystickOperator.getButton(ButtonF310.BumperLeft).whenPressed(m_retractClimbCommand);
+        joystickOperator.getButton(ButtonF310.B).whenPressed(m_elevatorTestCommand.lockSupplier());
         
         m_teleopArcadeDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightX), JOYSTICK_INPUT_EXPONENT));
         m_teleopTankDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightY), JOYSTICK_INPUT_EXPONENT));
-        m_shootBallCommand.setSupplier(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftY));
+        //m_shootBallCommand.setSupplier(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftY));
 
         m_teleopTankDriveCommand.setSuppliers(() -> joystickDrive.getRawAxis(AxisF310.JoystickLeftY), 
         () -> joystickDrive.getRawAxis(AxisF310.JoystickRightY));
 
-        //TODO bind buttons for elevator test
-        m_elevatorTestCommand.setSuppliers(, () -> joystickOperator.getRawAxis(AxisF310.JoystickLeftY), () -> joystickOperator.getRawAxis(AxisF310.JoystickRightX));
+        m_elevatorTestCommand.setSuppliers(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftY), () -> joystickOperator.getRawAxis(AxisF310.JoystickRightX));
     }
 
     private void configureDefaultCommands() {
