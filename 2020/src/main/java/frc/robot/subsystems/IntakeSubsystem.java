@@ -32,7 +32,7 @@ public class IntakeSubsystem extends SubsystemBase implements Loggable {
     }
 
     public void set(boolean on) {
-        m_solenoid.set(on);
+        //m_solenoid.set(on);
         if (on) {
             if (m_reversed) m_motor.set(-1 * INTAKE_MOTOR_SPEED);
             else m_motor.set(INTAKE_MOTOR_SPEED);

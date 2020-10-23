@@ -13,7 +13,7 @@ public class DrivetrainReverseCommand extends InstantCommand {
 
     @Override
     public void initialize() {
-        m_drive.setReversed(! m_drive.isReversed());
+        //m_drive.setReversed(! m_drive.isReversed());
     }
 
 }
