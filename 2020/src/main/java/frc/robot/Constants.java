@@ -137,7 +137,7 @@ public final class Constants implements Loggable {
     public static double STORAGE_MOTOR_SPEED = 0.5;
 
     @Config(name = "Climb Motor Speed", tabName = "Op Configuration")
-    public static double CLIMB_MOTOR_SPEED = 0.1;
+    public static double CLIMB_MOTOR_SPEED = 0.25;
 
     //Classes
     public static class TalonSRXGains extends SlotConfiguration {
