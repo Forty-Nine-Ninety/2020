@@ -125,7 +125,7 @@ public final class Constants implements Loggable {
     public static double ARCADE_ROTATION_MULTIPLIER = 0.5;
 
     @Config(name = "Speed Input Multiplier", tabName = "Op Configuration")
-    public static double ARCADE_SPEED_MULTIPLIER = 0.75;
+    public static double ARCADE_SPEED_MULTIPLIER = 0;//0.75;
 
     @Config(name = "Intake Motor Speed", tabName = "Op Configuration")
     public static double INTAKE_MOTOR_SPEED = 0.5;
@@ -137,7 +137,7 @@ public final class Constants implements Loggable {
     public static double STORAGE_MOTOR_SPEED = 0.5;
 
     @Config(name = "Climb Motor Speed", tabName = "Op Configuration")
-    public static double CLIMB_MOTOR_SPEED = 0.25;
+    public static double CLIMB_MOTOR_SPEED = 1;
 
     //Classes
     public static class TalonSRXGains extends SlotConfiguration {

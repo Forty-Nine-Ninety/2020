@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import java.util.function.DoubleSupplier;
+import static frc.robot.Constants.*;
 
 public class ElevatorTestCommand extends CommandBase {
 
@@ -18,11 +19,9 @@ public class ElevatorTestCommand extends CommandBase {
 
     @Override
     public void execute() {
-        double climbSpeed = m_climbSpeedSupplier.getAsDouble();
+        double climbSpeed = m_climbSpeedSupplier.getAsDouble() * CLIMB_MOTOR_SPEED;
         double balanceSpeed = m_balanceSpeedSupplier.getAsDouble();
 
-        System.out.println("Climb: " + climbSpeed);
-        System.out.println("Balance: " + balanceSpeed);
         m_climb.runClimb(climbSpeed);
         m_climb.runBalance(balanceSpeed);
     }

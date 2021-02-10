@@ -15,7 +15,7 @@ public class RetractClimbCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_climb.runClimb(m_climb.getBottomSensors() ? 0 : -1 * 0.4);
+        m_climb.runClimb(m_climb.getBottomSensors() ? 0 : -1 * CLIMB_MOTOR_SPEED);
         if (m_climb.getBottomSensors()) this.cancel();
     }
 
