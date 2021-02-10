@@ -26,7 +26,7 @@ public class RobotContainer {
     private final ClimbSubsystem m_climb = new ClimbSubsystem();
     //@Config.NumberSlider(name = "Multiplier", methodName = "setMultiplier", methodTypes = {double.class}, defaultValue = 1.1, min = 0, max = 2)
     private final DrivetrainSubsystem m_drivetrain = new DrivetrainSubsystem();
-    //private final HopperSubsystem m_hopper = new HopperSubsystem();
+    private final HopperSubsystem m_hopper = new HopperSubsystem();
     private final IntakeSubsystem m_intake = new IntakeSubsystem();
     //private final ShooterSubsystem m_shooter = new ShooterSubsystem();
     //private final StorageSubsystem m_storage  = new StorageSubsystem();
@@ -46,6 +46,8 @@ public class RobotContainer {
     //private final ClimbBalanceManualCommand m_climbBalanceManualCommand = new ClimbBalanceManualCommand(m_climb);
     private final ElevatorTestCommand m_elevatorTestCommand = new ElevatorTestCommand(m_climb);
 
+    private final HopperManualCommand m_hopperManualCommand = new HopperManualCommand(m_hopper);
+
     public RobotContainer() {
         configureButtonBindings();
         configureDefaultCommands();
@@ -60,6 +62,7 @@ public class RobotContainer {
         joystickOperator.getButton(ButtonF310.B).whenPressed(m_elevatorTestCommand.lockSupplier());
         joystickOperator.getButton(ButtonF310.X).whenPressed(new InstantCommand(() -> m_intake.m_solenoid.set(m_intake.get() == Value.kForward ? Value.kReverse : Value.kForward), m_intake));
         joystickOperator.getButton(ButtonF310.Start).whenPressed(new InstantCommand(() -> m_compressor.setClosedLoopControl(! m_compressor.getClosedLoopControl())));
+        joystickOperator.getButton(ButtonF310.Y).toggleWhenPressed(m_hopperManualCommand);
         
         m_elevatorTestCommand.setSuppliers(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftY), () -> joystickOperator.getRawAxis(AxisF310.JoystickRightX));
 

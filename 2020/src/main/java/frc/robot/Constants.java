@@ -40,14 +40,14 @@ public final class Constants implements Loggable {
     public static int CAN_DRIVETRAIN_LEFT_VICTORSPX = 14;
     public static int CAN_SHOOTER_TALONSRX = 2;
     public static int CAN_SHOOTER_SLAVE_TALONSRX = 3;
-    public static int CAN_SHOOTER_INSERTER_TALONSRX = 5;
+    public static int CAN_SHOOTER_INSERTER_TALONSRX = 30;
     public static int CAN_CLIMB_MAIN_TALONSRX = 13;
     public static int CAN_CLIMB_BALANCE_TALONSRX = 10;
-    public static int CAN_STORAGE_LOW_TALONSRX = 6;
-    public static int CAN_INTAKE_TALONSRX = 8;
+    public static int CAN_STORAGE_LOW_TALONSRX = 5;
+    public static int CAN_INTAKE_TALONSRX = 6;
     public static int CAN_SPINNER_TALONSRX = -1;
-    public static int CAN_LEFT_HOPPER_TALONSRX = 9;
-    public static int CAN_RIGHT_HOPPER_TALONSRX = 7;
+    public static int CAN_LEFT_HOPPER_TALONSRX = 7;
+    public static int CAN_RIGHT_HOPPER_TALONSRX = 8;
 
     //Talon and Victor information
     public static double TALON_ENCODER_RESOLUTION = 4096; // = EPR = CPR
