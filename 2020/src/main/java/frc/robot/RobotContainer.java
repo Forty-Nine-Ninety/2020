@@ -46,7 +46,8 @@ public class RobotContainer {
     //private final ClimbBalanceManualCommand m_climbBalanceManualCommand = new ClimbBalanceManualCommand(m_climb);
     private final ElevatorTestCommand m_elevatorTestCommand = new ElevatorTestCommand(m_climb);
 
-    private final HopperManualCommand m_hopperManualCommand = new HopperManualCommand(m_hopper);
+    private final HopperManualCommand m_hopperManualCommandFwd = new HopperManualCommand(m_hopper, false);
+    private final HopperManualCommand m_hopperManualCommandRev = new HopperManualCommand(m_hopper, true);
 
     public RobotContainer() {
         configureButtonBindings();
@@ -62,7 +63,8 @@ public class RobotContainer {
         joystickOperator.getButton(ButtonF310.B).whenPressed(m_elevatorTestCommand.lockSupplier());
         joystickOperator.getButton(ButtonF310.X).whenPressed(new InstantCommand(() -> m_intake.m_solenoid.set(m_intake.get() == Value.kForward ? Value.kReverse : Value.kForward), m_intake));
         joystickOperator.getButton(ButtonF310.Start).whenPressed(new InstantCommand(() -> m_compressor.setClosedLoopControl(! m_compressor.getClosedLoopControl())));
-        joystickOperator.getButton(ButtonF310.Y).toggleWhenPressed(m_hopperManualCommand);
+        joystickOperator.getButton(ButtonF310.Y).toggleWhenPressed(m_hopperManualCommandFwd);
+        joystickOperator.getButton(ButtonF310.Back).toggleWhenPressed(m_hopperManualCommandRev);
         
         m_elevatorTestCommand.setSuppliers(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftY), () -> joystickOperator.getRawAxis(AxisF310.JoystickRightX));
 

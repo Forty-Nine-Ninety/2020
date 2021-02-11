@@ -6,19 +6,29 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class HopperManualCommand extends CommandBase{
 
     private final HopperSubsystem m_hopper;
+    private final boolean m_reverse;
 
-    public HopperManualCommand(HopperSubsystem hopper) {
+    public HopperManualCommand(HopperSubsystem hopper, boolean reverse) {
         addRequirements(hopper);
         m_hopper = hopper;
+        m_reverse = reverse;
     }
 
     @Override
     public void execute() {
-        m_hopper.set(true);
+        if (m_reverse) {
+            m_hopper.setReverse(true);
+        } else {
+            m_hopper.set(true);
+        }
     }
 
     @Override
     public void end(boolean interrupted) {
-        m_hopper.set(false);
+        if (m_reverse) {
+            m_hopper.setReverse(false);
+        } else {
+            m_hopper.set(false);
+        }
     }
 }
