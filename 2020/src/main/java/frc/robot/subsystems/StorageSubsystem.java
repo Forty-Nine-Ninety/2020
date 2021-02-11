@@ -11,11 +11,11 @@ import static frc.robot.Constants.*;
 public class StorageSubsystem extends SubsystemBase implements Loggable {
     private int balls, lastBall;
     private boolean enabled;
-    private final WPI_TalonSRX m_motor;
+    private WPI_TalonSRX m_motor;
     private final DigitalInput m_sensor;
 
     public StorageSubsystem() {
-        m_motor = new WPI_TalonSRX(CAN_STORAGE_LOW_TALONSRX);
+        //m_motor = new WPI_TalonSRX(CAN_STORAGE_LOW_TALONSRX);
         m_sensor = new DigitalInput(DIO_BREAKBEAM_STORAGE_LOW);
 
         balls = 0;
