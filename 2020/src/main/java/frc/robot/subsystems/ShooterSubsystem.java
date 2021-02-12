@@ -25,11 +25,15 @@ public class ShooterSubsystem extends SubsystemBase implements Loggable {
 
     public void fireRaw(double speed) {
         m_motor.set(ControlMode.Velocity, speed);
-        m_inserter.set(ControlMode.Velocity, speed * SHOOTER_INSERTER_SPEED_MULTIPLIER);
+        runInserter(speed);
     }
 
     public void setFireSpeed(double speed) {
         fireRaw(speed * SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY);
+    }
+    
+    public void runInserter(double speed) {
+        m_inserter.set(ControlMode.Velocity, speed * SHOOTER_INSERTER_SPEED_MULTIPLIER);
     }
     
     public double getVelocity() {
