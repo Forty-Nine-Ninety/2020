@@ -22,9 +22,7 @@ public class BallMotorsCommand extends CommandBase{
 
     @Override
     public void execute() {
-        while (m_shooter.getVelocity() != SHOOTER_FIRE_PERCENTAGE) {
-            m_shooter.setFireSpeed(SHOOTER_FIRE_PERCENTAGE);
-        }
+        m_shooter.setFireSpeed(SHOOTER_FIRE_PERCENTAGE);
 
         m_hopper.setReverse(true);
         Timer.delay(0.5);
