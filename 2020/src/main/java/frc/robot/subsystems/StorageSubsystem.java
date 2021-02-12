@@ -29,9 +29,9 @@ public class StorageSubsystem extends SubsystemBase implements Loggable {
         m_motor.set(b && enabled ? STORAGE_MOTOR_SPEED : 0);
     }
 
-    public void manualSpeed(int mult) {
-        m_motor.set(mult * STORAGE_MOTOR_SPEED);
-    }
+    // public void manualSpeed(int mult) {
+    //     m_motor.set(mult * STORAGE_MOTOR_SPEED);
+    // }
 
     public boolean hasBall() {
         return m_sensor.get();
