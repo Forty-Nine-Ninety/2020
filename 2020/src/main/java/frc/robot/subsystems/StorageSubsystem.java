@@ -11,11 +11,11 @@ import static frc.robot.Constants.*;
 public class StorageSubsystem extends SubsystemBase implements Loggable {
     private int balls, lastBall;
     private boolean enabled;
-    private WPI_TalonSRX m_motor;
+    private final WPI_TalonSRX m_motor;
     private final DigitalInput m_sensor;
 
     public StorageSubsystem() {
-        //m_motor = new WPI_TalonSRX(CAN_STORAGE_LOW_TALONSRX);
+        m_motor = new WPI_TalonSRX(CAN_STORAGE_LOW_TALONSRX);
         m_sensor = new DigitalInput(DIO_BREAKBEAM_STORAGE_LOW);
 
         balls = 0;
@@ -28,10 +28,6 @@ public class StorageSubsystem extends SubsystemBase implements Loggable {
     public void run(boolean b) {
         m_motor.set(b && enabled ? STORAGE_MOTOR_SPEED : 0);
     }
-
-    // public void manualSpeed(int mult) {
-    //     m_motor.set(mult * STORAGE_MOTOR_SPEED);
-    // }
 
     public boolean hasBall() {
         return m_sensor.get();
