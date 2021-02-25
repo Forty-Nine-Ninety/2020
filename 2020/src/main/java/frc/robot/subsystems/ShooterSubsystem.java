@@ -16,7 +16,6 @@ public class ShooterSubsystem extends SubsystemBase implements Loggable {
         m_motor = new WPI_TalonSRX(CAN_SHOOTER_TALONSRX);
         m_slave = new WPI_TalonSRX(CAN_SHOOTER_SLAVE_TALONSRX);
         
-
         configureMotors();
     }
 
@@ -35,8 +34,8 @@ public class ShooterSubsystem extends SubsystemBase implements Loggable {
         return m_motor.getSelectedSensorVelocity() * SHOOTER_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     }
 
-    public double getVelocityError() {
-        return m_motor.getClosedLoopError();
+    public boolean readyToFire() {
+        return Math.abs(m_motor.getClosedLoopError()) < SHOOTER_MAXIMUM_ALLOWED_VELOCITY_ERROR;
     }
 
     private void configureMotors() {
@@ -51,11 +50,10 @@ public class ShooterSubsystem extends SubsystemBase implements Loggable {
         m_motor.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);
 
         //Create config objects
-        TalonSRXConfiguration configM = new TalonSRXConfiguration(), configI = new TalonSRXConfiguration();
+        TalonSRXConfiguration configM = new TalonSRXConfiguration();
 
         //Setup config objects with desired values
         configM.slot0 = SHOOTER_FPID;
-        configI.slot0 = SHOOTER_INSERTER_FPID;
         
         //Configure talons
         m_motor.configAllSettings(configM);
