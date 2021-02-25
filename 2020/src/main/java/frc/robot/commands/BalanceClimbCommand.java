@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import static frc.robot.Constants.*;
 
-public class ClimbBalanceCommand extends CommandBase {
+public class BalanceClimbCommand extends CommandBase {
 
     private final DrivetrainSubsystem m_drive;
     private final PIDController m_pid;
     private final ClimbSubsystem m_climb;
 
-    public ClimbBalanceCommand(ClimbSubsystem climb, DrivetrainSubsystem drive) {
+    public BalanceClimbCommand(ClimbSubsystem climb, DrivetrainSubsystem drive) {
         addRequirements(climb);
         m_drive = drive;
         m_climb = climb;
