@@ -34,7 +34,7 @@ public class ShooterSubsystem extends SubsystemBase implements Loggable {
         return m_motor.getSelectedSensorVelocity() * SHOOTER_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     }
 
-    public boolean readyToFire() {
+    public boolean isReady() {
         return Math.abs(m_motor.getClosedLoopError()) < SHOOTER_MAXIMUM_ALLOWED_VELOCITY_ERROR;
     }
 
