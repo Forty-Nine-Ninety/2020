@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.tests;
 
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -8,12 +8,12 @@ import static frc.robot.Constants.*;
 
 import java.util.function.DoubleSupplier;
 
-public class ClimbBalanceManualCommand extends CommandBase {
+public class TestClimbBalanceCommand extends CommandBase {
 
     private final ClimbSubsystem m_climb;
     private DoubleSupplier m_speed;
 
-    public ClimbBalanceManualCommand(ClimbSubsystem climb) {
+    public TestClimbBalanceCommand(ClimbSubsystem climb) {
         addRequirements(climb);
         m_climb = climb;
     }

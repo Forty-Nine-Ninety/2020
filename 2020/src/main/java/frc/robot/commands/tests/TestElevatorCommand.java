@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.tests;
 
 import frc.robot.subsystems.ClimbSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import java.util.function.DoubleSupplier;
 import static frc.robot.Constants.*;
 
-public class ElevatorTestCommand extends CommandBase {
+public class TestElevatorCommand extends CommandBase {
 
     private final ClimbSubsystem m_climb;
     private DoubleSupplier m_climbSpeedSupplier, m_balanceSpeedSupplier;
 
-    public ElevatorTestCommand(ClimbSubsystem climb) {
+    public TestElevatorCommand(ClimbSubsystem climb) {
         addRequirements(climb);
         m_climb = climb;
     }

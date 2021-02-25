@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.tests;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
@@ -8,13 +8,13 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.StorageSubsystem;
 import static frc.robot.Constants.*;
 
-public class ShootBallCommand extends CommandBase {
+public class TestShooterCommand extends CommandBase {
 
     private DoubleSupplier m_speed;
     private final ShooterSubsystem m_shooter;
     private final StorageSubsystem m_storage;
 
-    public ShootBallCommand(ShooterSubsystem shooter, StorageSubsystem storage) {
+    public TestShooterCommand(ShooterSubsystem shooter, StorageSubsystem storage) {
         addRequirements(shooter);
         //Doesn't require storage subsystem
         m_shooter = shooter;

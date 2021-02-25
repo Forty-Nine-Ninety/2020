@@ -1,18 +1,18 @@
-package frc.robot.commands;
+package frc.robot.commands.tests;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class BallMotorsCommand extends CommandBase{
+public class TestBallCommand extends CommandBase{
 
     private final ShooterSubsystem m_shooter;
     private final HopperSubsystem m_hopper;
 
     private final double SHOOTER_FIRE_PERCENTAGE = 0.8;
 
-    public BallMotorsCommand(ShooterSubsystem shooter, HopperSubsystem hopper){
+    public TestBallCommand(ShooterSubsystem shooter, HopperSubsystem hopper){
         addRequirements(shooter);
         addRequirements(hopper);
 

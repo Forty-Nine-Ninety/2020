@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
+import frc.robot.commands.tests.TestShooterCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.StorageSubsystem;
@@ -10,7 +11,8 @@ import frc.robot.vision.TargetFinder;
 import static frc.robot.Constants.*;
 
 
-public class LimelightShootBallCommand extends ShootBallCommand {
+//TODO Reimplement when new command for running shooter is up
+public class LimelightShootBallCommand extends TestShooterCommand {
 
     private final DrivetrainSubsystem m_drive;
     private PIDController m_pid;

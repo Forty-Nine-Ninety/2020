@@ -1,9 +1,5 @@
 package frc.robot;
 
-import frc.robot.JoystickF310.*;
-import frc.robot.commands.*;
-//import frc.robot.AutonomousChooser;
-import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -12,10 +8,17 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
+import frc.robot.JoystickF310.*;
+import frc.robot.commands.*;
+import frc.robot.commands.tests.*;
+import frc.robot.subsystems.*;
+
 import static frc.robot.Constants.*;
+
 import io.github.oblarg.oblog.Logger;
 import io.github.oblarg.oblog.annotations.*;
 
+//TODO rename constants with new command names (i.e. runhoppercommand)
 public class RobotContainer {
     //So Oblog can find it
 
@@ -44,11 +47,11 @@ public class RobotContainer {
     private final ToggleIntakeCommand m_toggleIntakeCommand = new ToggleIntakeCommand(m_intake);
 
     //private final ClimbBalanceManualCommand m_climbBalanceManualCommand = new ClimbBalanceManualCommand(m_climb);
-    private final ElevatorTestCommand m_elevatorTestCommand = new ElevatorTestCommand(m_climb);
+    private final TestElevatorCommand m_elevatorTestCommand = new TestElevatorCommand(m_climb);
 
-    private final HopperManualCommand m_hopperManualCommandFwd = new HopperManualCommand(m_hopper, false);
-    private final HopperManualCommand m_hopperManualCommandRev = new HopperManualCommand(m_hopper, true);
-    private final BallMotorsCommand m_BallMotorsCommand = new BallMotorsCommand(m_shooter, m_hopper);
+    private final RunHopperCommand m_hopperManualCommandFwd = new RunHopperCommand(m_hopper, false);
+    private final RunHopperCommand m_hopperManualCommandRev = new RunHopperCommand(m_hopper, true);
+    private final TestBallCommand m_BallMotorsCommand = new TestBallCommand(m_shooter, m_hopper);
 
     public RobotContainer() {
         configureButtonBindings();

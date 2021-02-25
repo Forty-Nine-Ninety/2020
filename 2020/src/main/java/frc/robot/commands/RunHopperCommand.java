@@ -3,12 +3,12 @@ package frc.robot.commands;
 import frc.robot.subsystems.HopperSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class HopperManualCommand extends CommandBase{
+public class RunHopperCommand extends CommandBase {
 
     private final HopperSubsystem m_hopper;
     private final boolean m_reverse;
 
-    public HopperManualCommand(HopperSubsystem hopper, boolean reverse) {
+    public RunHopperCommand(HopperSubsystem hopper, boolean reverse) {
         addRequirements(hopper);
         m_hopper = hopper;
         m_reverse = reverse;
