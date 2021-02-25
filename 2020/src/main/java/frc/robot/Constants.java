@@ -87,7 +87,6 @@ public final class Constants implements Loggable {
     public static double SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY = 50;//TODO find this number
     public static double SHOOTER_MAXIMUM_ALLOWED_VELOCITY_ERROR = 50;//TODO find this number
     public static double SHOOTER_MAXIMUM_ALLOWED_ANGULAR_ERROR_DEGREES = 0.1;//TODO find this number
-    public static double SHOOTER_INSERTER_SPEED_MULTIPLIER = 0.25;//TODO find this number
 
     //Storage movement information
     public static double STORAGE_MINIMUM_BALL_SPACING_ENCODER_UNITS = 50;//TODO find this number
@@ -97,7 +96,6 @@ public final class Constants implements Loggable {
     public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.6, 0, 25);
     public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.8, 0, 25);
     public static TalonSRXGains SHOOTER_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
-    public static TalonSRXGains SHOOTER_INSERTER_FPID = new TalonSRXGains(0, 0, 0, 0);
     public static TalonSRXGains CLIMB_FPID = new TalonSRXGains(0, 0, 0, 0);
 
     //The following two could possibly just be normal PID values
@@ -125,7 +123,7 @@ public final class Constants implements Loggable {
     public static double ARCADE_ROTATION_MULTIPLIER = 0.5;
 
     @Config(name = "Speed Input Multiplier", tabName = "Op Configuration")
-    public static double ARCADE_SPEED_MULTIPLIER = 0;//0.75;
+    public static double ARCADE_SPEED_MULTIPLIER = 0.75;
 
     @Config(name = "Intake Motor Speed", tabName = "Op Configuration")
     public static double INTAKE_MOTOR_SPEED = 0.8;
@@ -138,6 +136,10 @@ public final class Constants implements Loggable {
 
     @Config(name = "Climb Motor Speed", tabName = "Op Configuration")
     public static double CLIMB_MOTOR_SPEED = 1;
+
+    //TODO find this number
+    @Config(name = "Inserter Motor Speed", tabName = "Op Configuration")
+    public static double INSERTER_MOTOR_SPEED = 0.25;
 
     //Classes
     public static class TalonSRXGains extends SlotConfiguration {
