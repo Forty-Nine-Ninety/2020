@@ -10,12 +10,12 @@ import static frc.robot.Constants.*;
 
 public class ShooterSubsystem extends SubsystemBase implements Loggable {
 
-    private final WPI_TalonSRX m_motor, m_slave, m_inserter;
+    private final WPI_TalonSRX m_motor, m_slave;
 
     public ShooterSubsystem() {
         m_motor = new WPI_TalonSRX(CAN_SHOOTER_TALONSRX);
         m_slave = new WPI_TalonSRX(CAN_SHOOTER_SLAVE_TALONSRX);
-        m_inserter = new WPI_TalonSRX(CAN_SHOOTER_INSERTER_TALONSRX);
+        
 
         configureMotors();
     }
@@ -25,15 +25,10 @@ public class ShooterSubsystem extends SubsystemBase implements Loggable {
 
     public void fireRaw(double speed) {
         m_motor.set(ControlMode.Velocity, speed);
-        runInserter(speed);
     }
 
     public void setFireSpeed(double speed) {
         fireRaw(speed * SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY);
-    }
-    
-    public void runInserter(double speed) {
-        m_inserter.set(ControlMode.Velocity, speed * SHOOTER_INSERTER_SPEED_MULTIPLIER);
     }
     
     public double getVelocity() {
@@ -49,13 +44,11 @@ public class ShooterSubsystem extends SubsystemBase implements Loggable {
         //First setup talons with default settings
         m_motor.configFactoryDefault();
         m_slave.configFactoryDefault();
-        m_inserter.configFactoryDefault();
 
         m_slave.follow(m_motor, DEFAULT_MOTOR_FOLLOWER_TYPE);
 
         //Setup talon built-in PID
         m_motor.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);
-        m_inserter.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);
 
         //Create config objects
         TalonSRXConfiguration configM = new TalonSRXConfiguration(), configI = new TalonSRXConfiguration();
@@ -66,6 +59,5 @@ public class ShooterSubsystem extends SubsystemBase implements Loggable {
         
         //Configure talons
         m_motor.configAllSettings(configM);
-        m_inserter.configAllSettings(configI);
     }
 }
