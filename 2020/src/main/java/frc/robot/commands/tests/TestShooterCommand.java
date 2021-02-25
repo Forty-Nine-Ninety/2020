@@ -41,7 +41,7 @@ public class TestShooterCommand extends CommandBase {
 
     public boolean getStorageState() {
         //Make sure ball can be shot
-        return Math.abs(m_shooter.getVelocityError()) < SHOOTER_MAXIMUM_ALLOWED_VELOCITY_ERROR;
+        return m_shooter.isReady();
     }
 
     public void setSupplier(DoubleSupplier sp) {
