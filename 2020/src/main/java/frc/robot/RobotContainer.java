@@ -48,7 +48,7 @@ public class RobotContainer {
 
     private final HopperManualCommand m_hopperManualCommandFwd = new HopperManualCommand(m_hopper, false);
     private final HopperManualCommand m_hopperManualCommandRev = new HopperManualCommand(m_hopper, true);
-    private final BallMotorsCommand m_BallMotorsCommand = new BallMotorsCommand(m_shooter, m_storage, m_hopper);
+    private final BallMotorsCommand m_BallMotorsCommand = new BallMotorsCommand(m_shooter, m_hopper);
 
     public RobotContainer() {
         configureButtonBindings();
