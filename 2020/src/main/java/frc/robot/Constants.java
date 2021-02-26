@@ -93,8 +93,8 @@ public final class Constants implements Loggable {
     public static double STORAGE_LENGTH_ENCODER_UNITS = 250;//TODO find this number
 
     //PID
-    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.6, 0, 1);
-    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.8, 0, 1);
+    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 1, 0, 0);
+    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 1, 0, 0);
     public static TalonSRXGains SHOOTER_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
     public static TalonSRXGains CLIMB_FPID = new TalonSRXGains(0, 0, 0, 0);
 

@@ -70,15 +70,15 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
         right *= m_speedMultiplier;
         m_leftTalon.set(left);
         m_rightTalon.set(right);*/
-        m_leftTalon.set(ControlMode.Velocity,left);
-        m_rightTalon.set(ControlMode.Velocity,right);
+        m_leftTalon.set(ControlMode.PercentOutput, left);
+        m_rightTalon.set(ControlMode.PercentOutput, right);
     }
 
     //Functions below are for 0-1
     public void tankDrive(double left, double right) {
         //Convert from value in range [0, 1] to raw encoder units
-        left *= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
-        right *= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
+        //left *= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
+        //right *= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
         driveRaw(left, right);
     }
 
@@ -113,23 +113,6 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
 
         m_leftVictor.follow(m_leftTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
         m_rightVictor.follow(m_rightTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
-
-        //Setup talon built-in PID
-        m_leftTalon.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);
-        m_rightTalon.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);
-
-        //Create config objects
-        TalonSRXConfiguration cLeft = new TalonSRXConfiguration(), cRight = new TalonSRXConfiguration();
-
-        //Setup config objects with desired values
-        cLeft.slot0 = DRIVETRAIN_LEFT_FPID;
-        cRight.slot0 = DRIVETRAIN_RIGHT_FPID;
-        cLeft.closedloopRamp = DRIVETRAIN_CLOSED_LOOP_RAMP;
-        cRight.closedloopRamp = DRIVETRAIN_CLOSED_LOOP_RAMP;
-
-        //Configure talons
-        m_leftTalon.configAllSettings(cLeft);
-        m_rightTalon.configAllSettings(cRight);
     }
 
     public double getGyroRate() {
