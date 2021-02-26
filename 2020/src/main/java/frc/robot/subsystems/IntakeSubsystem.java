@@ -21,7 +21,7 @@ public class IntakeSubsystem extends SubsystemBase implements Loggable {
     public IntakeSubsystem() {
         m_motor = new WPI_TalonSRX(CAN_INTAKE_TALONSRX);
         m_ballSensor = new DigitalInput(DIO_BREAKBEAM_INTAKE);
-        m_solenoid = new DoubleSolenoid(PCM_INTAKE_FORWARD,PCM_INTAKE_REVERSE);
+        m_solenoid = new DoubleSolenoid(PCM_INTAKE_FORWARD, PCM_INTAKE_REVERSE);
 
         m_solenoid.set(Value.kOff);
         m_motor.setInverted(true);
@@ -29,7 +29,7 @@ public class IntakeSubsystem extends SubsystemBase implements Loggable {
 
     @Override
     public void periodic() {
-        //TODO
+        //TODO I don't think there needs to be anything here.
     }
 
     public void run(Direction direction) {
