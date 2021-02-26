@@ -70,6 +70,10 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
         right *= m_speedMultiplier;
         m_leftTalon.set(left);
         m_rightTalon.set(right);*/
+
+        //Here's the magic number
+        left *= 0.96;
+
         m_leftTalon.set(ControlMode.PercentOutput, left);
         m_rightTalon.set(ControlMode.PercentOutput, right);
     }

@@ -79,8 +79,8 @@ public final class Constants implements Loggable {
 
     //Drivetrain movement information
     public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 6000;//free speed ~3200
-    public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 2.5;
-    public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
+    public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 5;
+    public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;//Around 7.1 I think
     public static double DRIVETRAIN_CLOSED_LOOP_RAMP = 0.1; //seconds from 0 to full or full to 0
 
     //Shooter movement information
@@ -120,10 +120,10 @@ public final class Constants implements Loggable {
 
     //Operation config
     @Config(name = "Rotation Input Multiplier", tabName = "Op Configuration")
-    public static double ARCADE_ROTATION_MULTIPLIER = 0.5;
+    public static double ARCADE_ROTATION_MULTIPLIER = 0.75;
 
     @Config(name = "Speed Input Multiplier", tabName = "Op Configuration")
-    public static double ARCADE_SPEED_MULTIPLIER = 0.75;
+    public static double ARCADE_SPEED_MULTIPLIER = 0.9;
 
     @Config(name = "Intake Motor Speed", tabName = "Op Configuration")
     public static double INTAKE_MOTOR_SPEED = 0.8;
