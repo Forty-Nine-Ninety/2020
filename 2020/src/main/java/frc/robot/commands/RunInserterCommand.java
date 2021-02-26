@@ -1,32 +1,31 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Direction;
 import frc.robot.subsystems.InserterSubsystem;
 
 import static frc.robot.Constants.*;
 
-import java.util.function.BooleanSupplier;
-
 public class RunInserterCommand extends CommandBase {
 
     private final InserterSubsystem m_inserter;
-    private BooleanSupplier m_supplier;
+    private final Direction direction;
 
-    public RunInserterCommand(InserterSubsystem shooter) {
-        m_inserter = shooter;
+
+    public RunInserterCommand(InserterSubsystem inserter, Direction direction) {
+        addRequirements(inserter);
+        m_inserter = inserter;
+
+        this.direction = direction;
     }
 
     @Override
     public void execute() {
-    }
-
-    @Override
-    public boolean isFinished() {
-        return false;
+        m_inserter.run(this.direction);
     }
 
     @Override
     public void end(boolean interrupted) {
-        m_inserter.run(false);
+        m_inserter.run(Direction.Stop);
     }
 }

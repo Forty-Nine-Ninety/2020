@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Direction;
 import io.github.oblarg.oblog.Loggable;
 
 import static frc.robot.Constants.*;
@@ -13,7 +14,7 @@ import static frc.robot.Constants.*;
 public class IntakeSubsystem extends SubsystemBase implements Loggable {
 
     private final WPI_TalonSRX m_motor;
-    public final DoubleSolenoid m_solenoid;
+    private final DoubleSolenoid m_solenoid;
     private final DigitalInput m_ballSensor;
     private boolean m_reversed;
 
@@ -31,13 +32,16 @@ public class IntakeSubsystem extends SubsystemBase implements Loggable {
         //TODO
     }
 
-    public void set(boolean on) {
-        //m_solenoid.set(on);
-        if (on) {
-            if (m_reversed) m_motor.set(-1 * INTAKE_MOTOR_SPEED);
-            else m_motor.set(INTAKE_MOTOR_SPEED);
+    public void run(Direction direction) {
+        int multiplier = direction.getMultiplier();
+        m_motor.set(multiplier * INTAKE_MOTOR_SPEED)
+        if (Math.abs(multiplier) == 1) {
+            m_solenoid.set(Value.kForward);
         }
-        else m_motor.set(0);
+        else {
+            m_solenoid.set(Value.kReverse);
+            m_solenoid.set(Value.kOff);
+        }
     }
 
     public Value get() {
@@ -46,13 +50,5 @@ public class IntakeSubsystem extends SubsystemBase implements Loggable {
 
     public boolean hasBall() {
         return m_ballSensor.get();
-    }
-
-    public boolean isReversed() {
-        return m_reversed;
-    }
-
-    public void setReversed(boolean b) {
-        m_reversed = b;
     }
 }

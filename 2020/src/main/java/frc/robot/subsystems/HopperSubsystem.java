@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Direction;
+
 import static frc.robot.Constants.*;
 import io.github.oblarg.oblog.Loggable;
 
@@ -22,14 +24,14 @@ public class HopperSubsystem extends SubsystemBase implements Loggable {
     @Override
     public void periodic() {}
 
-    public void set(boolean on) {
-        m_leftMotor.set(on ? -1 * HOPPER_MOTOR_SPEED : 0);
-        m_rightMotor.set(on ? HOPPER_MOTOR_SPEED : 0);
-    }
+    public void run(Direction direction) {
+        int multiplier = direction.getMultiplier();
 
-    public void setReverse(boolean on) {
-        m_leftMotor.set(on ? HOPPER_MOTOR_SPEED : 0);
-        m_rightMotor.set(on ? -1 * HOPPER_MOTOR_SPEED : 0);
+        double rightMotorSpeed = multiplier * HOPPER_MOTOR_SPEED;
+        double leftMotorSpeed = -1 * rightMotorSpeed;
+
+        m_rightMotor.set(rightMotorSpeed);
+        m_leftMotor.set(leftMotorSpeed);
     }
 
     public boolean hasBall() {

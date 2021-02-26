@@ -1,34 +1,28 @@
 package frc.robot.commands;
 
+import frc.robot.Direction;
 import frc.robot.subsystems.HopperSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunHopperCommand extends CommandBase {
 
     private final HopperSubsystem m_hopper;
-    private final boolean m_reverse;
+    private final Direction direction;
 
-    public RunHopperCommand(HopperSubsystem hopper, boolean reverse) {
+    public RunHopperCommand(HopperSubsystem hopper, Direction direction) {
         addRequirements(hopper);
         m_hopper = hopper;
-        m_reverse = reverse;
+        
+        this.direction = direction;
     }
 
     @Override
     public void execute() {
-        if (m_reverse) {
-            m_hopper.setReverse(true);
-        } else {
-            m_hopper.set(true);
-        }
+        m_hopper.run(direction);
     }
 
     @Override
     public void end(boolean interrupted) {
-        if (m_reverse) {
-            m_hopper.setReverse(false);
-        } else {
-            m_hopper.set(false);
-        }
+        m_hopper.run(Direction.Stop);
     }
 }
