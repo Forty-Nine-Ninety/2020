@@ -20,7 +20,7 @@ public class TestShooterCommand extends CommandBase {
         m_shooter = shooter;
         m_storage = storage;
     }
-
+    /*
     @Override
     public void execute() {
         if (m_storage.getBallCount() == 0) m_shooter.setFireSpeed(0);
@@ -47,5 +47,5 @@ public class TestShooterCommand extends CommandBase {
     public void setSupplier(DoubleSupplier sp) {
         m_speed = sp;
     }
-
+    */
 }

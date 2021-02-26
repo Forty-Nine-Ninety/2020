@@ -44,13 +44,12 @@ public class RobotContainer {
     //private final ShootBallCommand m_shootBallCommand = new ShootBallCommand(m_shooter, m_storage);
     private final TeleopArcadeDriveCommand m_teleopArcadeDriveCommand = new TeleopArcadeDriveCommand(m_drivetrain);
     private final TeleopTankDriveCommand m_teleopTankDriveCommand = new TeleopTankDriveCommand(m_drivetrain);
-    private final ToggleIntakeCommand m_toggleIntakeCommand = new ToggleIntakeCommand(m_intake);
 
     //private final ClimbBalanceManualCommand m_climbBalanceManualCommand = new ClimbBalanceManualCommand(m_climb);
     private final TestElevatorCommand m_elevatorTestCommand = new TestElevatorCommand(m_climb);
 
-    private final RunHopperCommand m_hopperManualCommandFwd = new RunHopperCommand(m_hopper, false);
-    private final RunHopperCommand m_hopperManualCommandRev = new RunHopperCommand(m_hopper, true);
+    private final RunHopperCommand m_hopperManualCommandFwd = new RunHopperCommand(m_hopper, Direction.Forward);
+    private final RunHopperCommand m_hopperManualCommandRev = new RunHopperCommand(m_hopper, Direction.Backward);
     private final TestBallCommand m_BallMotorsCommand = new TestBallCommand(m_shooter, m_hopper);
 
     public RobotContainer() {
@@ -61,12 +60,10 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         //joystickOperator.getButton(ButtonF310.Start).whenPressed(m_climbBalanceCommand);
-        joystickOperator.getButton(ButtonF310.A).whenPressed(m_toggleIntakeCommand);
         joystickOperator.getButton(ButtonF310.BumperRight).toggleWhenPressed(m_extendClimbCommand);
         joystickOperator.getButton(ButtonF310.BumperLeft).toggleWhenPressed(m_retractClimbCommand);
         // joystickOperator.getButton(ButtonF310.B).whenPressed(m_elevatorTestCommand.lockSupplier());
         joystickOperator.getButton(ButtonF310.B).whenPressed(m_BallMotorsCommand);
-        joystickOperator.getButton(ButtonF310.X).whenPressed(new InstantCommand(() -> m_intake.m_solenoid.set(m_intake.get() == Value.kForward ? Value.kReverse : Value.kForward), m_intake));
         joystickOperator.getButton(ButtonF310.Start).whenPressed(new InstantCommand(() -> m_compressor.setClosedLoopControl(! m_compressor.getClosedLoopControl())));
         joystickOperator.getButton(ButtonF310.Y).toggleWhenPressed(m_hopperManualCommandFwd);
         joystickOperator.getButton(ButtonF310.Back).toggleWhenPressed(m_hopperManualCommandRev);
