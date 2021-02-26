@@ -64,18 +64,12 @@ public class RobotContainer {
     private final FollowPathCommand m_followPathCommand = new FollowPathCommand();
     //private final LimelightShootBallCommand m_limelightShootBallCommand = new LimelightShootBallCommand(m_shooter, m_storage, m_drivetrain);
     //private final RunStorageCommand m_runStorageCommand = new RunStorageCommand(m_storage, m_hopper);
-    //private final ShootBallCommand m_shootBallCommand = new ShootBallCommand(m_shooter, m_storage);
-    private final TeleopArcadeDriveCommand m_teleopArcadeDriveCommand = new TeleopArcadeDriveCommand(m_drivetrain);
-    private final TeleopTankDriveCommand m_teleopTankDriveCommand = new TeleopTankDriveCommand(m_drivetrain);
-
-    //private final ClimbBalanceManualCommand m_climbBalanceManualCommand = new ClimbBalanceManualCommand(m_climb);
+    
     private final TestElevatorCommand m_elevatorTestCommand = new TestElevatorCommand(m_climb);
 
-    private final RunHopperCommand m_hopperManualCommandFwd = new RunHopperCommand(m_hopper, Direction.Forward);
-    private final RunHopperCommand m_hopperManualCommandRev = new RunHopperCommand(m_hopper, Direction.Backward);
     private final TestBallCommand m_BallMotorsCommand = new TestBallCommand(m_shooter, m_hopper);
     */
-    
+
     public RobotContainer() {
         configureControlBindings();
         configureDefaultCommands();
@@ -109,21 +103,13 @@ public class RobotContainer {
 
 
         /* OLD CODE BELOW
-        //joystickOperator.getButton(ButtonF310.Start).whenPressed(m_climbBalanceCommand);
         joystickOperator.getButton(ButtonF310.BumperRight).toggleWhenPressed(m_extendClimbCommand);
         joystickOperator.getButton(ButtonF310.BumperLeft).toggleWhenPressed(m_retractClimbCommand);
-        // joystickOperator.getButton(ButtonF310.B).whenPressed(m_elevatorTestCommand.lockSupplier());
-        joystickOperator.getButton(ButtonF310.B).whenPressed(m_BallMotorsCommand);
-        joystickOperator.getButton(ButtonF310.Start).whenPressed(new InstantCommand(() -> m_compressor.setClosedLoopControl(! m_compressor.getClosedLoopControl())));
+
         joystickOperator.getButton(ButtonF310.Y).toggleWhenPressed(m_hopperManualCommandFwd);
         joystickOperator.getButton(ButtonF310.Back).toggleWhenPressed(m_hopperManualCommandRev);
         
         m_elevatorTestCommand.setSuppliers(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftY), () -> joystickOperator.getRawAxis(AxisF310.JoystickRightX));
-
-        m_teleopArcadeDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightX), JOYSTICK_INPUT_EXPONENT));
-        m_teleopTankDriveCommand.setSuppliers(() -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT), () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightY), JOYSTICK_INPUT_EXPONENT));
-        //m_climbBalanceManualCommand.setSupplier(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftX));
-        //m_shootBallCommand.setSupplier(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftY));
         */
     }
 
