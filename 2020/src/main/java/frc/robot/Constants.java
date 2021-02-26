@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.SlotConfiguration;
 
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import io.github.oblarg.oblog.Loggable;
 import io.github.oblarg.oblog.annotations.Config;
 
@@ -82,6 +83,7 @@ public final class Constants implements Loggable {
     public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 2.5;
     public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     public static double DRIVETRAIN_CLOSED_LOOP_RAMP = 0.1; //seconds from 0 to full or full to 0
+    public static double DRIVETRAIN_FEEDFORWARD_TO_TALON_UNITS = 1;//TODO find this number
 
     //Shooter movement information
     public static double SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY = 50;//TODO find this number
@@ -93,14 +95,17 @@ public final class Constants implements Loggable {
     public static double STORAGE_LENGTH_ENCODER_UNITS = 250;//TODO find this number
 
     //PID
-    public static TalonSRXGains DRIVETRAIN_LEFT_FPID = new TalonSRXGains(0.3, 0.6, 0, 1);
-    public static TalonSRXGains DRIVETRAIN_RIGHT_FPID = new TalonSRXGains(0.3, 0.8, 0, 1);
-    public static TalonSRXGains SHOOTER_FPID = new TalonSRXGains(0.3, 0.5, 0, 5);
-    public static TalonSRXGains CLIMB_FPID = new TalonSRXGains(0, 0, 0, 0);
+    public static TalonSRXGains DRIVETRAIN_LEFT_PID = new TalonSRXGains(0, 0, 0);
+    public static TalonSRXGains DRIVETRAIN_RIGHT_PID = new TalonSRXGains(0, 0, 0);
+    public static TalonSRXGains SHOOTER_PID = new TalonSRXGains(0, 0, 0);
+    public static TalonSRXGains CLIMB_PID = new TalonSRXGains(0, 0, 0);
+
+    //Feedforward
+    public static SimpleMotorFeedforward DRIVETRAIN_FEEDFORWARD = new SimpleMotorFeedforward(0, 0, 0);
 
     //The following two could possibly just be normal PID values
-    public static TalonSRXGains LIMELIGHT_SHOOTER_FPID = new TalonSRXGains(0, 0, 0, 0);
-    public static TalonSRXGains LIMELIGHT_DRIVETRAIN_FPID = new TalonSRXGains(0, 0, 0, 0);
+    public static TalonSRXGains LIMELIGHT_SHOOTER_PID = new TalonSRXGains(0, 0, 0);
+    public static TalonSRXGains LIMELIGHT_DRIVETRAIN_PID = new TalonSRXGains(0, 0, 0);
 
     public static double LIMELIGHT_SHOOTER_KP = 0.5;
     public static double LIMELIGHT_SHOOTER_KI = 0;
@@ -144,18 +149,11 @@ public final class Constants implements Loggable {
     //Classes
     public static class TalonSRXGains extends SlotConfiguration {
 
-        public TalonSRXGains(double kF, double kP, double kI, double kD) {
+        public TalonSRXGains(double kP, double kI, double kD) {
             super();
-            this.kF = kF;
             this.kP = kP;
             this.kI = kI;
             this.kD = kD;
-        }
-
-        public TalonSRXGains(double kF, double kP, double kI, double kD, double iA, int iZ) {
-            this(kF, kP, kI, kD);
-            this.maxIntegralAccumulator = iA;
-            this.integralZone = iZ;
         }
     }
 }

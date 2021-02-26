@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -63,15 +64,8 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
 
     //Assumes left and right are in encoder units per 100ms
     public void driveRaw(double left, double right) {
-        //System.out.println("Target:\t" + (int)left + " " + (int)right);
-        //System.out.println("Encoder:\t" + (int)m_leftTalon.getSelectedSensorVelocity() + " " + (int)m_rightTalon.getSelectedSensorVelocity());
-        /*left /= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
-        right /= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
-        right *= m_speedMultiplier;
-        m_leftTalon.set(left);
-        m_rightTalon.set(right);*/
-        m_leftTalon.set(ControlMode.Velocity,left);
-        m_rightTalon.set(ControlMode.Velocity,right);
+        m_leftTalon.set(ControlMode.Velocity, left, DemandType.ArbitraryFeedForward, DRIVETRAIN_FEEDFORWARD.calculate(left) * DRIVETRAIN_FEEDFORWARD_TO_TALON_UNITS);
+        m_rightTalon.set(ControlMode.Velocity, right, DemandType.ArbitraryFeedForward, DRIVETRAIN_FEEDFORWARD.calculate(right) * DRIVETRAIN_FEEDFORWARD_TO_TALON_UNITS);
     }
 
     //Functions below are for 0-1
@@ -103,13 +97,12 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
         m_rightVictor.configFactoryDefault();
 
         
-        //Left side encoder goes in the wrong direction
+        //Left side encoder goes in the wrong direction too
         m_leftTalon.setSensorPhase(true);
         m_rightTalon.setSensorPhase(true);
 
         m_rightTalon.setInverted(true);
         m_rightVictor.setInverted(true);
-
 
         m_leftVictor.follow(m_leftTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
         m_rightVictor.follow(m_rightTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
@@ -117,13 +110,16 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
         //Setup talon built-in PID
         m_leftTalon.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);
         m_rightTalon.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);
+        
 
         //Create config objects
         TalonSRXConfiguration cLeft = new TalonSRXConfiguration(), cRight = new TalonSRXConfiguration();
 
         //Setup config objects with desired values
-        cLeft.slot0 = DRIVETRAIN_LEFT_FPID;
-        cRight.slot0 = DRIVETRAIN_RIGHT_FPID;
+        cLeft.slot0 = DRIVETRAIN_LEFT_PID;
+        cRight.slot0 = DRIVETRAIN_RIGHT_PID;
+
+        //Not sure if the two below are strictly necessary
         cLeft.closedloopRamp = DRIVETRAIN_CLOSED_LOOP_RAMP;
         cRight.closedloopRamp = DRIVETRAIN_CLOSED_LOOP_RAMP;
 
