@@ -23,8 +23,8 @@ public class AutoShootCommand extends ParallelCommandGroup {
             //Unjam storage, then start shooting
             //TODO perhaps move this command group into its own file?
             new SequentialCommandGroup(
-                //TODO Unjam storage
-                //TODO new command that waits for shooter and drivetrain are ready
+                new UnjamStorageCommand(storage),
+                //TODO new command that waits until shooter and drivetrain are ready
                 new RunInserterCommand(inserter, Direction.Forward),
                 new RunStorageCommand(storage, Direction.Forward)
             )
