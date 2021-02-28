@@ -1,18 +1,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import frc.robot.JoystickF310.*;
 import frc.robot.commands.*;
 import frc.robot.commands.tests.*;
 import frc.robot.subsystems.*;
-import frc.robot.vision.VisionShooterSpeedController;
+import frc.robot.vision.VisionController;
 
 import static frc.robot.Constants.*;
 import static frc.robot.vision.Constants.CONTROL_POINTS;
@@ -78,7 +75,7 @@ public class RobotContainer {
         //Logger.configureLoggingAndConfig(this, false);
 
         //Set control points for shooter speed calculations
-        VisionShooterSpeedController.setControlPoints(CONTROL_POINTS);
+        VisionController.setControlPoints(CONTROL_POINTS);
     }
 
     private void configureControlBindings() {

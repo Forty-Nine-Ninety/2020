@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.util.Units;
 // https://www.wired.com/2012/01/projectile-motion-primer-for-first-robotics/
 // http://docs.limelightvision.io/en/latest/cs_aimandrange.html
 
-public class VisionShooterSpeedController {
+public class VisionController {
 
     private static Spline[] splines;
     private static ControlPoint[] controlPoints;
@@ -25,7 +25,7 @@ public class VisionShooterSpeedController {
         //TODO Compute splines from control points
     }
 
-    public static double getSpeedFromDistance(double dist) {
+    public static double getShooterSpeedFromDistance(double dist) {
         //If the distance is a control point, return that.
         for (ControlPoint p : controlPoints) {
             if (dist == p.getDistance()) return p.getSpeed();
@@ -43,16 +43,16 @@ public class VisionShooterSpeedController {
         return 0;
     }
 
-    public static double getSpeedFromLimelight() {
-        return getSpeedFromDistance(findDistanceToTarget());
+    public static double getShooterSpeedFromLimelight() {
+        return getShooterSpeedFromDistance(findDistanceToTarget());
     }
 
     // http://docs.limelightvision.io/en/latest/cs_estimating_distance.html
-    private static double findDistanceToTarget() {
+    public static double findDistanceToTarget() {
         return (TARGET_HEIGHT_METERS - LIMELIGHT_HEIGHT_METERS) / Math.tan(findAngleToTarget());
     }
 
-    private static double findAngleToTarget() {
+    public static double findAngleToTarget() {
         return LIMELIGHT_ANGLE_RADIANS + Units.degreesToRadians(Limelight.getCrosshairVerticalOffset());
     }
 

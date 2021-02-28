@@ -8,9 +8,9 @@ import frc.robot.subsystems.InserterSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.StorageSubsystem;
 
-public class AutoShootCommand extends ParallelCommandGroup {
+public class LimelightAimShootCommand extends ParallelCommandGroup {
 
-    public AutoShootCommand(ShooterSubsystem shooter, DrivetrainSubsystem drivetrain, InserterSubsystem inserter, StorageSubsystem storage) {
+    public LimelightAimShootCommand(ShooterSubsystem shooter, DrivetrainSubsystem drivetrain, InserterSubsystem inserter, StorageSubsystem storage) {
         
         //No requirements needed, because the commands themselves require the subsystem.
         //addRequirements(m_shooter, m_drivetrain);
@@ -18,15 +18,17 @@ public class AutoShootCommand extends ParallelCommandGroup {
         
         addCommands(
             //Make sure the drivetrain and shooter are aimed correctly and spinning
-            new AutoAimCommand(shooter, drivetrain),
+            new LimelightAimCommand(shooter, drivetrain),
 
             //Unjam storage, then start shooting
             //TODO perhaps move this command group into its own file?
             new SequentialCommandGroup(
                 new UnjamStorageCommand(storage),
-                //TODO new command that waits until shooter and drivetrain are ready
-                new RunInserterCommand(inserter, Direction.Forward),
-                new RunStorageCommand(storage, Direction.Forward)
+                new LimelightWaitForAimCommand(drivetrain, shooter),
+                new ParallelCommandGroup(
+                    new RunInserterCommand(inserter, Direction.Forward),
+                    new RunStorageCommand(storage, Direction.Forward)
+                )
             )
         );
     }
