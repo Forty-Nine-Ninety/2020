@@ -12,8 +12,10 @@ import frc.robot.JoystickF310.*;
 import frc.robot.commands.*;
 import frc.robot.commands.tests.*;
 import frc.robot.subsystems.*;
+import frc.robot.vision.VisionShooterSpeedController;
 
 import static frc.robot.Constants.*;
+import static frc.robot.vision.Constants.CONTROL_POINTS;
 
 import io.github.oblarg.oblog.Logger;
 import io.github.oblarg.oblog.annotations.*;
@@ -74,6 +76,9 @@ public class RobotContainer {
         configureControlBindings();
         configureDefaultCommands();
         //Logger.configureLoggingAndConfig(this, false);
+
+        //Set control points for shooter speed calculations
+        VisionShooterSpeedController.setControlPoints(CONTROL_POINTS);
     }
 
     private void configureControlBindings() {

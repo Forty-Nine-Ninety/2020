@@ -11,22 +11,35 @@ import edu.wpi.first.wpilibj.util.Units;
 
 public class VisionShooterSpeedController {
 
-    private Spline[] splines;
+    private static Spline[] splines;
+    private static ControlPoint[] controlPoints;
 
     public static void setControlPoints(ControlPoint[] points) {
-        //TODO Check to make sure points are in order
+        //TODO Check to make sure points are in order here
 
-        computeSpline(points);
+        controlPoints = points;
+        computeSplines();
     }
 
-    private static void computeSpline(ControlPoint[] points) {
-        //TODO Compute spline
+    private static void computeSplines() {
+        //TODO Compute splines from control points
     }
 
     public static double getSpeedFromDistance(double dist) {
-        //TODO check if distance is in a control point
+        //If the distance is a control point, return that.
+        for (ControlPoint p : controlPoints) {
+            if (dist == p.getDistance()) return p.getSpeed();
+        }
 
-        //TODO if not, then interpolate.
+        //Try to interpolate.
+        double i = 0;
+        for (Spline s : splines) {
+            i = s.interpolate(dist);
+            if (i != -1) return i;
+        }
+
+        //If we couldn't interpolate, it means that the distance isn't in the correct range.
+        System.err.println("[ERROR] Couldn't interpolate shooter speed, distance out of range.");
         return 0;
     }
 
@@ -59,7 +72,7 @@ public class VisionShooterSpeedController {
         }
 
         public double interpolate(double x) {
-            if (x <= xmin || x >= xmax) throw new IllegalArgumentException(x + " out of bounds for spline (" + xmin + ", " + xmax + ")");
+            if (x <= xmin || x >= xmax) return -1;
             x -= xi;
             return a * Math.pow(x, 3) + b * Math.pow(x, 2) + c * x + d;
         }
