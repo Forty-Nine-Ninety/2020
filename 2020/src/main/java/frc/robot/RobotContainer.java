@@ -19,6 +19,8 @@ import io.github.oblarg.oblog.annotations.*;
 //TODO rename constants with new command names (i.e. runhoppercommand)
 public class RobotContainer {
 
+    public final boolean TESTING = false;
+
     //Allow Oblog to find the Constants class
     private Constants constants;
     
@@ -69,7 +71,9 @@ public class RobotContainer {
     */
 
     public RobotContainer() {
-        configureControlBindings();
+        if (TESTING) configureTestBindings();
+        else configureControlBindings();
+        
         configureDefaultCommands();
         //Logger.configureLoggingAndConfig(this, false);
 
@@ -112,6 +116,10 @@ public class RobotContainer {
         
         m_elevatorTestCommand.setSuppliers(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftY), () -> joystickOperator.getRawAxis(AxisF310.JoystickRightX));
         */
+    }
+
+    private void configureTestBindings() {
+
     }
 
     private void configureDefaultCommands() {
