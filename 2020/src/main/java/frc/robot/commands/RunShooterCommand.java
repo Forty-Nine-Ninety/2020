@@ -12,13 +12,15 @@ public class RunShooterCommand extends CommandBase {
     private final ShooterSubsystem m_shooter;
     private DoubleSupplier m_supplier;
 
-    public RunShooterCommand(ShooterSubsystem shooter) {
+    public RunShooterCommand(ShooterSubsystem shooter, DoubleSupplier supplier) {
         m_shooter = shooter;
+        m_supplier = supplier;
         addRequirements(shooter);
     }
 
     @Override
     public void execute() {
+        m_shooter.setRotationSpeed(m_supplier.getAsDouble());
     }
 
     @Override
@@ -28,10 +30,6 @@ public class RunShooterCommand extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        m_shooter.setFireSpeed(0);
-    }
-
-    public void setSupplier(DoubleSupplier s) {
-        m_supplier = s;
+        m_shooter.setRotationSpeed(0);
     }
 }
