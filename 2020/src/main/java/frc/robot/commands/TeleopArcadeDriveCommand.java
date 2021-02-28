@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TeleopArcadeDriveCommand extends CommandBase {
 
-    private final DrivetrainSubsystem m_drive;
+    private final DrivetrainSubsystem m_drivetrain;
     private DoubleSupplier m_speedSupplier, m_rotationSupplier;
 
-    public TeleopArcadeDriveCommand(DrivetrainSubsystem drive) {
-        addRequirements(drive);
-        m_drive = drive;
+    public TeleopArcadeDriveCommand(DrivetrainSubsystem drivetrain) {
+        m_drivetrain = drivetrain;
+        addRequirements(drivetrain);
     }
 
     public void setSuppliers(DoubleSupplier left, DoubleSupplier right) {
@@ -28,9 +28,9 @@ public class TeleopArcadeDriveCommand extends CommandBase {
         //Convert speeds to target speeds in meters per second, and then divide by hypothetical maximum movement speed
         speeds[0] = speeds[0] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND / DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND;
         speeds[1] = speeds[1] * DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND / DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND;
-        //if (m_drive.isReversed()) speeds = new double[] {speeds[1] * -1, speeds[0 * -1]};
+        //if (m_drivetrain.isReversed()) speeds = new double[] {speeds[1] * -1, speeds[0 * -1]};
         
-        m_drive.tankDrive(speeds);
+        m_drivetrain.tankDrive(speeds);
     }
 
 }
