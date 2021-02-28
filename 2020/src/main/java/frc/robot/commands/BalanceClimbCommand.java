@@ -16,7 +16,7 @@ public class BalanceClimbCommand extends CommandBase {
         addRequirements(climb);
         m_drivetrain = drivetrain;
         m_climb = climb;
-        m_pid = new PIDController(CLIMB_BALANCE_KP, CLIMB_BALANCE_KI, CLIMB_BALANCE_KD);
+        m_pid = new PIDController(MotionControl.CLIMB_BALANCE_KP, MotionControl.CLIMB_BALANCE_KI, MotionControl.CLIMB_BALANCE_KD);
     }
 
     @Override

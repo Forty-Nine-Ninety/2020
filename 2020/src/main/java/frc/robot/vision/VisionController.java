@@ -1,6 +1,5 @@
 package frc.robot.vision;
 
-import static frc.robot.vision.Constants.*;
 import static frc.robot.Constants.*;
 
 import edu.wpi.first.wpilibj.util.Units;
@@ -49,11 +48,11 @@ public class VisionController {
 
     // http://docs.limelightvision.io/en/latest/cs_estimating_distance.html
     public static double findDistanceToTarget() {
-        return (TARGET_HEIGHT_METERS - LIMELIGHT_HEIGHT_METERS) / Math.tan(findAngleToTarget());
+        return (Vision.TARGET_HEIGHT_METERS - RobotMeasurements.LIMELIGHT_HEIGHT_METERS) / Math.tan(findAngleToTarget());
     }
 
     public static double findAngleToTarget() {
-        return LIMELIGHT_ANGLE_RADIANS + Units.degreesToRadians(Limelight.getCrosshairVerticalOffset());
+        return RobotMeasurements.LIMELIGHT_ANGLE_RADIANS + Units.degreesToRadians(Limelight.getCrosshairVerticalOffset());
     }
 
     private class Spline {

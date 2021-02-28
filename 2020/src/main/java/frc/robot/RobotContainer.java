@@ -12,7 +12,6 @@ import frc.robot.subsystems.*;
 import frc.robot.vision.VisionController;
 
 import static frc.robot.Constants.*;
-import static frc.robot.vision.Constants.CONTROL_POINTS;
 
 import io.github.oblarg.oblog.Logger;
 import io.github.oblarg.oblog.annotations.*;
@@ -24,8 +23,8 @@ public class RobotContainer {
     private Constants constants;
     
     //Set up Joysticks
-    private final JoystickF310 joystickDrive = new JoystickF310(PORT_JOYSTICK_DRIVE);
-    private final JoystickF310 joystickOperator = new JoystickF310(PORT_JOYSTICK_OPERATOR);
+    private final JoystickF310 joystickDrive = new JoystickF310(Ports.PORT_JOYSTICK_DRIVE);
+    private final JoystickF310 joystickOperator = new JoystickF310(Ports.PORT_JOYSTICK_OPERATOR);
 
     //Create subsystems
     private final ClimbSubsystem m_climb = new ClimbSubsystem();
@@ -75,7 +74,7 @@ public class RobotContainer {
         //Logger.configureLoggingAndConfig(this, false);
 
         //Set control points for shooter speed calculations
-        VisionController.setControlPoints(CONTROL_POINTS);
+        VisionController.setControlPoints(Vision.CONTROL_POINTS);
     }
 
     private void configureControlBindings() {

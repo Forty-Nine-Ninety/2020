@@ -13,7 +13,7 @@ public class InserterSubsystem extends SubsystemBase {
     private final WPI_TalonSRX m_inserter;
 
     public InserterSubsystem() {
-        m_inserter = new WPI_TalonSRX(CAN_SHOOTER_INSERTER_TALONSRX);
+        m_inserter = new WPI_TalonSRX(Ports.CAN_SHOOTER_INSERTER_TALONSRX);
     }
 
     public void run(Direction direction) {

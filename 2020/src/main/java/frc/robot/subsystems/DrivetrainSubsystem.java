@@ -37,17 +37,17 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
 
 
     public DrivetrainSubsystem() {
-        m_leftTalon = new WPI_TalonSRX(CAN_DRIVETRAIN_LEFT_TALONSRX);
-        m_leftVictor = new WPI_VictorSPX(CAN_DRIVETRAIN_LEFT_VICTORSPX);
-        m_rightTalon = new WPI_TalonSRX(CAN_DRIVETRAIN_RIGHT_TALONSRX);
-        m_rightVictor = new WPI_VictorSPX(CAN_DRIVETRAIN_RIGHT_VICTORSPX);
+        m_leftTalon = new WPI_TalonSRX(Ports.CAN_DRIVETRAIN_LEFT_TALONSRX);
+        m_leftVictor = new WPI_VictorSPX(Ports.CAN_DRIVETRAIN_LEFT_VICTORSPX);
+        m_rightTalon = new WPI_TalonSRX(Ports.CAN_DRIVETRAIN_RIGHT_TALONSRX);
+        m_rightVictor = new WPI_VictorSPX(Ports.CAN_DRIVETRAIN_RIGHT_VICTORSPX);
 
         configureMotors();
 
-        m_gyro = new AHRS(SPI_PORT_GYRO);
+        m_gyro = new AHRS(Ports.SPI_PORT_GYRO);
         m_gyro.reset();
 
-        m_kinematics = new DifferentialDriveKinematics(DRIVETRAIN_TRACKWIDTH_METERS);
+        m_kinematics = new DifferentialDriveKinematics(RobotMeasurements.DRIVETRAIN_TRACKWIDTH_METERS);
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(m_gyro.getAngle()));
     }
 
@@ -60,15 +60,15 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
     //Assumes left and right are in encoder units per 100ms
     public void driveRaw(double left, double right) {
         //TODO Add acceleration to feedfoward?
-        m_leftTalon.set(ControlMode.Velocity, left, DemandType.ArbitraryFeedForward, DRIVETRAIN_FEEDFORWARD.calculate(left) * DRIVETRAIN_FEEDFORWARD_TO_ENCODER_UNITS);
-        m_rightTalon.set(ControlMode.Velocity, right, DemandType.ArbitraryFeedForward, DRIVETRAIN_FEEDFORWARD.calculate(right) * DRIVETRAIN_FEEDFORWARD_TO_ENCODER_UNITS);
+        m_leftTalon.set(ControlMode.Velocity, left, DemandType.ArbitraryFeedForward, MotionControl.DRIVETRAIN_FEEDFORWARD.calculate(left) * Conversions.DRIVETRAIN_FEEDFORWARD_TO_ENCODER_UNITS);
+        m_rightTalon.set(ControlMode.Velocity, right, DemandType.ArbitraryFeedForward, MotionControl.DRIVETRAIN_FEEDFORWARD.calculate(right) * Conversions.DRIVETRAIN_FEEDFORWARD_TO_ENCODER_UNITS);
     }
 
     //Functions below are for 0-1
     public void tankDrive(double left, double right) {
         //Convert from value in range [0, 1] to raw encoder units
-        left *= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
-        right *= DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
+        left *= SubsystemConfig.DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
+        right *= SubsystemConfig.DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY;
         driveRaw(left, right);
     }
 
@@ -85,7 +85,7 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
     }
 
     public boolean isReady() {
-        return Math.abs(Limelight.getCrosshairHorizontalOffset()) < SHOOTER_MAXIMUM_ALLOWED_ANGULAR_ERROR_DEGREES;
+        return Math.abs(Limelight.getCrosshairHorizontalOffset()) < SubsystemConfig.SHOOTER_MAXIMUM_ALLOWED_ANGULAR_ERROR_DEGREES;
     }
 
     public double getGyroRate() {
@@ -97,19 +97,19 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
     }
 
     public double getDistanceLeft() {
-        return m_leftTalon.getSelectedSensorPosition() * DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
+        return m_leftTalon.getSelectedSensorPosition() * Conversions.DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
     }
 
     public double getDistanceRight() {
-        return m_rightTalon.getSelectedSensorPosition() * DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
+        return m_rightTalon.getSelectedSensorPosition() * Conversions.DRIVETRAIN_ENCODER_DISTANCE_TO_METERS;
     }
 
     public double getRateLeft() {
-        return m_leftTalon.getSelectedSensorVelocity() * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
+        return m_leftTalon.getSelectedSensorVelocity() * Conversions.DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     }
 
     public double getRateRight() {
-        return m_rightTalon.getSelectedSensorVelocity() * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
+        return m_rightTalon.getSelectedSensorVelocity() * Conversions.DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     }
     public void setMultiplier(double d) {
         m_speedMultiplier = d;
@@ -161,24 +161,24 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
         m_rightTalon.setInverted(true);
         m_rightVictor.setInverted(true);
 
-        m_leftVictor.follow(m_leftTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
-        m_rightVictor.follow(m_rightTalon, DEFAULT_MOTOR_FOLLOWER_TYPE);
+        m_leftVictor.follow(m_leftTalon, MotorConfig.DEFAULT_MOTOR_FOLLOWER_TYPE);
+        m_rightVictor.follow(m_rightTalon, MotorConfig.DEFAULT_MOTOR_FOLLOWER_TYPE);
 
         //Setup talon built-in PID
-        m_leftTalon.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);
-        m_rightTalon.configSelectedFeedbackSensor(TALON_DEFAULT_FEEDBACK_DEVICE, TALON_DEFAULT_PID_ID, TALON_TIMEOUT_MS);
+        m_leftTalon.configSelectedFeedbackSensor(MotorConfig.TALON_DEFAULT_FEEDBACK_DEVICE, MotorConfig.TALON_DEFAULT_PID_ID, MotorConfig.TALON_TIMEOUT_MS);
+        m_rightTalon.configSelectedFeedbackSensor(MotorConfig.TALON_DEFAULT_FEEDBACK_DEVICE, MotorConfig.TALON_DEFAULT_PID_ID, MotorConfig.TALON_TIMEOUT_MS);
         
 
         //Create config objects
         TalonSRXConfiguration cLeft = new TalonSRXConfiguration(), cRight = new TalonSRXConfiguration();
 
         //Setup config objects with desired values
-        cLeft.slot0 = DRIVETRAIN_LEFT_PID;
-        cRight.slot0 = DRIVETRAIN_RIGHT_PID;
+        cLeft.slot0 = MotionControl.DRIVETRAIN_LEFT_PID;
+        cRight.slot0 = MotionControl.DRIVETRAIN_RIGHT_PID;
 
         //Not sure if the two below are strictly necessary
-        cLeft.closedloopRamp = DRIVETRAIN_CLOSED_LOOP_RAMP;
-        cRight.closedloopRamp = DRIVETRAIN_CLOSED_LOOP_RAMP;
+        cLeft.closedloopRamp = SubsystemConfig.DRIVETRAIN_CLOSED_LOOP_RAMP;
+        cRight.closedloopRamp = SubsystemConfig.DRIVETRAIN_CLOSED_LOOP_RAMP;
 
         //Configure talons
         m_leftTalon.configAllSettings(cLeft);

@@ -19,9 +19,9 @@ public class IntakeSubsystem extends SubsystemBase implements Loggable {
     private boolean m_reversed;
 
     public IntakeSubsystem() {
-        m_motor = new WPI_TalonSRX(CAN_INTAKE_TALONSRX);
-        m_ballSensor = new DigitalInput(DIO_BREAKBEAM_INTAKE);
-        m_solenoid = new DoubleSolenoid(PCM_INTAKE_FORWARD, PCM_INTAKE_REVERSE);
+        m_motor = new WPI_TalonSRX(Ports.CAN_INTAKE_TALONSRX);
+        m_ballSensor = new DigitalInput(Ports.DIO_BREAKBEAM_INTAKE);
+        m_solenoid = new DoubleSolenoid(Ports.PCM_INTAKE_FORWARD, Ports.PCM_INTAKE_REVERSE);
 
         m_solenoid.set(Value.kOff);
         m_motor.setInverted(true);

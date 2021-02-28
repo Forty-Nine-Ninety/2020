@@ -16,9 +16,9 @@ public class HopperSubsystem extends SubsystemBase implements Loggable {
     private final DigitalInput m_ballSensor;
 
     public HopperSubsystem() {
-        m_leftMotor = new WPI_TalonSRX(CAN_LEFT_HOPPER_TALONSRX);
-        m_rightMotor = new WPI_TalonSRX(CAN_RIGHT_HOPPER_TALONSRX);
-        m_ballSensor = new DigitalInput(DIO_BREAKBEAM_HOPPER);
+        m_leftMotor = new WPI_TalonSRX(Ports.CAN_LEFT_HOPPER_TALONSRX);
+        m_rightMotor = new WPI_TalonSRX(Ports.CAN_RIGHT_HOPPER_TALONSRX);
+        m_ballSensor = new DigitalInput(Ports.DIO_BREAKBEAM_HOPPER);
     }
 
     @Override
