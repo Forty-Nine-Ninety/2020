@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -23,10 +24,11 @@ public class ShooterSubsystem extends SubsystemBase implements Loggable {
     public void periodic() {}
 
     public void fireRaw(double speed) {
-        m_motor.set(ControlMode.Velocity, speed);
+        //TODO Add acceleration
+        m_motor.set(ControlMode.Velocity, speed, DemandType.ArbitraryFeedForward, SHOOTER_FEEDFORWARD.calculate(speed) * SHOOTER_FEEDFORWARD_TO_ENCODER_UNITS);
     }
 
-    public void setFireSpeed(double speed) {
+    public void setRotationSpeed(double speed) {
         fireRaw(speed * SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY);
     }
     
@@ -53,7 +55,7 @@ public class ShooterSubsystem extends SubsystemBase implements Loggable {
         TalonSRXConfiguration configM = new TalonSRXConfiguration();
 
         //Setup config objects with desired values
-        configM.slot0 = SHOOTER_FPID;
+        configM.slot0 = SHOOTER_PID;
         
         //Configure talons
         m_motor.configAllSettings(configM);

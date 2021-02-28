@@ -75,7 +75,7 @@ public class ClimbSubsystem extends SubsystemBase implements Loggable {
         TalonSRXConfiguration config = new TalonSRXConfiguration();
 
         //Setup config objects with desired values
-        config.slot0 = CLIMB_FPID;
+        config.slot0 = CLIMB_PID;
 
         //Configure talons
         m_climb.configAllSettings(config);

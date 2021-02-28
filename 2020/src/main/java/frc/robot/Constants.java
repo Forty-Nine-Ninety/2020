@@ -83,12 +83,13 @@ public final class Constants implements Loggable {
     public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 2.5;
     public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
     public static double DRIVETRAIN_CLOSED_LOOP_RAMP = 0.1; //seconds from 0 to full or full to 0
-    public static double DRIVETRAIN_FEEDFORWARD_TO_TALON_UNITS = 1;//TODO find this number
+    public static double DRIVETRAIN_FEEDFORWARD_TO_ENCODER_UNITS = 1;//TODO find this number
 
     //Shooter movement information
     public static double SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY = 50;//TODO find this number
     public static double SHOOTER_MAXIMUM_ALLOWED_VELOCITY_ERROR = 50;//TODO find this number
     public static double SHOOTER_MAXIMUM_ALLOWED_ANGULAR_ERROR_DEGREES = 0.1;//TODO find this number
+    public static double SHOOTER_FEEDFORWARD_TO_ENCODER_UNITS = 1;//TODO find this number
 
     //Storage movement information
     public static double STORAGE_MINIMUM_BALL_SPACING_ENCODER_UNITS = 50;//TODO find this number
@@ -102,6 +103,7 @@ public final class Constants implements Loggable {
 
     //Feedforward
     public static SimpleMotorFeedforward DRIVETRAIN_FEEDFORWARD = new SimpleMotorFeedforward(0, 0, 0);
+    public static SimpleMotorFeedforward SHOOTER_FEEDFORWARD = new SimpleMotorFeedforward(0, 0, 0);
 
     //The following two could possibly just be normal PID values
     public static TalonSRXGains LIMELIGHT_SHOOTER_PID = new TalonSRXGains(0, 0, 0);

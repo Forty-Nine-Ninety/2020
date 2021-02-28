@@ -64,8 +64,9 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
 
     //Assumes left and right are in encoder units per 100ms
     public void driveRaw(double left, double right) {
-        m_leftTalon.set(ControlMode.Velocity, left, DemandType.ArbitraryFeedForward, DRIVETRAIN_FEEDFORWARD.calculate(left) * DRIVETRAIN_FEEDFORWARD_TO_TALON_UNITS);
-        m_rightTalon.set(ControlMode.Velocity, right, DemandType.ArbitraryFeedForward, DRIVETRAIN_FEEDFORWARD.calculate(right) * DRIVETRAIN_FEEDFORWARD_TO_TALON_UNITS);
+        //TODO Add acceleration
+        m_leftTalon.set(ControlMode.Velocity, left, DemandType.ArbitraryFeedForward, DRIVETRAIN_FEEDFORWARD.calculate(left) * DRIVETRAIN_FEEDFORWARD_TO_ENCODER_UNITS);
+        m_rightTalon.set(ControlMode.Velocity, right, DemandType.ArbitraryFeedForward, DRIVETRAIN_FEEDFORWARD.calculate(right) * DRIVETRAIN_FEEDFORWARD_TO_ENCODER_UNITS);
     }
 
     //Functions below are for 0-1
