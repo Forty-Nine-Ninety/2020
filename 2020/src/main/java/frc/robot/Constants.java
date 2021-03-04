@@ -105,6 +105,7 @@ public final class Constants implements Loggable {
         //Storage movement information
         public static double STORAGE_MINIMUM_BALL_SPACING_ENCODER_UNITS = 50;//TODO find this number
         public static double STORAGE_LENGTH_ENCODER_UNITS = 250;//TODO find this number
+        public static double STORAGE_REVERSE_LENGTH = 0.1;
     }
 
     public static class Vision {

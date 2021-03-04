@@ -3,6 +3,7 @@ package frc.robot.commands;
 import frc.robot.Direction;
 import frc.robot.subsystems.StorageSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import static frc.robot.Constants.SubsystemConfig.*;
 
 public class RunStorageCommand extends CommandBase {
 
@@ -28,7 +29,7 @@ public class RunStorageCommand extends CommandBase {
     @Override
     public boolean isFinished() {
         if (direction.compareTo(Direction.Reverse) == 0){
-            if (System.currentTimeMillis() - startTime >= 100) {
+            if (System.currentTimeMillis() - startTime >= STORAGE_REVERSE_LENGTH * 1000) {
                 return true;
             }
         }
