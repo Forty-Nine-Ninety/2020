@@ -46,16 +46,23 @@ public class RobotContainer {
     private final TeleopArcadeDriveCommand m_teleopArcadeDriveCommand = new TeleopArcadeDriveCommand(m_drivetrain);
 
     //Hopper
+    private final RunHopperCommand m_runForwardHopperCommand =  new RunHopperCommand(m_hopper, Direction.Forward);
+    private final RunHopperCommand  m_runReverseHopperCommand = new RunHopperCommand(m_hopper, Direction.Reverse);
 
     //Intake
     private final RunIntakeCommand m_runForwardIntakeCommand = new RunIntakeCommand(m_intake, Direction.Forward);
     private final RunIntakeCommand m_runReverseIntakeCommand = new RunIntakeCommand(m_intake, Direction.Reverse);
 
     //Inserter
+    private final RunInserterCommand  m_runForwardInserterCommand = new RunInserterCommand(m_inserter, Direction.Forward);
+    private final RunInserterCommand m_runReverseInserterCommand = new RunInserterCommand(m_inserter, Direction.Reverse);
 
     //Shooter
 
     //Storage
+    private final RunStorageCommand m_runForwardStorageCommand = new RunStorageCommand(m_storage, Direction.Forward);
+    private final RunStorageCommand m_runReverseStorageCommand = new RunStorageCommand(m_storage, Direction.Reverse);
+    private final UnjamStorageCommand m_unjamStorageCommand = new UnjamStorageCommand(m_storage);
 
     /* OLD CODE BELOW
     //private final ClimbBalanceCommand m_climbBalanceCommand = new ClimbBalanceCommand(m_climb, m_drivetrain);
@@ -119,7 +126,26 @@ public class RobotContainer {
     }
 
     private void configureTestBindings() {
+        //Hopper
+        joystickOperator.getButton(ButtonF310.Y).toggleWhenPressed(m_runForwardHopperCommand);
+        joystickOperator.getButton(ButtonF310.A).toggleWhenPressed(m_runReverseHopperCommand);
 
+        //Intake
+        joystickOperator.getButton(ButtonF310.B).toggleWhenPressed(m_runForwardIntakeCommand);
+        joystickOperator.getButton(ButtonF310.X).toggleWhenPressed(m_runReverseIntakeCommand);
+
+        //Inserter
+        joystickOperator.getButton(POVF310.Top).toggleWhenPressed(m_runForwardInserterCommand);
+        joystickOperator.getButton(POVF310.Bottom).toggleWhenPressed(m_runReverseInserterCommand);
+
+        //Shooter
+
+        //Storage
+        joystickOperator.getButton(POVF310.Right).toggleWhenPressed(m_runForwardIntakeCommand);
+        joystickOperator.getButton(POVF310.Left).toggleWhenPressed(m_runReverseIntakeCommand);
+        
+        //Unjamming
+        joystickOperator.getButton(ButtonF310.Start).toggleWhenPressed(m_unjamStorageCommand);
     }
 
     private void configureDefaultCommands() {
