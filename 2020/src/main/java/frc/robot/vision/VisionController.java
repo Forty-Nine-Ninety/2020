@@ -14,8 +14,7 @@ public class VisionController {
     private static ControlPoint[] controlPoints;
 
     public static void setControlPoints(ControlPoint[] points) {
-        //TODO Check to make sure points are in order here
-        double last = Double.MIN_VALUE;
+        double last = Integer.MIN_VALUE;
         for (ControlPoint p : points) {
             if (p.getDistance() <= last) {
                 System.err.println("[ERROR] Control points not in increasing order");
