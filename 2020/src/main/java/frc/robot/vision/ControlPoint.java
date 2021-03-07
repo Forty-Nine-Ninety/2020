@@ -16,4 +16,16 @@ public class ControlPoint {
     public double getSpeed() {
         return m_speed;
     }
+
+    double getX() {
+        return m_distance;
+    }
+
+    double getY() {
+        return m_speed;
+    }
+
+    public String toString() {
+        return "(" + m_distance + ", " + m_speed + ")";
+    }
 }
