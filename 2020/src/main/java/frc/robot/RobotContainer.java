@@ -64,19 +64,6 @@ public class RobotContainer {
     private final RunStorageCommand m_runReverseStorageCommand = new RunStorageCommand(m_storage, Direction.Reverse);
     private final UnjamStorageCommand m_unjamStorageCommand = new UnjamStorageCommand(m_storage);
 
-    /* OLD CODE BELOW
-    //private final ClimbBalanceCommand m_climbBalanceCommand = new ClimbBalanceCommand(m_climb, m_drivetrain);
-    private final ExtendClimbCommand m_extendClimbCommand = new ExtendClimbCommand(m_climb);
-    private final RetractClimbCommand m_retractClimbCommand = new RetractClimbCommand(m_climb);
-    private final FollowPathCommand m_followPathCommand = new FollowPathCommand();
-    //private final LimelightShootBallCommand m_limelightShootBallCommand = new LimelightShootBallCommand(m_shooter, m_storage, m_drivetrain);
-    //private final RunStorageCommand m_runStorageCommand = new RunStorageCommand(m_storage, m_hopper);
-    
-    private final TestElevatorCommand m_elevatorTestCommand = new TestElevatorCommand(m_climb);
-
-    private final TestBallCommand m_BallMotorsCommand = new TestBallCommand(m_shooter, m_hopper);
-    */
-
     public RobotContainer() {
         if (TESTING) configureTestBindings();
         else configureControlBindings();
