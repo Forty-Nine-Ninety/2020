@@ -21,18 +21,6 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         m_robotContainer = new RobotContainer();
-
-        //Splash text!
-        try {
-            Scanner s = new Scanner(new File(Filesystem.getDeployDirectory().toString() + "/splash.txt"));
-            ArrayList<String> splashes = new ArrayList<>();
-            Random r = new Random();
-            while (s.hasNextLine()) splashes.add(s.nextLine());
-            System.out.println("\n\n" + splashes.get(r.nextInt(splashes.size())) + "\n\n");
-            s.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Couldn't find splash messages :(");
-        }
     }
 
     @Override
