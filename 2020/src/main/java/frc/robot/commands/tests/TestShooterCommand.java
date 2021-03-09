@@ -10,15 +10,16 @@ import static frc.robot.Constants.*;
 
 public class TestShooterCommand extends CommandBase {
 
-    private DoubleSupplier m_speed;
     private final ShooterSubsystem m_shooter;
-    private final StorageSubsystem m_storage;
 
-    public TestShooterCommand(ShooterSubsystem shooter, StorageSubsystem storage) {
+    public TestShooterCommand(ShooterSubsystem shooter) {
         addRequirements(shooter);
-        //Doesn't require storage subsystem
         m_shooter = shooter;
-        m_storage = storage;
+        m_shooter.setRotationSpeed(0.1);
+    }
+
+    public void end(boolean interrupted) {
+        m_shooter.setRotationSpeed(0);
     }
     /*
     @Override

@@ -98,7 +98,7 @@ public final class Constants implements Loggable {
         public static double DRIVETRAIN_CLOSED_LOOP_RAMP = 0.1; //seconds from 0 to full or full to 0
 
         //Shooter movement information
-        public static double SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY = 50;//TODO find this number
+        public static double SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY = 5000;//TODO find this number
         public static double SHOOTER_MAXIMUM_ALLOWED_VELOCITY_ERROR = 50;//TODO find this number
         public static double SHOOTER_MAXIMUM_ALLOWED_ANGULAR_ERROR_DEGREES = 0.1;//TODO find this number
 

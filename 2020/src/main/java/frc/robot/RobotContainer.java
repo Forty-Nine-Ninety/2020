@@ -64,6 +64,10 @@ public class RobotContainer {
     private final RunStorageCommand m_runReverseStorageCommand = new RunStorageCommand(m_storage, Direction.Reverse);
     private final UnjamStorageCommand m_unjamStorageCommand = new UnjamStorageCommand(m_storage);
 
+    //Test Commands
+    private final TestBallProcessCommand m_testBallProcessCommand = new TestBallProcessCommand(m_hopper, m_intake, m_storage);
+    private final TestShooterCommand m_testShooterCommand = new TestShooterCommand(m_shooter);
+
     public RobotContainer() {
         if (TESTING) configureTestBindings();
         else configureControlBindings();
@@ -99,17 +103,6 @@ public class RobotContainer {
         //Shooter
 
         //Storage
-
-
-        /* OLD CODE BELOW
-        joystickOperator.getButton(ButtonF310.BumperRight).toggleWhenPressed(m_extendClimbCommand);
-        joystickOperator.getButton(ButtonF310.BumperLeft).toggleWhenPressed(m_retractClimbCommand);
-
-        joystickOperator.getButton(ButtonF310.Y).toggleWhenPressed(m_hopperManualCommandFwd);
-        joystickOperator.getButton(ButtonF310.Back).toggleWhenPressed(m_hopperManualCommandRev);
-        
-        m_elevatorTestCommand.setSuppliers(() -> joystickOperator.getRawAxis(AxisF310.JoystickLeftY), () -> joystickOperator.getRawAxis(AxisF310.JoystickRightX));
-        */
     }
 
     private void configureTestBindings() {
@@ -126,6 +119,7 @@ public class RobotContainer {
         joystickOperator.getButton(POVF310.Bottom).toggleWhenPressed(m_runReverseInserterCommand);
 
         //Shooter
+        joystickOperator.getButton(ButtonF310.BumperLeft).toggleWhenPressed(m_testShooterCommand);
 
         //Storage
         joystickOperator.getButton(POVF310.Right).toggleWhenPressed(m_runForwardIntakeCommand);
@@ -133,6 +127,7 @@ public class RobotContainer {
         
         //Unjamming
         joystickOperator.getButton(ButtonF310.Start).toggleWhenPressed(m_unjamStorageCommand);
+        joystickOperator.getButton(ButtonF310.Back).toggleWhenPressed(m_testBallProcessCommand);
     }
 
     private void configureDefaultCommands() {
