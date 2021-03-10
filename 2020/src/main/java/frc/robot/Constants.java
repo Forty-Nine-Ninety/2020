@@ -79,7 +79,7 @@ public final class Constants implements Loggable {
 
     //Drivetrain movement information
     public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 6000;//free speed ~3200
-    public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 5;
+    public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 6;
     public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;//Around 7.1 I think
     public static double DRIVETRAIN_CLOSED_LOOP_RAMP = 0.1; //seconds from 0 to full or full to 0
 

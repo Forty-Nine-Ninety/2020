@@ -37,13 +37,13 @@ public class IntakeSubsystem extends SubsystemBase implements Loggable {
         m_motor.set(multiplier * INTAKE_MOTOR_SPEED);
 
         //Either running forwards or backwards, solenoid extends
-        if (Math.abs(multiplier) == 1) {
+        /*if (Math.abs(multiplier) == 1) {
             m_solenoid.set(Value.kForward);
         }
         //The motor is stopped, intake is retracted
         else {
             m_solenoid.set(Value.kReverse);
-        }
+        }*/
     }
 
     public Value get() {
