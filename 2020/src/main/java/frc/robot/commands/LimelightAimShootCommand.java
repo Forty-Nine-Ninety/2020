@@ -21,12 +21,12 @@ public class LimelightAimShootCommand extends ParallelCommandGroup {
             new LimelightAimCommand(shooter, drivetrain),
 
             //Unjam storage, then start shooting
-            //TODO perhaps move this command group into its own file?
+            //TODO This sequential command group needs to run 
             new SequentialCommandGroup(
                 new UnjamStorageCommand(storage),
                 new LimelightWaitForAimCommand(drivetrain, shooter),
-                new ParallelCommandGroup(
-                    new RunInserterCommand(inserter, Direction.Forward),
+                new ParallelCommandGroup(//TODO Change command type to parallelrace so it ends when inserter ends?
+                    new CheckRunInserterCommand(inserter, Direction.Forward, () -> shooter.isReady()),
                     new RunStorageCommand(storage, Direction.Forward)
                 )
             )
