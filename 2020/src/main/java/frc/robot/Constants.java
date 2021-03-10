@@ -105,8 +105,8 @@ public final class Constants implements Loggable {
         //Storage movement information
         public static double STORAGE_MINIMUM_BALL_SPACING_ENCODER_UNITS = 50;//TODO find this number
         public static double STORAGE_LENGTH_ENCODER_UNITS = 250;//TODO find this number
-        public static double STORAGE_UNJAM_REVERSE_TIME = 0.1;
-        public static double STORAGE_UNJAM_WAIT_TIME = 0.4;
+        public static double STORAGE_UNJAM_REVERSE_TIME = 0.15;
+        public static double STORAGE_UNJAM_WAIT_TIME = 0.05;
     }
 
     public static class Vision {
@@ -127,7 +127,7 @@ public final class Constants implements Loggable {
         public static TalonSRXGains CLIMB_PID = new TalonSRXGains(0, 0, 0);
 
         //Feedforward
-        public static SimpleMotorFeedforward DRIVETRAIN_FEEDFORWARD = new SimpleMotorFeedforward(0, 0, 0);
+        public static SimpleMotorFeedforward DRIVETRAIN_FEEDFORWARD = new SimpleMotorFeedforward(0.843, 0.362, 0.04);
         public static SimpleMotorFeedforward SHOOTER_FEEDFORWARD = new SimpleMotorFeedforward(0, 0, 0);
 
         //The following two could possibly just be normal PID values
