@@ -19,7 +19,7 @@ import io.github.oblarg.oblog.annotations.*;
 //TODO rename constants with new command names (i.e. runhoppercommand)
 public class RobotContainer {
 
-    public final boolean TESTING = false;
+    public final boolean TESTING = true;
 
     //Allow Oblog to find the Constants class
     private Constants constants;

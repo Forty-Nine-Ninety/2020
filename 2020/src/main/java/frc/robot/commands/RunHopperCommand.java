@@ -7,18 +7,18 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class RunHopperCommand extends CommandBase {
 
     private final HopperSubsystem m_hopper;
-    private final Direction direction;
+    private final Direction m_direction;
 
     public RunHopperCommand(HopperSubsystem hopper, Direction direction) {
         addRequirements(hopper);
         m_hopper = hopper;
         
-        this.direction = direction;
+        m_direction = direction;
     }
 
     @Override
     public void execute() {
-        m_hopper.run(direction);
+        m_hopper.run(m_direction);
     }
 
     @Override

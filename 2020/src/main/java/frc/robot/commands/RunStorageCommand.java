@@ -7,18 +7,18 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class RunStorageCommand extends CommandBase {
 
     private final StorageSubsystem m_storage;
-    private final Direction direction;
+    private final Direction m_direction;
 
     public RunStorageCommand(StorageSubsystem storage, Direction direction) {
         addRequirements(storage);
         m_storage = storage;
 
-        this.direction = direction;
+        m_direction = direction;
     }
     
     @Override
     public void execute() {
-        m_storage.run(direction);
+        m_storage.run(m_direction);
     
     }
 

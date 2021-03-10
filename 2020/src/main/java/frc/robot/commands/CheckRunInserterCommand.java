@@ -6,22 +6,25 @@ import frc.robot.subsystems.InserterSubsystem;
 
 import static frc.robot.Constants.*;
 
-public class RunInserterCommand extends CommandBase {
+import java.util.function.BooleanSupplier;
+
+public class CheckRunInserterCommand extends CommandBase {
 
     private final InserterSubsystem m_inserter;
     private final Direction m_direction;
+    private final BooleanSupplier m_checkSupplier;
 
 
-    public RunInserterCommand(InserterSubsystem inserter, Direction direction) {
+    public CheckRunInserterCommand(InserterSubsystem inserter, Direction direction, BooleanSupplier checkSupplier) {
         addRequirements(inserter);
         m_inserter = inserter;
-
         m_direction = direction;
+        m_checkSupplier = checkSupplier;
     }
 
     @Override
     public void execute() {
-        m_inserter.run(m_direction);
+        m_inserter.run(m_checkSupplier.getAsBoolean() ? m_direction : Direction.Stop);
     }
 
     @Override
