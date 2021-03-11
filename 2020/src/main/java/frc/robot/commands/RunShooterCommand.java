@@ -20,7 +20,7 @@ public class RunShooterCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_shooter.setRotationSpeed(m_supplier.getAsDouble());
+        m_shooter.setRotationPercentage(m_supplier.getAsDouble());
     }
 
     @Override
@@ -30,6 +30,6 @@ public class RunShooterCommand extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        m_shooter.setRotationSpeed(0);
+        m_shooter.setRotationPercentage(0);
     }
 }

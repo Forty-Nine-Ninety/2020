@@ -21,7 +21,6 @@ public class TestShooterCommand extends CommandBase {
     @Override
     public void execute() {
         m_shooter.firePO(0.5);
-        System.out.println("Running");
     }
     /*
     @Override
