@@ -32,7 +32,7 @@ public class ShooterSubsystem extends SubsystemBase implements Loggable {
         m_motor.set(ControlMode.Velocity, speed, DemandType.ArbitraryFeedForward, MotionControl.SHOOTER_FEEDFORWARD.calculate(speed) * Conversions.SHOOTER_FEEDFORWARD_TO_ENCODER_UNITS);
     }
 
-    public void setRotationSpeed(double speed) {
+    public void setRotationPercentage(double speed) {
         fireRaw(speed * SubsystemConfig.SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY);
     }
 
