@@ -153,10 +153,10 @@ public final class Constants implements Loggable {
 
     //Operation config
     @Config(name = "Rotation Input Multiplier", tabName = "Op Configuration")
-    public static double ARCADE_ROTATION_MULTIPLIER = 0.05;
+    public static double ARCADE_ROTATION_MULTIPLIER = 0.9;
 
     @Config(name = "Speed Input Multiplier", tabName = "Op Configuration")
-    public static double ARCADE_SPEED_MULTIPLIER = 0.1;
+    public static double ARCADE_SPEED_MULTIPLIER = 1;
 
     @Config(name = "Intake Motor Speed", tabName = "Op Configuration")
     public static double INTAKE_MOTOR_SPEED = 0.4;
