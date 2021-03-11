@@ -38,6 +38,7 @@ public class ShooterSubsystem extends SubsystemBase implements Loggable {
 
     public void firePO(double speed) {
         m_motor.set(ControlMode.PercentOutput, speed);
+        System.out.println(m_motor.getSelectedSensorVelocity());
     }
     
     public double getVelocity() {
