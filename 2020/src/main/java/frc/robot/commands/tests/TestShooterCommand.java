@@ -11,21 +11,19 @@ public class TestShooterCommand extends CommandBase {
     public TestShooterCommand(ShooterSubsystem shooter) {
         addRequirements(shooter);
         m_shooter = shooter;
-        m_shooter.setRotationSpeed(0.1);
     }
 
     public void end(boolean interrupted) {
-        m_shooter.setRotationSpeed(0);
+        m_shooter.firePO(0);
+        System.out.println("Stopping");
     }
-    /*
+    
     @Override
     public void execute() {
-        if (m_storage.getBallCount() == 0) m_shooter.setFireSpeed(0);
-        else m_shooter.setFireSpeed(m_speed.getAsDouble());
-        
-        m_storage.setEnabled(getStorageState());
+        m_shooter.firePO(0.5);
+        System.out.println("Running");
     }
-
+    /*
     @Override
     public boolean isFinished() {
         return m_storage.getBallCount() == 0;

@@ -4,10 +4,14 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.Conversions;
+import frc.robot.Constants.MotionControl;
+import frc.robot.Constants.MotorConfig;
+import frc.robot.Constants.Ports;
+import frc.robot.Constants.SubsystemConfig;
 import io.github.oblarg.oblog.Loggable;
-import static frc.robot.Constants.*;
 
 public class ShooterSubsystem extends SubsystemBase implements Loggable {
 
@@ -30,6 +34,10 @@ public class ShooterSubsystem extends SubsystemBase implements Loggable {
 
     public void setRotationSpeed(double speed) {
         fireRaw(speed * SubsystemConfig.SHOOTER_MAXIMUM_TESTED_ENCODER_VELOCITY);
+    }
+
+    public void firePO(double speed) {
+        m_motor.set(ControlMode.PercentOutput, speed);
     }
     
     public double getVelocity() {

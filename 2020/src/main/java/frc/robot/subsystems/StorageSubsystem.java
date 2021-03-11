@@ -13,7 +13,8 @@ public class StorageSubsystem extends SubsystemBase implements Loggable {
     private final WPI_TalonSRX m_motor;
 
     public StorageSubsystem() {
-        m_motor = new WPI_TalonSRX(Ports.CAN_STORAGE_LOW_TALONSRX);
+        m_motor = new WPI_TalonSRX(Ports.CAN_STORAGE_TALONSRX);
+        m_motor.configFactoryDefault();
     }
 
     @Override

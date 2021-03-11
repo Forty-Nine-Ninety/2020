@@ -106,24 +106,34 @@ public class RobotContainer {
     }
 
     private void configureTestBindings() {
-        //Hopper
+
+        // Start/Stop Compressor button
+        joystickOperator.getButton(ButtonF310.Start).whenPressed(new InstantCommand(() -> m_compressor.setClosedLoopControl(! m_compressor.getClosedLoopControl())));
+
+        //Drivetrain: DONE, except constants are strange.
+        m_teleopArcadeDriveCommand.setSuppliers(
+            () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY),JOYSTICK_INPUT_EXPONENT),
+            () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightX), JOYSTICK_INPUT_EXPONENT)
+        );
+        
+        //Hopper: DONE
         joystickOperator.getButton(ButtonF310.Y).toggleWhenPressed(m_runForwardHopperCommand);
         joystickOperator.getButton(ButtonF310.A).toggleWhenPressed(m_runReverseHopperCommand);
 
-        //Intake
+        //Intake: DONE
         joystickOperator.getButton(ButtonF310.B).toggleWhenPressed(m_runForwardIntakeCommand);
         joystickOperator.getButton(ButtonF310.X).toggleWhenPressed(m_runReverseIntakeCommand);
 
-        //Inserter
+        //Inserter: DONE
         joystickOperator.getButton(POVF310.Top).toggleWhenPressed(m_runForwardInserterCommand);
         joystickOperator.getButton(POVF310.Bottom).toggleWhenPressed(m_runReverseInserterCommand);
 
         //Shooter
         joystickOperator.getButton(ButtonF310.BumperLeft).toggleWhenPressed(m_testShooterCommand);
 
-        //Storage
-        joystickOperator.getButton(POVF310.Right).toggleWhenPressed(m_runForwardIntakeCommand);
-        joystickOperator.getButton(POVF310.Left).toggleWhenPressed(m_runReverseIntakeCommand);
+        //Storage: DONE
+        joystickOperator.getButton(POVF310.Right).toggleWhenPressed(m_runForwardStorageCommand);
+        joystickOperator.getButton(POVF310.Left).toggleWhenPressed(m_runReverseStorageCommand);
         
         //Unjamming
         joystickOperator.getButton(ButtonF310.Start).toggleWhenPressed(m_unjamStorageCommand);

@@ -44,14 +44,14 @@ public final class Constants implements Loggable {
         public static int CAN_DRIVETRAIN_LEFT_VICTORSPX = 14;
         public static int CAN_SHOOTER_TALONSRX = 2;
         public static int CAN_SHOOTER_SLAVE_TALONSRX = 3;
-        public static int CAN_SHOOTER_INSERTER_TALONSRX = 30;
+        public static int CAN_SHOOTER_INSERTER_TALONSRX = 5;
         public static int CAN_CLIMB_MAIN_TALONSRX = 13;
         public static int CAN_CLIMB_BALANCE_TALONSRX = 6;
-        public static int CAN_STORAGE_LOW_TALONSRX = 5;
+        public static int CAN_STORAGE_TALONSRX = 7;
         public static int CAN_INTAKE_TALONSRX = 8;
         public static int CAN_SPINNER_TALONSRX = -1;
-        public static int CAN_LEFT_HOPPER_TALONSRX = 7;
-        public static int CAN_RIGHT_HOPPER_TALONSRX = 9;
+        public static int CAN_LEFT_HOPPER_TALONSRX = 21;
+        public static int CAN_RIGHT_HOPPER_TALONSRX = 20;
     }
 
     public static class MotorConfig {
@@ -127,7 +127,7 @@ public final class Constants implements Loggable {
         public static TalonSRXGains CLIMB_PID = new TalonSRXGains(0, 0, 0);
 
         //Feedforward
-        public static SimpleMotorFeedforward DRIVETRAIN_FEEDFORWARD = new SimpleMotorFeedforward(0.843, 0.362, 0.04);
+        public static SimpleMotorFeedforward DRIVETRAIN_FEEDFORWARD = new SimpleMotorFeedforward(0.843, 0.362, 0);
         public static SimpleMotorFeedforward SHOOTER_FEEDFORWARD = new SimpleMotorFeedforward(0, 0, 0);
 
         //The following two could possibly just be normal PID values
@@ -153,26 +153,26 @@ public final class Constants implements Loggable {
 
     //Operation config
     @Config(name = "Rotation Input Multiplier", tabName = "Op Configuration")
-    public static double ARCADE_ROTATION_MULTIPLIER = 0.5;
+    public static double ARCADE_ROTATION_MULTIPLIER = 0.05;
 
     @Config(name = "Speed Input Multiplier", tabName = "Op Configuration")
-    public static double ARCADE_SPEED_MULTIPLIER = 0.75;
+    public static double ARCADE_SPEED_MULTIPLIER = 0.1;
 
     @Config(name = "Intake Motor Speed", tabName = "Op Configuration")
-    public static double INTAKE_MOTOR_SPEED = 0.8;
+    public static double INTAKE_MOTOR_SPEED = 0.4;
 
     @Config(name = "Hopper Motor Speed", tabName = "Op Configuration")
     public static double HOPPER_MOTOR_SPEED = 0.4;
 
     @Config(name = "Storage Motor Speed", tabName = "Op Configuration")
-    public static double STORAGE_MOTOR_SPEED = 0.6;
+    public static double STORAGE_MOTOR_SPEED = 0.8;
 
     @Config(name = "Climb Motor Speed", tabName = "Op Configuration")
     public static double CLIMB_MOTOR_SPEED = 1;
 
     //TODO find this number
     @Config(name = "Inserter Motor Speed", tabName = "Op Configuration")
-    public static double INSERTER_MOTOR_SPEED = 0.25;
+    public static double INSERTER_MOTOR_SPEED = 0.4;
 
     //Classes
     public static class TalonSRXGains extends SlotConfiguration {

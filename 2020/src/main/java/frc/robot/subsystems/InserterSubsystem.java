@@ -13,6 +13,8 @@ public class InserterSubsystem extends SubsystemBase {
 
     public InserterSubsystem() {
         m_inserter = new WPI_TalonSRX(Ports.CAN_SHOOTER_INSERTER_TALONSRX);
+        m_inserter.configFactoryDefault();
+        m_inserter.setInverted(true);
     }
 
     public void run(Direction direction) {

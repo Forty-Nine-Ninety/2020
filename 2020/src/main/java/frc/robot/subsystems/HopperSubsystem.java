@@ -27,11 +27,16 @@ public class HopperSubsystem extends SubsystemBase implements Loggable {
     public void run(Direction direction) {
         int multiplier = direction.getMultiplier();
 
-        double rightMotorSpeed = multiplier * HOPPER_MOTOR_SPEED;
-        double leftMotorSpeed = -1 * rightMotorSpeed;
+        double leftMotorSpeed = multiplier * HOPPER_MOTOR_SPEED;
+        double rightMotorSpeed = -1 * leftMotorSpeed;
 
         m_rightMotor.set(rightMotorSpeed);
         m_leftMotor.set(leftMotorSpeed);
+
+        m_rightMotor.configFactoryDefault();
+
+        m_leftMotor.configFactoryDefault();
+
     }
 
     public boolean hasBall() {
