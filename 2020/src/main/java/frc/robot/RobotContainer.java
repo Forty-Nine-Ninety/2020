@@ -112,8 +112,8 @@ public class RobotContainer {
 
         //Drivetrain: DONE, except constants are strange.
         m_teleopArcadeDriveCommand.setSuppliers(
-            () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY),JOYSTICK_INPUT_EXPONENT),
-            () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightX), JOYSTICK_INPUT_EXPONENT)
+            () -> Util.toAlternateInput(joystickDrive.getRawAxis(AxisF310.JoystickLeftY)),
+            () -> Util.toAlternateInput(joystickDrive.getRawAxis(AxisF310.JoystickRightX))
         );
         
         //Hopper: DONE

@@ -6,6 +6,11 @@ public class Util {
         return Math.copySign(Math.pow(a, b), a);
     }
 
+    public static double toAlternateInput(double input) {
+        if (input > 0) return 4 * powCopySign(input - 0.5, 3) + 0.5;
+        return 4 * powCopySign(input + 0.5, 3) - 0.5;
+    }
+
     public static double[] arcadeToTankDrive(double speed, double rot) {
         double left, right, maxSpeed;
 
