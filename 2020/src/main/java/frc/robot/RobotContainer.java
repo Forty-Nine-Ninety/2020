@@ -67,6 +67,7 @@ public class RobotContainer {
     //Test Commands
     private final TestBallProcessCommand m_testBallProcessCommand = new TestBallProcessCommand(m_hopper, m_intake, m_storage);
     private final TestShooterCommand m_testShooterCommand = new TestShooterCommand(m_shooter);
+    private final TeleopBadArcadeDriveCommand m_TeleopBadArcadeDriveCommand = new TeleopBadArcadeDriveCommand(m_drivetrain);
 
     public RobotContainer() {
         if (TESTING) configureTestBindings();
@@ -88,7 +89,7 @@ public class RobotContainer {
 
         //Drivetrain
         m_teleopArcadeDriveCommand.setSuppliers(
-            () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY),JOYSTICK_INPUT_EXPONENT),
+            () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickLeftY), JOYSTICK_INPUT_EXPONENT),
             () -> Util.powCopySign(joystickDrive.getRawAxis(AxisF310.JoystickRightX), JOYSTICK_INPUT_EXPONENT)
             );
 
@@ -111,7 +112,7 @@ public class RobotContainer {
         joystickOperator.getButton(ButtonF310.Start).whenPressed(new InstantCommand(() -> m_compressor.setClosedLoopControl(! m_compressor.getClosedLoopControl())));
 
         //Drivetrain: DONE, except constants are strange.
-        m_teleopArcadeDriveCommand.setSuppliers(
+        m_TeleopBadArcadeDriveCommand.setSuppliers(
             () -> Util.toAlternateInput(joystickDrive.getRawAxis(AxisF310.JoystickLeftY)),
             () -> Util.toAlternateInput(joystickDrive.getRawAxis(AxisF310.JoystickRightX))
         );

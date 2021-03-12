@@ -62,6 +62,11 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
         //TODO Add acceleration to feedfoward?
         //m_leftTalon.set(ControlMode.Velocity, left, DemandType.ArbitraryFeedForward, MotionControl.DRIVETRAIN_FEEDFORWARD.calculate(left) * Conversions.DRIVETRAIN_FEEDFORWARD_TO_ENCODER_UNITS);
         //m_rightTalon.set(ControlMode.Velocity, right, DemandType.ArbitraryFeedForward, MotionControl.DRIVETRAIN_FEEDFORWARD.calculate(right) * Conversions.DRIVETRAIN_FEEDFORWARD_TO_ENCODER_UNITS);
+        m_leftTalon.set(ControlMode.Velocity, left);
+        m_rightTalon.set(ControlMode.Velocity, right);
+    }
+
+    public void drivePO(double left, double right) {
         m_leftTalon.set(ControlMode.PercentOutput, left);
         m_rightTalon.set(ControlMode.PercentOutput, right);
     }
