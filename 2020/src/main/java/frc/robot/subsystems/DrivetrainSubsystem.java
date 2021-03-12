@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -61,8 +62,8 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
         //TODO Add acceleration to feedfoward?
         //m_leftTalon.set(ControlMode.Velocity, left, DemandType.ArbitraryFeedForward, MotionControl.DRIVETRAIN_FEEDFORWARD.calculate(left) * Conversions.DRIVETRAIN_FEEDFORWARD_TO_ENCODER_UNITS);
         //m_rightTalon.set(ControlMode.Velocity, right, DemandType.ArbitraryFeedForward, MotionControl.DRIVETRAIN_FEEDFORWARD.calculate(right) * Conversions.DRIVETRAIN_FEEDFORWARD_TO_ENCODER_UNITS);
-        m_leftTalon.set(ControlMode.Velocity, left);
-        m_rightTalon.set(ControlMode.Velocity, right);
+        m_leftTalon.set(ControlMode.PercentOutput, left);
+        m_rightTalon.set(ControlMode.PercentOutput, right);
     }
 
     //Functions below are for 0-1
@@ -180,6 +181,12 @@ public class DrivetrainSubsystem extends SubsystemBase implements Loggable {
         //Not sure if the two below are strictly necessary
         cLeft.closedloopRamp = SubsystemConfig.DRIVETRAIN_CLOSED_LOOP_RAMP;
         cRight.closedloopRamp = SubsystemConfig.DRIVETRAIN_CLOSED_LOOP_RAMP;
+
+        //Brake mode so no coasting
+        m_leftTalon.setNeutralMode(NeutralMode.Brake);
+        m_leftVictor.setNeutralMode(NeutralMode.Brake);
+        m_rightTalon.setNeutralMode(NeutralMode.Brake);
+        m_rightVictor.setNeutralMode(NeutralMode.Brake);
 
         //Configure talons
         m_leftTalon.configAllSettings(cLeft);
