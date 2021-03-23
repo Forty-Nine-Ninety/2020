@@ -92,8 +92,8 @@ public final class Constants implements Loggable {
         public static int CLIMB_TIMEOUT_S = 5;
 
         //Drivetrain movement information
-        public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 6000;//free speed ~3200
-        public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 7;//Max ~7.1
+        public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 3450;//free speed ~3320
+        public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 3.95;//Max is ~4.09
         public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * Conversions.DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
         public static double DRIVETRAIN_CLOSED_LOOP_RAMP = 0.1; //seconds from 0 to full or full to 0
 
@@ -121,13 +121,15 @@ public final class Constants implements Loggable {
     
     public static class MotionControl {
         //PID
-        public static TalonSRXGains DRIVETRAIN_LEFT_PID = new TalonSRXGains(0, 0, 0);
-        public static TalonSRXGains DRIVETRAIN_RIGHT_PID = new TalonSRXGains(0, 0, 0);
+        public static TalonSRXGains DRIVETRAIN_LEFT_PID = new TalonSRXGains(0.5, 0, 0);
+        public static TalonSRXGains DRIVETRAIN_RIGHT_PID = new TalonSRXGains(0.5, 0, 0);
         public static TalonSRXGains SHOOTER_PID = new TalonSRXGains(0, 0, 0);
         public static TalonSRXGains CLIMB_PID = new TalonSRXGains(0, 0, 0);
 
         //Feedforward
-        public static SimpleMotorFeedforward DRIVETRAIN_FEEDFORWARD = new SimpleMotorFeedforward(0.843, 0.362, 0);
+        public static double DRIVETRAIN_FEEDFORWARD_KV_UNITS = 1 / 12 / 10 / MotorConfig.TALON_ENCODER_RESOLUTION;
+        public static double DRIVETRAIN_FEEDFORWARD_KS_UNITS = 1 / 12;
+        public static SimpleMotorFeedforward DRIVETRAIN_FEEDFORWARD = new SimpleMotorFeedforward(0.843 * DRIVETRAIN_FEEDFORWARD_KS_UNITS, 0.362 * DRIVETRAIN_FEEDFORWARD_KV_UNITS, 0);
         public static SimpleMotorFeedforward SHOOTER_FEEDFORWARD = new SimpleMotorFeedforward(0, 0, 0);
 
         //The following two could possibly just be normal PID values
@@ -153,7 +155,7 @@ public final class Constants implements Loggable {
 
     //Operation config
     @Config(name = "Rotation Input Multiplier", tabName = "Op Configuration")
-    public static double ARCADE_ROTATION_MULTIPLIER = 0.5;
+    public static double ARCADE_ROTATION_MULTIPLIER = 0.75;
 
     @Config(name = "Speed Input Multiplier", tabName = "Op Configuration")
     public static double ARCADE_SPEED_MULTIPLIER = 1;

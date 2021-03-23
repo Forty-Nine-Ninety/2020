@@ -30,7 +30,8 @@ public class TeleopBadArcadeDriveCommand extends CommandBase {
         //speeds[0] *= factor;
         //speeds[1] *= factor;
         
-        m_drivetrain.driveRaw(speeds[0], speeds[1]);
+        m_drivetrain.drivePO(speeds[0], speeds[1]);
+        System.out.println(SubsystemConfig.DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND);
     }
 
 }

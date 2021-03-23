@@ -67,7 +67,7 @@ public class RobotContainer {
     //Test Commands
     private final TestBallProcessCommand m_testBallProcessCommand = new TestBallProcessCommand(m_hopper, m_intake, m_storage);
     private final TestShooterCommand m_testShooterCommand = new TestShooterCommand(m_shooter);
-    private final TeleopBadArcadeDriveCommand m_TeleopBadArcadeDriveCommand = new TeleopBadArcadeDriveCommand(m_drivetrain);
+    private final TeleopBadArcadeDriveCommand m_teleopBadArcadeDriveCommand = new TeleopBadArcadeDriveCommand(m_drivetrain);
 
     public RobotContainer() {
         switch(runType)  {
@@ -115,6 +115,8 @@ public class RobotContainer {
         //Shooter
 
         //Storage
+
+        CommandScheduler.getInstance().setDefaultCommand(m_drivetrain, m_teleopArcadeDriveCommand);
     }
 
     private void configureTestBindings() {
@@ -123,7 +125,7 @@ public class RobotContainer {
         joystickOperator.getButton(ButtonF310.Start).whenPressed(new InstantCommand(() -> m_compressor.setClosedLoopControl(! m_compressor.getClosedLoopControl())));
 
         //Drivetrain: DONE, except constants are strange.
-        m_TeleopBadArcadeDriveCommand.setSuppliers(
+        m_teleopBadArcadeDriveCommand.setSuppliers(
             () -> Util.toAlternateInput(joystickDrive.getRawAxis(AxisF310.JoystickLeftY)),
             () -> Util.toAlternateInput(joystickDrive.getRawAxis(AxisF310.JoystickRightX))
         );
@@ -150,6 +152,9 @@ public class RobotContainer {
         //Unjamming
         joystickOperator.getButton(ButtonF310.Start).toggleWhenPressed(m_unjamStorageCommand);
         joystickOperator.getButton(ButtonF310.Back).toggleWhenPressed(m_testBallProcessCommand);
+
+        //Configure default commands
+        CommandScheduler.getInstance().setDefaultCommand(m_drivetrain, m_teleopBadArcadeDriveCommand);
     }
 
     private void configureTuneBindings() {
@@ -159,7 +164,7 @@ public class RobotContainer {
     }
 
     private void configureDefaultCommands() {
-        CommandScheduler.getInstance().setDefaultCommand(m_drivetrain, m_teleopArcadeDriveCommand);
+        //CommandScheduler.getInstance().setDefaultCommand(m_drivetrain, m_teleopArcadeDriveCommand);
     }
 
     public Command getAutonomousCommand() {
