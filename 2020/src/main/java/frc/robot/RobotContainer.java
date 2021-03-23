@@ -19,7 +19,7 @@ import io.github.oblarg.oblog.annotations.*;
 //TODO rename constants with new command names (i.e. runhoppercommand)
 public class RobotContainer {
 
-    public final boolean TESTING = true;
+    public final RunType runType = RunType.TuneShooter;
 
     //Allow Oblog to find the Constants class
     private Constants constants;
@@ -70,10 +70,21 @@ public class RobotContainer {
     private final TeleopBadArcadeDriveCommand m_TeleopBadArcadeDriveCommand = new TeleopBadArcadeDriveCommand(m_drivetrain);
 
     public RobotContainer() {
-        if (TESTING) configureTestBindings();
-        else configureControlBindings();
-        
-        configureDefaultCommands();
+        switch(runType)  {
+            case Drive:
+                configureControlBindings();
+                configureDefaultCommands();
+                break;
+
+            case Test:
+                configureTestBindings();
+                configureDefaultCommands();
+                break;
+
+            case TuneShooter:
+                configureTuneBindings();
+                break;
+        }
         //Logger.configureLoggingAndConfig(this, false);
 
         //Set control points for shooter speed calculations
@@ -141,6 +152,12 @@ public class RobotContainer {
         joystickOperator.getButton(ButtonF310.Back).toggleWhenPressed(m_testBallProcessCommand);
     }
 
+    private void configureTuneBindings() {
+        joystickOperator.getButton(ButtonF310.A).toggleWhenPressed(new TuneShooterCommand(m_shooter));
+        joystickOperator.getButton(POVF310.Top).whenPressed(new ChangeShooterSetpointCommand(100));
+        joystickOperator.getButton(POVF310.Bottom).whenPressed(new ChangeShooterSetpointCommand(-100));
+    }
+
     private void configureDefaultCommands() {
         CommandScheduler.getInstance().setDefaultCommand(m_drivetrain, m_teleopArcadeDriveCommand);
     }
@@ -151,5 +168,11 @@ public class RobotContainer {
 
     public void updateLoggerEntries() {
         Logger.updateEntries();
+    }
+
+    private enum RunType {
+        Drive,
+        Test,
+        TuneShooter
     }
 }
