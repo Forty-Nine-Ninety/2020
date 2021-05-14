@@ -92,8 +92,8 @@ public final class Constants implements Loggable {
         public static int CLIMB_TIMEOUT_S = 5;
 
         //Drivetrain movement information
-        public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 3450;//free speed ~3320
-        public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 3.95;//Max is ~4.09
+        public static double DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY = 3450;//Approx 4.03 meters per second
+        public static double DRIVETRAIN_MAXIMUM_CRUISE_SPEED_METERS_PER_SECOND = 3.95;//Max is ~4
         public static double DRIVETRAIN_MAXIMUM_MOVEMENT_SPEED_METERS_PER_SECOND = DRIVETRAIN_MAXIMUM_TESTED_ENCODER_VELOCITY * Conversions.DRIVETRAIN_ENCODER_VELOCITY_TO_METERS_PER_SECOND;
         public static double DRIVETRAIN_CLOSED_LOOP_RAMP = 0.1; //seconds from 0 to full or full to 0
 
@@ -127,7 +127,7 @@ public final class Constants implements Loggable {
         public static TalonSRXGains CLIMB_PID = new TalonSRXGains(0, 0, 0);
 
         //Feedforward
-        public static double DRIVETRAIN_FEEDFORWARD_KV_UNITS = 1 / 12 / 10 / MotorConfig.TALON_ENCODER_RESOLUTION;
+        public static double DRIVETRAIN_FEEDFORWARD_KV_UNITS = 1 / 12 / MotorConfig.TALON_ENCODER_RESOLUTION * 10;
         public static double DRIVETRAIN_FEEDFORWARD_KS_UNITS = 1 / 12;
         public static SimpleMotorFeedforward DRIVETRAIN_FEEDFORWARD = new SimpleMotorFeedforward(0.843 * DRIVETRAIN_FEEDFORWARD_KS_UNITS, 0.362 * DRIVETRAIN_FEEDFORWARD_KV_UNITS, 0);
         public static SimpleMotorFeedforward SHOOTER_FEEDFORWARD = new SimpleMotorFeedforward(0, 0, 0);
